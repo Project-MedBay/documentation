@@ -1,0 +1,392 @@
+\documentclass{article}
+\begin{document}
+\chapter{Specifikacija programske potpore}
+
+\section{Funkcionalni zahtjevi}
+
+\textbf{\textit{dio 1. revizije}}
+
+\textit{ Glavni dionici su bolesnici, djelatnici zdravstvene ustanove te administratori sustava. Bolesnici su krajnji korisnici koji se prijavljuju na rehabilitaciju. Djelatnici zdravstvene ustanove provode rehabilitaciju i upravljaju terminima. Administratori sustava nadziru cjelokupno funkcioniranje sustava i upravljaju korisnicima.}
+
+\noindent \textbf{Dionici:}
+
+\begin{packed_enum}
+
+\item Administrator
+\item Djelatnik
+\item Bolesnik
+
+\end{packed_enum}
+\vspace{2em} % Dodajte 2 prazna reda
+
+
+\nođemt \textbf{Aktori i njihovi funkcionalni zahtjevi:}
+
+\begin{packed_enum}
+\item \underbar{Administrator može:}
+\begin{packed_enum}
+\item Registrirati bolesnika
+\item Prihvatiti ili odbiti registraciju bolesnika
+\item Pregledati i potvrditi prijave bolesnika za rehabilitaciju
+\item Dodavati nove djelatnike i upravljati korisničkim računima
+\item Dodavati specijalizacije djelatnicima
+\item Pregledati statističke podatke o terapijama
+\item Dodijeliti uloge i privilegije djelatnicima
+\end{packed_enum}
+\vspace{1em} % Dodajte jedan prazan red
+
+\item \underbar{Djelatnik može:}
+\begin{packed_enum}
+\item Pregledati prijave bolesnika za rehabilitaciju
+\item Dodijeliti termine bolesnicima za rehabilitaciju
+\item Bilježiti napredak bolesnika
+\item Pregledati raspored bolesnika i sesija
+\item Pregledati raspored svih djelatnika
+\item Pregledati podatke o bolesnicima
+\item Pregledati specijalizacije djelatnika
+\end{packed_enum}
+\vspace{1em} % Dodajte jedan prazan red
+
+\item \underbar{Bolesnik može:}
+\begin{packed_enum}
+\item Registrirati se u sustav
+\item Prijaviti se na rehabilitaciju
+\item Odabrati terapiju i termine dolaska na rehabilitaciju
+\item Otkazati zakazani termin
+\item Pregledati vlastiti kalendar s terminima terapije
+\item Pregledati statističke podatke o terapijama
+\end{packed_enum}
+\end{packed_enum}
+\vspace{2em} % Dodajte jedan prazan red
+
+\eject
+
+\subsection{Obrasci uporabe}
+
+\textbf{\textit{dio 1. revizije}}
+
+\subsubsection{Opis obrazaca uporabe}
+\textit{Funkcionalne zahtjeve razraditi u obliku obrazaca uporabe. Svaki obrazac je potrebno razraditi prema donjem predlošku. Ukoliko u nekom koraku može doći do odstupanja, potrebno je to odstupanje opisati i po mogućnosti ponuditi rješenje kojim bi se tijek obrasca vratio na osnovni tijek.}
+\vspace{2em} % Dodajte jedan prazan red
+
+\noindent \underbar{\textbf{UC1 - Registracija bolesnika}}
+\begin{packed_item}
+\item \textbf{Glavni sudionik:} Bolesnik
+\item \textbf{Cilj:} Registrirati se u sustav kako bi pristupio procesu rehabilitacije.
+\item \textbf{Sudionici:} Baza podataka/Sustav
+\item \textbf{Preduvjet:} Bolesnik nema prethodno registriran korisnički račun
+\item \textbf{Opis osnovnog tijeka:}
+\begin{packed_enum}
+\item Bolesnik unosi osobne podatke i odabire korisničko ime i lozinku.
+\item Sustav provjerava ispravnost podataka.
+\item Sustav pohranjuje podatke i stvara korisnički račun.
+\end{packed_enum}
+\item \textbf{Opis mogućih odstupanja:}
+Sustav reagira na neispravne podatke, duplikate korisničkih imena i nepotpune obrasce te obavještava bolesnika o potrebnim ispravkama.
+\end{packed_item}
+\vspace{1em} % Dodajte jedan prazan red
+
+\underbar{\textbf{UC2 - Prijava bolesnika na rehabilitaciju}}
+\begin{packed_item}
+\item \textbf{Glavni sudionik:} Bolesnik
+\item \textbf{Cilj:} Prijaviti se za proces rehabilitacije.
+\item \textbf{Sudionici:} Baza podataka
+\item \textbf{Preduvjet:} Bolesnik je registriran i prijavljen u sustav.
+\item \textbf{Opis osnovnog tijeka:}
+\begin{packed_enum}
+\item Bolesnik se prijavljuje u sustav.
+\item Bolesnik odabire opciju za prijavu na rehabilitaciju.
+\item Bolesnik unosi informacije o svom oboljenju, željenom postupku liječenja i liječniku koji ga je uputio na rehabilitaciju.
+\item Bolesnik odabire datum i vrijeme dolaska na rehabilitaciju.
+\end{packed_enum}
+\end{packed_item}
+\vspace{1em} % Dodajte jedan prazan red
+
+\underbar{\textbf{UC3 - Obrada zahtjeva}}
+\begin{packed_item}
+\item \textbf{Glavni sudionik:} Djelatnik
+\item \textbf{Cilj:} Provjeriti i obraditi nove zahtjeve za rehabilitaciju.
+\item \textbf{Sudionici:} Baza podataka, Bolesnik
+\item \textbf{Preduvjet:} Bolesnici su poslali zahtjeve za rehabilitaciju.
+\item \textbf{Opis osnovnog tijeka:}
+\begin{packed_enum}
+\item Djelatnik provjerava nove zahtjeve.
+\item Djelatnik dodjeljuje termine temeljem raspoloživih resursa.
+\item Bolesnik prima e-mail s potvrdom ili promjenama u terminima.
+\item Ako je potrebno, djelatnik može izravno kontaktirati bolesnika.
+\end{packed_enum}
+\end{packed_item}
+
+\vspace{1em} % Dodajte jedan prazan red
+\underbar{\textbf{UC4 - Bilježenje napretka}}
+\begin{packed_item}
+\item \textbf{Glavni sudionik:} Djelatnik
+\item \textbf{Cilj:} Bilježiti i evidentirati napredak bolesnika tijekom procesa rehabilitacije.
+\item \textbf{Sudionici:} Baza podataka, Bolesnik
+\item \textbf{Preduvjet:} Bolesnik je registriran, prijavljen i prošao kroz proces rehabilitacije.
+\item \textbf{Opis osnovnog tijeka:}
+\begin{packed_enum}
+\item Djelatnik odabire bolesnika za bilježenje napretka.
+\item Djelatnik unosi podatke o sesiji rehabilitacije.
+\item Djelatnik potvrđuje unos i sprema podatke.
+\end{packed_enum}
+\end{packed_item}
+
+\vspace{1em} % Dodajte jedan prazan red
+\underbar{\textbf{UC5 - Pregled rasporeda bolesnika i sesija}}
+\begin{packed_item}
+\item \textbf{Glavni sudionik:} Djelatnik
+\item \textbf{Cilj:} Pregledati raspored bolesnika i sesija rehabilitacije.
+\item \textbf{Sudionici:} Baza podataka
+\item \textbf{Preduvjet:} Djelatnik je prijavljen u sustav.
+\item \textbf{Opis osnovnog tijeka:}
+\begin{packed_enum}
+\item Djelatnik odabire opciju za pregled rasporeda.
+\item Sustav prikazuje raspored bolesnika i sesija.
+\item Djelatnik može filtrirati raspored po različitim kriterijima.
+\end{packed_enum}
+\end{packed_item}
+
+\vspace{1em} % Dodajte jedan prazan red
+\underbar{\textbf{UC6 - Pregled rasporeda svih djelatnika}}
+\begin{packed_item}
+\item \textbf{Glavni sudionik:} Djelatnik
+\item \textbf{Cilj:} Pregledati raspored svih djelatnika u sustavu.
+\item \textbf{Sudionici:} Baza podataka
+\item \textbf{Preduvjet:} Djelatnik je prijavljen u sustav.
+\item \textbf{Opis osnovnog tijeka:}
+\begin{packed_enum}
+\item Djelatnik odabire opciju za pregled rasporeda svih djelatnika.
+\item Sustav prikazuje raspored svih djelatnika.
+\item Djelatnik može pregledati informacije o pojedinom djelatniku.
+\end{packed_enum}
+\end{packed_item}
+\vspace{1em} % Dodajte jedan prazan red
+
+\underbar{\textbf{UC7 - Pregled podataka o bolesnicima}}
+\begin{packed_item}
+\item \textbf{Glavni sudionik:} Djelatnik
+\item \textbf{Cilj:} Pregledati podatke o bolesnicima.
+\item \textbf{Sudionici:} Baza podataka
+\item \textbf{Preduvjet:} Djelatnik je prijavljen u sustav.
+\item \textbf{Opis osnovnog tijeka:}
+\begin{packed_enum}
+\item Djelatnik odabire opciju za pregled podataka o bolesnicima.
+\item Sustav prikazuje popis bolesnika i osnovne informacije o njima.
+\item Djelatnik može pregledati detaljnije podatke o svakom bolesniku.
+\end{packed_enum}
+\end{packed_item}
+
+\vspace{1em} % Dodajte jedan prazan red
+\underbar{\textbf{UC8 - Pregled specijalizacija djelatnika}}
+\begin{packed_item}
+\item \textbf{Glavni sudionik:} Djelatnik
+\item \textbf{Cilj:} Pregledati specijalizacije djelatnika u sustavu.
+\item \textbf{Sudionici:} Baza podataka
+\item \textbf{Preduvjet:} Djelatnik je prijavljen u sustav.
+\item \textbf{Opis osnovnog tijeka:}
+\begin{packed_enum}
+\item Djelatnik odabire opciju za pregled specijalizacija.
+\item Sustav prikazuje popis specijalizacija i povezane djelatnike.
+\item Djelatnik može pregledati detalje o svakoj specijalizaciji.
+\end{packed_enum}
+\end{packed_item}
+
+\vspace{1em} % Dodajte jedan prazan red
+\underbar{\textbf{UC9 - Odabir terapije i termina}}
+\begin{packed_item}
+\item \textbf{Glavni sudionik:} Bolesnik
+\item \textbf{Cilj:} Odabrati terapiju i termine dolaska na rehabilitaciju.
+\item \textbf{Sudionici:} Baza podataka
+\item \textbf{Preduvjet:} Bolesnik je registriran i prijavljen u sustav.
+\item \textbf{Opis osnovnog tijeka:}
+\begin{packed_enum}
+\item Bolesnik odabire opciju za odabir terapije.
+\item Bolesnik pregledava dostupne terapije i informacije o njima.
+\item Bolesnik odabire željenu terapiju i termine dolaska.
+\item Sustav potvrđuje odabir i pohranjuje podatke.
+\end{packed_enum}
+\end{packed_item}
+
+\vspace{1em} % Dodajte jedan prazan red
+\underbar{\textbf{UC10 - Otkazivanje zakazanog termina}}
+\begin{packed_item}
+\item \textbf{Glavni sudionik:} Bolesnik
+\item \textbf{Cilj:} Otkaži zakazani termin za rehabilitaciju.
+\item \textbf{Sudionici:} Baza podataka
+\item \textbf{Preduvjet:} Bolesnik je registriran, prijavljen i ima zakazane termine.
+\item \textbf{Opis osnovnog tijeka:}
+\begin{packed_enum}
+\item Bolesnik odabire opciju za otkazivanje termina.
+\item Bolesnik pregledava svoj raspored i odabire termin za otkazivanje.
+\item Sustav potvrđuje otkazivanje i oslobađa taj termin.
+\end{packed_enum}
+\end{packed_item}
+
+\vspace{1em} % Dodajte jedan prazan red
+\underbar{\textbf{UC11 - Pregled vlastitog kalendara}}
+\begin{packed_item}
+\item \textbf{Glavni sudionik:} Bolesnik
+\item \textbf{Cilj:} Pregledati kalendar s terminima terapije.
+\item \textbf{Sudionici:} Baza podataka
+\item \textbf{Preduvjet:} Bolesnik je registriran i prijavljen u sustav.
+\item \textbf{Opis osnovnog tijeka:}
+\begin{packed_enum}
+\item Bolesnik odabire opciju za pregled vlastitog kalendara.
+\item Sustav prikazuje raspored svih zakazanih termina terapije.
+\item Bolesnik može pregledati detalje o svakom terminu.
+\end{packed_enum}
+\end{packed_item}
+
+\vspace{1em} % Dodajte jedan prazan red
+\underbar{\textbf{UC12 - Pregled statističkih podataka o terapijama}}
+\begin{packed_item}
+\item \textbf{Glavni sudionik:} Bolesnik
+\item \textbf{Cilj:} Pregledati statističke podatke o terapijama.
+\item \textbf{Sudionici:} Baza podataka
+\item \textbf{Preduvjet:} Bolesnik je registriran i prijavljen u sustav.
+\item \textbf{Opis osnovnog tijeka:}
+\begin{packed_enum}
+\item Bolesnik odabire opciju za pregled statističkih podataka.
+\item Sustav prikazuje relevantne statističke informacije o terapijama.
+\item Bolesnik može filtrirati i prilagoditi prikaz podataka.
+\end{packed_enum}
+\end{packed_item}
+
+\vspace{1em} % Dodajte jedan prazan red
+\underbar{\textbf{UC13 - Registracija bolesnika}}
+\begin{packed_item}
+\item \textbf{Glavni sudionik:} Administrator
+\item \textbf{Cilj:} Registrirati novog bolesnika u sustavu.
+\item \textbf{Sudionici:} Baza podataka
+\item \textbf{Preduvjet:} Administrator je prijavljen u sustav.
+\item \textbf{Opis osnovnog tijeka:}
+\begin{packed_enum}
+\item Administrator odabire opciju za registraciju bolesnika.
+\item Administrator unosi osnovne informacije o bolesniku.
+\item Sustav provjerava i potvrđuje unos.
+\item Bolesnik je registriran u sustavu.
+\end{packed_enum}
+\end{packed_item}
+
+\vspace{1em} % Dodajte jedan prazan red
+\underbar{\textbf{UC14 - Prihvaćanje ili odbijanje registracije bolesnika}}
+\begin{packed_item}
+\item \textbf{Glavni sudionik:} Administrator
+\item \textbf{Cilj:} Prihvatiti ili odbiti zahtjev za registraciju bolesnika.
+\item \textbf{Sudionici:} Baza podataka
+\item \textbf{Preduvjet:} Administrator je prijavljen u sustav.
+\item \textbf{Opis osnovnog tijeka:}
+\begin{packed_enum}
+\item Administrator pregledava zahtjeve za registraciju bolesnika.
+\item Administrator odabire opciju za prihvaćanje ili odbijanje zahtjeva.
+\item Sustav ažurira status registracije bolesnika.
+\end{packed_enum}
+\end{packed_item}
+
+\vspace{1em} % Dodajte jedan prazan red
+\underbar{\textbf{UC15 - Dodavanje specijalizacija djelatnicima}}
+\begin{packed_item}
+\item \textbf{Glavni sudionik:} Administrator
+\item \textbf{Cilj:} Dodati specijalizacije djelatnicima u sustavu.
+\item \textbf{Sudionici:} Baza podataka
+\item \textbf{Preduvjet:} Administrator je prijavljen u sustav.
+\item \textbf{Opis osnovnog tijeka:}
+\begin{packed_enum}
+\item Administrator odabire opciju za dodavanje specijalizacija.
+\item Administrator odabire djelatnika i specijalizaciju koju dodaje.
+\item Sustav potvrđuje dodavanje specijalizacije djelatniku.
+\end{packed_enum}
+\end{packed_item}
+
+\vspace{1em} % Dodajte jedan prazan red
+\underbar{\textbf{UC16 - Praćenje opreme i kapaciteta}}
+\begin{packed_item}
+\item \textbf{Glavni sudionik:} Djelatnik
+\item \textbf{Cilj:} Praćenje dostupnosti opreme i kapaciteta za rehabilitaciju.
+\item \textbf{Sudionici:} Baza podataka, Sustav
+\item \textbf{Preduvjet:} Djelatnik je prijavljen u sustav.
+\item \textbf{Opis osnovnog tijeka:}
+\begin{packed_enum}
+\item Djelatnik pregledava dostupnu opremu i kapacitete prostorija za rehabilitaciju.
+\item Sustav prikazuje trenutno dostupne resurse i obavještava djelatnika o njihovoj raspoloživosti.
+\end{packed_enum}
+\end{packed_item}
+
+\vspace{1em} % Dodajte jedan prazan red
+\underbar{\textbf{UC17 - Pomoć bolesnicima pri korištenju sustava}}
+\begin{packed_item}
+\item \textbf{Glavni sudionik:} Bolesnik
+\item \textbf{Cilj:} Tražiti pomoć i podršku pri korištenju sustava rehabilitacije.
+\item \textbf{Sudionici:} Djelatnici, Sustav
+\item \textbf{Preduvjet:} Bolesnik je prijavljen u sustav.
+\item \textbf{Opis osnovnog tijeka:}
+\begin{packed_enum}
+\item Bolesnik odabire opciju za kontaktiranje podrške.
+\item Sustav omogućava slanje upita ili zahtjeva za pomoć.
+\item Djelatnik podrške odgovara na upit i pruža potrebne informacije ili pomoć bolesniku.
+\end{packed_enum}
+\end{packed_item}
+
+\vspace{1em} % Dodajte jedan prazan red
+\underbar{\textbf{UC18 - Sigurnosna provjera pristupa podacima}}
+\begin{packed_item}
+\item \textbf{Glavni sudionik:} Administrator
+\item \textbf{Cilj:} Osigurati siguran pristup podacima i kontrolirati ovlasti korisnika.
+\item \textbf{Sudionici:} Baza podataka, Djelatnici
+\item \textbf{Preduvjet:} Administrator je prijavljen u sustav.
+\item \textbf{Opis osnovnog tijeka:}
+\begin{packed_enum}
+\item Administrator pregledava i uređuje ovlasti korisnika sustava.
+\item Sustav omogućava postavljanje različitih razina pristupa za različite korisničke uloge.
+\item Administrator osigurava da samo ovlašteni korisnici mogu pristupiti osjetljivim podacima bolesnika.
+\end{packed_enum}
+\end{packed_item}
+
+\vspace{1em} % Dodajte jedan prazan red
+\underbar{\textbf{UC19 - Obavijesti o promjenama termina}}
+\begin{packed_item}
+\item \textbf{Glavni sudionik:} Administrator
+\item \textbf{Cilj:} Obavijestiti bolesnike ili djelatnike o promjenama u rasporedu termina rehabilitacije.
+\item \textbf{Sudionici:} Bolesnici, Djelatnici
+\item \textbf{Preduvjet:} Promjena termina ili otkazivanje termina.
+\item \textbf{Opis osnovnog tijeka:}
+\begin{packed_enum}
+\item Sustav automatski obavještava bolesnike putem e-maila o svim promjenama u rasporedu termina.
+\item Bolesnici primaju obavijest i mogu potvrditi promjene ili se obratiti podršci ako je potrebno.
+\end{packed_enum}
+\end{packed_item}
+
+\vspace{1em} % Dodajte jedan prazan red
+\underbar{\textbf{UC20 - Dodavanje specijalizacije djelatnika}}
+\begin{packed_item}
+\item \textbf{Glavni sudionik:} Administrator
+\item \textbf{Cilj:} Dodati specijalizaciju djelatniku.
+\item \textbf{Sudionici:} Baza podataka, Djelatnici
+\item \textbf{Preduvjet:} Administrator je prijavljen u sustav.
+\item \textbf{Opis osnovnog tijeka:}
+\begin{packed_enum}
+\item Administrator odabire opciju za dodavanje specijalizacije djelatniku.
+\item Sustav prikazuje popis svih djelatnika.
+\item Administrator odabire djelatnika kojem želi dodijeliti specijalizaciju.
+\item Administrator odabire jednu ili više specijalizacija koje će biti dodijeljene djelatniku.
+\end{packed_enum}
+\end{packed_item}
+
+\vspace{1em} % Dodajte jedan prazan red
+\underbar{\textbf{UC21 - Pregled specijalizacija djelatnika}}
+\begin{packed_item}
+\item \textbf{Glavni sudionik:} Administrator
+\item \textbf{Cilj:} Pregledati specijalizacije svih djelatnika.
+\item \textbf{Sudionici:} Baza podataka, Djelatnici
+\item \textbf{Preduvjet:} Administrator je prijavljen u sustav.
+\item \textbf{Opis osnovnog tijeka:}
+\begin{packed_enum}
+\item Administrator odabire opciju za pregled specijalizacija djelatnika.
+\item Sustav prikazuje popis svih djelatnika i njihovih specijalizacija.
+\item Administrator može uređivati ili brisati specijalizacije djelatnika.
+\end{packed_enum}
+\end{packed_item}
+
+
+\end{document}
