@@ -2,6 +2,22 @@
 
 \section{Funkcionalni zahtjevi}
 
+% Define a counter for use cases
+\newcounter{UCCounter}
+
+% Define a command for beginning a new use case
+\newcommand{\usecase}[1]{
+  \refstepcounter{UCCounter} % Increment the counter
+  \noindent\underbar{\textbf{UC\theUCCounter{} - #1}} % Print the use case title with the number
+  \begin{packed_item}
+}
+
+% Define a command for ending a use case
+\newcommand{\closeusecase}{
+  \end{packed_item}
+  \vspace{1em}
+}
+
 \textbf{\textit{dio 1. revizije}}
 
 \textit{ Glavni dionici su bolesnici, djelatnici zdravstvene ustanove te administratori sustava. Bolesnici su krajnji korisnici koji se prijavljuju na rehabilitaciju. Djelatnici zdravstvene ustanove provode rehabilitaciju i upravljaju terminima. Administratori sustava nadziru cjelokupno funkcioniranje sustava i upravljaju korisnicima.}
@@ -26,26 +42,15 @@
 
 	\begin{packed_enum}
 
-		\item Dodavati nove djelatnike i upravljati korisničkim računima
-		\item Dodavati specijalizacije djelatnicima
-		\item Pregledati podatke o terapijama
-		\item Dodijeliti uloge i privilegije djelatnicima
-
-	\end{packed_enum}
-
-	\item  \underbar{Privilegirani djelatnik može:}
-
-	\begin{packed_enum}
-
+        \item Prijaviti se u sustav 
 		\item Prihvatiti ili odbiti registraciju bolesnika
-		\item Prihvatiti ili odbiti prijave bolesnika za rehabilitaciju
-		\item Dodijeliti termine bolesnicima za rehabilitaciju
-		\item Bilježiti napredak svojih bolesnika %svog
-		\item Pregledati raspored bolesnika i sesija
-		\item Pregledati raspored svih djelatnika
-		\item Pregledati podatke o bolesnicima
-		\item Pregledati specijalizacije djelatnika
-		\item Obavijestiti bolesnike o neočekivanoj promjeni termina
+        \item Pregledati i potvrditi prijave bolesnika za rehabilitaciju
+        \item Pregledati sve termine sesija
+        \item Dodavati račune djelatnika
+        \item Brisati račune bolesnika i djelatnika
+        \item PRegledavati, uređivati i brisati podatke računa bolesnika i djelatnika
+        \item Otkazati zakazani termin 
+        \item Pomicati zakazane termine 
 
 	\end{packed_enum}
 
@@ -53,10 +58,11 @@
 
 	\begin{packed_enum}
 
-		\item Bilježiti napredak svojih bolesnika %svog
-		\item Pregledati raspored bolesnika i sesija
+        \item Prijaviti se u sustav 
+		\item Bilježiti napredak svojih bolesnika
+		\item Pregledati raspored svojih sesija
 		\item Pregledati podatke o bolesnicima
-		\item Obavijestiti bolesnika o neočekivanoj promjeni termina
+		\item Otkazati sesiju pod određenim uvjetima
 
 	\end{packed_enum}
 
@@ -65,11 +71,13 @@
 	\begin{packed_enum}
 
 		\item Registrirati se u sustav
+        \item Prijaviti se u sustav 
 		\item Prijaviti se na rehabilitaciju
 		\item Odabrati terapiju i termine dolaska na rehabilitaciju
-		\item Otkazati zakazani termin
+		\item Pomaknuti zakazani termin pod određenim uvjetima
 		\item Pregledati vlastiti kalendar s terminima terapije
-		\item Pregledati statističke podatke o terapijama
+		\item Pregledati povijest svojih terapija 
+  
 
 	\end{packed_enum}
 
@@ -77,9 +85,9 @@
 
 	\begin{packed_enum}
 
-		\item Pohranjuje sve podatke o bolesnicima i o njihovom napretku
-		\item Pohranjuje podatke o opremi ustanove
-		\item Pohranjuje sve potrebne podatke o djelatnicima
+		\item Pohranjuje sve podatke o bolesnicima i njihovim rehabilitacijama
+		\item Pohranjuje sve potrebne podatke o djelatnicima i njihovim terminima
+        \item Pohranjuje podatke o resursima ustanove 
 
 	\end{packed_enum}
 \end{packed_enum}
@@ -96,8 +104,7 @@
 \textit{Funkcionalne zahtjeve razraditi u obliku obrazaca uporabe. Svaki obrazac je potrebno razraditi prema donjem predlošku. Ukoliko u nekom koraku može doći do odstupanja, potrebno je to odstupanje opisati i po mogućnosti ponuditi rješenje kojim bi se tijek obrasca vratio na osnovni tijek.}
 \vspace{2em} % Dodajte jedan prazan red
 
-\noindent \underbar{\textbf{UC1 - Registracija bolesnika}}
-\begin{packed_item}
+\usecase{Registracija bolesnika}
 	\item \textbf{Glavni sudionik:} Bolesnik
 	\item \textbf{Cilj:} Registrirati se u sustav kako bi pristupio procesu rehabilitacije.
 	\item \textbf{Sudionici:} Baza podataka/Sustav
@@ -110,12 +117,10 @@
 	\end{packed_enum}
 	\item \textbf{Opis mogućih odstupanja:}
 	Sustav reagira na neispravne podatke, duplikate adresa elektoničke pošte/MBO-a i nepotpune
-	obrasce te obavještava bolesnika o potrebnim ispravkama.
-\end{packed_item}
-\vspace{1em} % Dodajte jedan prazan red
+	obrasce te obavještava bolesnika o potrebnim ispravkama. \\
+\closeusecase
 
-\noindent\underbar{\textbf{UC2 - Prijava bolesnika na rehabilitaciju}}
-\begin{packed_item}
+\usecase{Prijava bolesnika na rehabilitaciju}
 	\item \textbf{Glavni sudionik:} Bolesnik
 	\item \textbf{Cilj:} Prijaviti se za proces rehabilitacije.
 	\item \textbf{Sudionici:} Baza podataka
@@ -129,12 +134,9 @@
 	\end{packed_enum}
 	\item \textbf{Opis mogućih odstupanja:}
 	Sustav reagira na neispravanu adresu elektoničke pošte ili lozinku te obavještava korisnika o neuspjeloj prijavi i vraća ga na stranicu za prijavu.
-\end{packed_item}
-\vspace{1em} % Dodajte jedan prazan red
+\closeusecase
 
-\vspace{1em} % Dodajte jedan prazan red
-\noindent\underbar{\textbf{UC3 - Odabir terapije i termina}}
-\begin{packed_item}
+\usecase{Odabir terapije i termina}
 	\item \textbf{Glavni sudionik:} Bolesnik
 	\item \textbf{Cilj:} Odabrati terapiju i termine dolaska na rehabilitaciju.
 	\item \textbf{Sudionici:} Baza podataka, privilegirani djelatnik
@@ -146,11 +148,9 @@
 		\item Bolesnik odabire željenu terapiju i termine dolaska.
 		\item Sustav potvrđuje odabir i pohranjuje podatke, ali se čeka odobrenje djelatnika.
 	\end{packed_enum}
-\end{packed_item}
+\closeusecase
 
-\vspace{1em} % Dodajte jedan prazan red
-\noindent\underbar{\textbf{UC4 - Promjena zakazanog termina}}
-\begin{packed_item}
+\usecase{Promjena zakazanog termina}
 	\item \textbf{Glavni sudionik:} Bolesnik
 	\item \textbf{Cilj:} Promjeni zakazani termin za rehabilitaciju.
 	\item \textbf{Sudionici:} Baza podataka
@@ -162,11 +162,9 @@
 		\item Bolesnik pregledava raspored slobodnih termina i odabire zamjenski termin.
 		\item Sustav potvrđuje promjenu.
 	\end{packed_enum}
-\end{packed_item}
+\closeusecase
 
-\vspace{1em} % Dodajte jedan prazan red
-\noindent\underbar{\textbf{UC5 - Pregled vlastitog kalendara}}
-\begin{packed_item}
+\usecase{Pregled vlastitog kalendara}
 	\item \textbf{Glavni sudionik:} Bolesnik
 	\item \textbf{Cilj:} Pregledati kalendar s terminima terapije.
 	\item \textbf{Sudionici:} Baza podataka
@@ -177,11 +175,9 @@
 		\item Sustav prikazuje raspored svih zakazanih termina terapije.
 		\item Bolesnik može pregledati detalje o svakom terminu.
 	\end{packed_enum}
-\end{packed_item}
+\closeusecase
 
-\vspace{1em} % Dodajte jedan prazan red
-\noindent\underbar{\textbf{UC6 - Pregled podataka o terapijama}}
-\begin{packed_item}
+\usecase{Pregled podataka o terapijama}
 	\item \textbf{Glavni sudionik:} Bolesnik
 	\item \textbf{Cilj:} Pregledati podatke o terapijama.
 	\item \textbf{Sudionici:} Baza podataka
@@ -191,11 +187,9 @@
 		\item Bolesnik odabire opciju za pregled podataka.
 		\item Sustav prikazuje relevantne informacije o terapijama.
 	\end{packed_enum}
-\end{packed_item}
+\closeusecase
 
-\vspace{1em} % Dodajte jedan prazan red
-\noindent\underbar{\textbf{UC7 - Deaktivacija vlastitog korisničkog računa}}
-\begin{packed_item}
+\usecase{Deaktivacija vlastitog korisničkog računa}
 	\item \textbf{Glavni sudionik:} Bolesnik
 	\item \textbf{Cilj:} Dekativirati vlastiti korisnički račun.
 	\item \textbf{Sudionici:} Baza podataka/Sustav
@@ -208,11 +202,9 @@
 	\end{packed_enum}
 	\item \textbf{Opis mogućih odstupanja:}
 	Sustav reagira na neispravnu lozinku te obavještava bolesnika o neuspjelom pokušaju.
-\end{packed_item}
+\closeusecase
 
-\vspace{1em} % Dodajte jedan prazan red
-\noindent\underbar{\textbf{UC8 - Bilježenje napretka}}
-\begin{packed_item}
+\usecase{Bilježenje napretka}
 	\item \textbf{Glavni sudionik:} Djelatnik/Privilegirani djelatnik
 	\item \textbf{Cilj:} Bilježiti i evidentirati napredak bolesnika tijekom procesa rehabilitacije.
 	\item \textbf{Sudionici:} Baza podataka, Bolesnik
@@ -223,11 +215,9 @@
 		\item Djelatnik unosi podatke o sesiji rehabilitacije.
 		\item Djelatnik potvrđuje unos i sprema podatke.
 	\end{packed_enum}
-\end{packed_item}
+\closeusecase
 
-\vspace{1em} % Dodajte jedan prazan red
-\noindent\underbar{\textbf{UC9 - Pregled vlastitog raspored djelatnika}}
-\begin{packed_item}
+\usecase{Pregled vlastitog raspored djelatnika}
 	\item \textbf{Glavni sudionik:} Djelatnik
 	\item \textbf{Cilj:} Pregledati raspored bolesnika i sesija rehabilitacije.
 	\item \textbf{Sudionici:} Baza podataka
@@ -237,11 +227,9 @@
 		\item Djelatnik odabire opciju za pregled rasporeda.
 		\item Sustav prikazuje raspored bolesnika i sesija dodijeljenih djelatniku.
 	\end{packed_enum}
-\end{packed_item}
+\closeusecase
 
-\vspace{1em} % Dodajte jedan prazan red
-\noindent\underbar{\textbf{UC10 - Obavijesti o promjenama termina}}
-\begin{packed_item}
+\usecase{Obavijesti o promjenama termina}
 	\item \textbf{Glavni sudionik:} Djelatnik/Privilegirani djelatnik
 	\item \textbf{Cilj:} Obavijestiti bolesnike ili djelatnike o promjenama u rasporedu termina rehabilitacije.
 	\item \textbf{Sudionici:} Bolesnici, Djelatnici
@@ -251,11 +239,9 @@
 		\item Djelatnik bolesnike putem elektoničke pošte o svim promjenama u rasporedu termina.
 		\item Bolesnici primaju obavijest i mogu sami promjeniti termine.
 	\end{packed_enum}
-\end{packed_item}
+\closeusecase
 
-\vspace{1em} % Dodajte jedan prazan red
-\noindent\underbar{\textbf{UC11 - Pregled rasporeda bolesnika i sesija}}
-\begin{packed_item}
+\usecase{Pregled rasporeda bolesnika i sesija}
 	\item \textbf{Glavni sudionik:} Privilegirani djelatnik
 	\item \textbf{Cilj:} Pregledati raspored bolesnika i sesija rehabilitacije.
 	\item \textbf{Sudionici:} Baza podataka
@@ -266,11 +252,9 @@
 		\item Sustav prikazuje raspored svih bolesnika i sesija.
 		\item Privilegirani djelatnik može filtrirati raspored po različitim kriterijima.
 	\end{packed_enum}
-\end{packed_item}
+\closeusecase
 
-\vspace{1em} % Dodajte jedan prazan red
-\noindent\underbar{\textbf{UC12 - Prihvaćanje ili odbijanje registracije bolesnika}}
-\begin{packed_item}
+\usecase{Prihvaćanje ili odbijanje registracije bolesnika}
 	\item \textbf{Glavni sudionik:} Privilegirani djelatnik
 	\item \textbf{Cilj:} Provjeriti i obraditi nove zahtjeve za rehabilitaciju.
 	\item \textbf{Sudionici:} Baza podataka, Bolesnik
@@ -282,11 +266,9 @@
 		\item Bolesnik prima elektoničku poštu s potvrdom ili promjenama u terminima.
 		\item Ako je potrebno, djelatnik može izravno kontaktirati bolesnika.
 	\end{packed_enum}
-\end{packed_item}
+\closeusecase
 
-\vspace{1em} % Dodajte jedan prazan red
-\noindent\underbar{\textbf{UC13 - Pregled rasporeda svih djelatnika}}
-\begin{packed_item}
+\usecase{Pregled rasporeda svih djelatnika}
 	\item \textbf{Glavni sudionik:} Privilegirani djelatnik
 	\item \textbf{Cilj:} Pregledati raspored svih djelatnika u sustavu.
 	\item \textbf{Sudionici:} Baza podataka
@@ -297,11 +279,9 @@
 		\item Sustav prikazuje raspored svih djelatnika.
 		\item Privilegirani djelatnik može pregledati informacije o pojedinom djelatniku.
 	\end{packed_enum}
-\end{packed_item}
+\closeusecase
 
-\vspace{1em} % Dodajte jedan prazan red
-\noindent\underbar{\textbf{UC14 - Pregled podataka o bolesnicima}}
-\begin{packed_item}
+\usecase{Pregled podataka o bolesnicima}
 	\item \textbf{Glavni sudionik:} Privilegirani djelatnik
 	\item \textbf{Cilj:} Pregledati podatke o bolesnicima.
 	\item \textbf{Sudionici:} Baza podataka
@@ -312,11 +292,9 @@
 		\item Sustav prikazuje popis bolesnika i osnovne informacije o njima.
 		\item Privilegirani djelatnik može pregledati detaljnije podatke o svakom bolesniku.
 	\end{packed_enum}
-\end{packed_item}
+\closeusecase
 
-\vspace{1em} % Dodajte jedan prazan red
-\noindent\underbar{\textbf{UC15 - Pregled specijalizacija djelatnika}}
-\begin{packed_item}
+\usecase{Pregled specijalizacija djelatnika}
 	\item \textbf{Glavni sudionik:} Privilegirani djelatnik
 	\item \textbf{Cilj:} Pregledati specijalizacije djelatnika u sustavu.
 	\item \textbf{Sudionici:} Baza podataka
@@ -327,11 +305,9 @@
 		\item Sustav prikazuje popis specijalizacija i povezane djelatnike.
 		\item Privilegirani djelatnik može pregledati detalje o svakoj specijalizaciji.
 	\end{packed_enum}
-\end{packed_item}
+\closeusecase
 
-\vspace{1em} % Dodajte jedan prazan red
-\noindent\underbar{\textbf{UC16 - Praćenje opreme i kapaciteta}}
-\begin{packed_item}
+\usecase{Praćenje opreme i kapaciteta}
 	\item \textbf{Glavni sudionik:} Privilegirani djelatnik
 	\item \textbf{Cilj:} Praćenje dostupnosti opreme i kapaciteta za rehabilitaciju.
 	\item \textbf{Sudionici:} Baza podataka, Sustav
@@ -341,11 +317,9 @@
 		\item Privilegirani djelatnik pregledava dostupnu opremu i kapacitete prostorija za rehabilitaciju.
 		\item Sustav prikazuje trenutno dostupne resurse i obavještava djelatnika o njihovoj raspoloživosti.
 	\end{packed_enum}
-\end{packed_item}
+\closeusecase
 
-\vspace{1em} % Dodajte jedan prazan red
-\noindent\underbar{\textbf{UC17 - Dodavanje djelatnika u bazu}}
-\begin{packed_item}
+\usecase{Dodavanje djelatnika u bazu}
 	\item \textbf{Glavni sudionik:} Administrator
 	\item \textbf{Cilj:} Stvoriti korisnički račun za novog djelatnika u sustavu medicinske rehabilitacije.
 	\item \textbf{Sudionici:} Baza podataka
@@ -359,11 +333,9 @@
 	\end{packed_enum}
 	\item \textbf{Opis mogućih odstupanja:}
 	Sustav reagira na neispravne podatke, već postojeće zaposlenike te obavještava administratora o neuspjelom upisu.
-\end{packed_item}
+\closeusecase
 
-\vspace{1em} % Dodajte jedan prazan red
-\noindent\underbar{\textbf{UC18 - Dodavanje specijalizacija djelatnicima}}
-\begin{packed_item}
+\usecase{Dodavanje specijalizacija djelatnicima}
 	\item \textbf{Glavni sudionik:} Administrator
 	\item \textbf{Cilj:} Dodati specijalizacije djelatnicima u sustavu.
 	\item \textbf{Sudionici:} Baza podataka
@@ -373,11 +345,9 @@
 		\item Administrator odabire opciju za dodavanje specijalizacija.
 		\item Administrator odabire djelatnika i specijalizaciju koju dodaje.
 	\end{packed_enum}
-\end{packed_item}
+\closeusecase
 
-\vspace{1em} % Dodajte jedan prazan red
-\noindent\underbar{\textbf{UC19 - Sigurnosna provjera pristupa podacima}}
-\begin{packed_item}
+\usecase{Sigurnosna provjera pristupa podacima}
 	\item \textbf{Glavni sudionik:} Administrator
 	\item \textbf{Cilj:} Osigurati siguran pristup podacima i kontrolirati ovlasti korisnika.
 	\item \textbf{Sudionici:} Baza podataka,Privilegirani djelatnici, Djelatnici, Bolesnici
@@ -388,11 +358,9 @@
 		\item Sustav omogućava postavljanje različitih razina pristupa za različite korisničke uloge.
 		\item Administrator osigurava da samo ovlašteni korisnici mogu pristupiti osjetljivim podacima bolesnika.
 	\end{packed_enum}
-\end{packed_item}
+\closeusecase
 
-\vspace{1em} % Dodajte jedan prazan red
-\noindent\underbar{\textbf{UC20 - Deaktivacija korisničkog računa djelatnika}}
-\begin{packed_item}
+\usecase{Deaktivacija korisničkog računa djelatnika}
 	\item \textbf{Glavni sudionik:} Administrator
 	\item \textbf{Cilj:} Deaktivirati korisnički račun djelatnika.
 	\item \textbf{Sudionici:} Baza podataka, Djelatnici, Privilegirani djelatnici
@@ -403,11 +371,9 @@
 		\item Sustav prikazuje popis svih djelatnika.
 		\item Administrator odabire djelatnika čiji korisnički račun želi deaktivirati.
 	\end{packed_enum}
-\end{packed_item}
+\closeusecase
 
-\vspace{1em} % Dodajte jedan prazan red
-\noindent\underbar{\textbf{UC21 - Deaktivacija korisničkog računa bolesnika}}
-\begin{packed_item}
+\usecase{Deaktivacija korisničkog računa bolesnika}
 	\item \textbf{Glavni sudionik:} Administrator
 	\item \textbf{Cilj:} Deaktivirati korisnički račun bolesnika.
 	\item \textbf{Sudionici:} Baza podataka, Bolesnici
@@ -418,11 +384,9 @@
 		\item Sustav prikazuje popis svih registriranih bolesnika.
 		\item Administrator odabire bolesnika čiji korisnički račun želi deaktivirati.
 	\end{packed_enum}
-\end{packed_item}
+\closeusecase
 
-\vspace{1em} % Dodajte jedan prazan red
-\noindent\underbar{\textbf{UC22 - Pregled specijalizacija djelatnika}}
-\begin{packed_item}
+\usecase{Pregled specijalizacija djelatnika}
 	\item \textbf{Glavni sudionik:} Administrator
 	\item \textbf{Cilj:} Pregledati specijalizacije svih djelatnika.
 	\item \textbf{Sudionici:} Baza podataka, Djelatnici, Privilegirani djelatnici
@@ -433,7 +397,8 @@
 		\item Sustav prikazuje popis svih djelatnika i njihovih specijalizacija.
 		\item Administrator može uređivati ili brisati specijalizacije djelatnika.
 	\end{packed_enum}
-\end{packed_item}
+\closeusecase
+
 
 \subsubsection{Dijagrami obrazaca uporabe}
 
