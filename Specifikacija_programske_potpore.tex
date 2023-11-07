@@ -104,21 +104,37 @@
 \textit{Funkcionalne zahtjeve razraditi u obliku obrazaca uporabe. Svaki obrazac je potrebno razraditi prema donjem predlošku. Ukoliko u nekom koraku može doći do odstupanja, potrebno je to odstupanje opisati i po mogućnosti ponuditi rješenje kojim bi se tijek obrasca vratio na osnovni tijek.}
 \vspace{2em} % Dodajte jedan prazan red
 
-\usecase{Registracija bolesnika}
+\usecase{Inicijalna registracija bolesnika u suszav}
 	\item \textbf{Glavni sudionik:} Bolesnik
 	\item \textbf{Cilj:} Registrirati se u sustav kako bi pristupio procesu rehabilitacije.
-	\item \textbf{Sudionici:} Baza podataka/Sustav
+	\item \textbf{Sudionici:} Baza podataka, Administrator
 	\item \textbf{Preduvjet:} Bolesnik nema prethodno registriran korisnički račun
 	\item \textbf{Opis osnovnog tijeka:}
 	\begin{packed_enum}
 		\item Bolesnik unosi osobne podatke, adresu elektoničke pošte i lozinku.
-		\item Sustav provjerava ispravnost podataka.
+		\item Administrator provjerava ispravnost podataka.
 		\item Sustav pohranjuje podatke i stvara korisnički račun.
 	\end{packed_enum}
 	\item \textbf{Opis mogućih odstupanja:}
 	Sustav reagira na neispravne podatke, duplikate adresa elektoničke pošte/MBO-a i nepotpune
 	obrasce te obavještava bolesnika o potrebnim ispravkama. \\
 \closeusecase
+
+\usecase{Prijava bolesnika/djelatnika/administratora u sustav}
+	\item \textbf{Glavni sudionik:} Bolesnik/Djelatnik/Administrator
+	\item \textbf{Cilj:} Korisnik se želi prijaviti u sustav 
+	\item \textbf{Sudionici:} Baza podataka
+	\item \textbf{Preduvjet:} Korisnikov račun je u bazi podataka
+	\item \textbf{Opis osnovnog tijeka:}
+	\begin{packed_enum}
+		\item Korisnik unosi adresu elektoničke pošte/korisničko ime i lozinku.
+		\item Provjerava se postojanost dane kombinacije u bazi
+		\item Ovisno o tipu profila povezanog s danim podacima, korisniku se otvara jedno od 3 moguća sučelja (bolesnik, djelatnik, administrator)
+	\end{packed_enum}
+	\item \textbf{Opis mogućih odstupanja:}
+	Sustav reagira na neispravne podatke te obavještava korisnika o netočnosti podataka. \\
+\closeusecase
+
 
 \usecase{Prijava bolesnika na rehabilitaciju}
 	\item \textbf{Glavni sudionik:} Bolesnik
@@ -127,53 +143,111 @@
 	\item \textbf{Preduvjet:} Bolesnik je registriran i prijavljen u sustav.
 	\item \textbf{Opis osnovnog tijeka:}
 	\begin{packed_enum}
-		\item Bolesnik se prijavljuje u sustav.
 		\item Bolesnik odabire opciju za prijavu na rehabilitaciju.
 		\item Bolesnik unosi informacije o svom oboljenju, potrebnom postupku liječenja i liječniku koji ga je uputio na rehabilitaciju.
-		\item Bolesnik odabire datum i vrijeme dolaska na rehabilitaciju.
+        \item S obzirom na unesenu vrstu rehabilitacije, sustav provjerava koji su sve termini slobodni (slobodan termin: slobodan resurs i slobodan specijalizirani djelatnik) 
+		\item Bolesnik odabire datum i vrijeme svojih termina na temelju dostupnih termina 
+        \item Bolesnik čeka odobrenje administratora (UCXY) 
+        \item Korisnik prima skočni prozor s obavijesti o administratorovoj odluci te sukladno istoj ili može ponoviti prijavu na rehabilitaciju ili je preusmjeren na kontrolnu ploču (dashboard) za novonastalu rehabilitaciju
 	\end{packed_enum}
 	\item \textbf{Opis mogućih odstupanja:}
-	Sustav reagira na neispravanu adresu elektoničke pošte ili lozinku te obavještava korisnika o neuspjeloj prijavi i vraća ga na stranicu za prijavu.
+	Dok sve nužne informacije nisu upisane blokirano je slanje forme na provjeru kod administratora. 
 \closeusecase
 
-\usecase{Odabir terapije i termina}
+\usecase{Promjena zakazanog termina (bolesnik)}
 	\item \textbf{Glavni sudionik:} Bolesnik
-	\item \textbf{Cilj:} Odabrati terapiju i termine dolaska na rehabilitaciju.
-	\item \textbf{Sudionici:} Baza podataka, privilegirani djelatnik
-	\item \textbf{Preduvjet:} Bolesnik je registriran i prijavljen u sustav.
-	\item \textbf{Opis osnovnog tijeka:}
-	\begin{packed_enum}
-		\item Bolesnik odabire opciju za odabir terapije.
-		\item Bolesnik pregledava dostupne terapije i informacije o njima.
-		\item Bolesnik odabire željenu terapiju i termine dolaska.
-		\item Sustav potvrđuje odabir i pohranjuje podatke, ali se čeka odobrenje djelatnika.
-	\end{packed_enum}
-\closeusecase
-
-\usecase{Promjena zakazanog termina}
-	\item \textbf{Glavni sudionik:} Bolesnik
-	\item \textbf{Cilj:} Promjeni zakazani termin za rehabilitaciju.
+	\item \textbf{Cilj:} Promijeni zakazani termin za rehabilitaciju.
 	\item \textbf{Sudionici:} Baza podataka
 	\item \textbf{Preduvjet:} Bolesnik je registriran, prijavljen i ima zakazane termine.
 	\item \textbf{Opis osnovnog tijeka:}
 	\begin{packed_enum}
+        \item Bolesnik ulazi na kontrolnu ploču.
 		\item Bolesnik odabire opciju za promjenu termina.
 		\item Bolesnik pregledava svoj raspored i odabire termin koji bi htio promjeniti.
 		\item Bolesnik pregledava raspored slobodnih termina i odabire zamjenski termin.
-		\item Sustav potvrđuje promjenu.
+		\item Sustav potvrđuje regularnost promjene i ona se evidentira na kontrolnoj ploči djelatnika i bolesnika. 
+	\end{packed_enum}
+    \item \textbf{Opis mogućih odstupanja:}
+	Ako promjena nije napravljena minimalno 48 sati prije termina, otkazivanja su onemogućena u sustavu i bolesnik se upućuje da u slučaju hitnoće kontaktira administratora direktno. 
+\closeusecase
+
+\usecase{Otkazivanje zakazanog termina (djelatnik)}
+	\item \textbf{Glavni sudionik:} Djelatnik
+	\item \textbf{Cilj:} Otkaži zakazani termin za rehabilitaciju.
+	\item \textbf{Sudionici:} Baza podataka
+	\item \textbf{Preduvjet:} Djelatnik je prijavljen u sustav. Bolesnik ima zakazane termine.
+	\item \textbf{Opis osnovnog tijeka:}
+	\begin{packed_enum}
+        \item Djelatnik ulazi na kontrolnu ploču i odabire termin koji želi promijeniti.
+		\item Djelatnik odabire opciju za otkazivanje termina 
+        \item Izvršava se promjena u bazi te se obavještava bolesnik koji odabire novi termin 
+	\end{packed_enum}
+    \item \textbf{Opis mogućih odstupanja:}
+	Djelatnik ne može otkazivati termine koji nisu njegovi. 
+\closeusecase
+
+\usecase{Otkazivanje zakazanog termina (administrator)}
+	\item \textbf{Glavni sudionik:} Administrator
+	\item \textbf{Cilj:} Otkaži zakazani termin za rehabilitaciju.
+	\item \textbf{Sudionici:} Baza podataka
+	\item \textbf{Preduvjet:} Administrator je prijavljen u sustav. Bolesnik ima zakazane termine.
+	\item \textbf{Opis osnovnog tijeka:}
+	\begin{packed_enum}
+        \item Administrator odlazi na kalendar i pretražuje termin po djelatniku i/li po bolesniku.
+		\item Administrator odabire opciju za otkazivanje termina 
+        \item Izvršava se promjena u bazi te se obavještava djelatnika i bolesnika koji odabire novi termin 
 	\end{packed_enum}
 \closeusecase
 
-\usecase{Pregled vlastitog kalendara}
-	\item \textbf{Glavni sudionik:} Bolesnik
+\usecase{Pregled kalendara vlastitih terapija}
+	\item \textbf{Glavni sudionik:} Bolesnik/Djleatnik
 	\item \textbf{Cilj:} Pregledati kalendar s terminima terapije.
 	\item \textbf{Sudionici:} Baza podataka
-	\item \textbf{Preduvjet:} Bolesnik je registriran i prijavljen u sustav.
+	\item \textbf{Preduvjet:} Bolesnik/Djelatnik je registriran i prijavljen u sustav.
 	\item \textbf{Opis osnovnog tijeka:}
 	\begin{packed_enum}
-		\item Bolesnik odabire opciju za pregled vlastitog kalendara.
+		\item Bolesnik/Djelatnik odabire opciju za pregled vlastitog kalendara.
 		\item Sustav prikazuje raspored svih zakazanih termina terapije.
-		\item Bolesnik može pregledati detalje o svakom terminu.
+        \item Bolesnik može pregledati sesije i vidjeti napomene, djelatnik ih može upisivati
+	\end{packed_enum}
+\closeusecase
+
+\usecase{Pregled podataka o bolesnicima}
+	\item \textbf{Glavni sudionik:} Djelatnik
+	\item \textbf{Cilj:} Pregledati podatke o bolesnicima.
+	\item \textbf{Sudionici:} Baza podataka
+	\item \textbf{Preduvjet:} Djelatnik je prijavljen u sustav.
+	\item \textbf{Opis osnovnog tijeka:}
+	\begin{packed_enum}
+		\item Djelatnik pretražuje ime bolesnika ili pregledava listu svih bolensika.
+		\item Sustav prikazuje popis bolesnika i osnovne informacije o njima.
+		\item Djelatnik može pregledati detaljnije podatke o svakom bolesniku.
+	\end{packed_enum}
+\closeusecase
+
+\usecase{Pregled rasporeda svih bolesnika, djelatnika i sesija}
+	\item \textbf{Glavni sudionik:} Administrator
+	\item \textbf{Cilj:} Pregledati raspored bolesnika i sesija rehabilitacije.
+	\item \textbf{Sudionici:} Baza podataka
+	\item \textbf{Preduvjet:} Administrator je prijavljen u sustav.
+	\item \textbf{Opis osnovnog tijeka:}
+	\begin{packed_enum}
+		\item Privilegirani djelatnik odabire opciju za pregled rasporeda.
+		\item Sustav prikazuje raspored svih bolesnika, djelatnika i sesija.
+		\item Administrator može filtrirati raspored po različitim kriterijima.
+	\end{packed_enum}
+\closeusecase
+
+\usecase{Bilježenje napretka bolesnika}
+	\item \textbf{Glavni sudionik:} Djelatnik
+	\item \textbf{Cilj:} Bilježiti i evidentirati napredak bolesnika tijekom procesa rehabilitacije.
+	\item \textbf{Sudionici:} Baza podataka, Bolesnik
+	\item \textbf{Preduvjet:} Bolesnik je registriran, prijavljen i odradio sesiju rehabilitacije s određenim djelatikom.
+	\item \textbf{Opis osnovnog tijeka:}
+	\begin{packed_enum}
+		\item Djelatnik odabire bolesnika za bilježenje napretka.
+		\item Djelatnik unosi podatke o sesiji rehabilitacije.
+		\item Djelatnik potvrđuje unos i sprema podatke.
 	\end{packed_enum}
 \closeusecase
 
@@ -189,133 +263,33 @@
 	\end{packed_enum}
 \closeusecase
 
-\usecase{Deaktivacija vlastitog korisničkog računa}
-	\item \textbf{Glavni sudionik:} Bolesnik
-	\item \textbf{Cilj:} Dekativirati vlastiti korisnički račun.
-	\item \textbf{Sudionici:} Baza podataka/Sustav
-	\item \textbf{Preduvjet:} Bolesnik je prijavljen u sustav.
-	\item \textbf{Opis osnovnog tijeka:}
-	\begin{packed_enum}
-		\item Bolesnik odabire opciju za deaktivaciju računa.
-		\item Sustav traži bolesnikovu lozinku za potvrdu zahtijeva.
-		\item Sustav je deaktivirao bolesnikov korisnički račun.
-	\end{packed_enum}
-	\item \textbf{Opis mogućih odstupanja:}
-	Sustav reagira na neispravnu lozinku te obavještava bolesnika o neuspjelom pokušaju.
-\closeusecase
 
-\usecase{Bilježenje napretka}
-	\item \textbf{Glavni sudionik:} Djelatnik/Privilegirani djelatnik
-	\item \textbf{Cilj:} Bilježiti i evidentirati napredak bolesnika tijekom procesa rehabilitacije.
-	\item \textbf{Sudionici:} Baza podataka, Bolesnik
-	\item \textbf{Preduvjet:} Bolesnik je registriran, prijavljen i odradio sesiju rehabilitacije s određenim djelatikom.
-	\item \textbf{Opis osnovnog tijeka:}
-	\begin{packed_enum}
-		\item Djelatnik odabire bolesnika za bilježenje napretka.
-		\item Djelatnik unosi podatke o sesiji rehabilitacije.
-		\item Djelatnik potvrđuje unos i sprema podatke.
-	\end{packed_enum}
-\closeusecase
-
-\usecase{Pregled vlastitog raspored djelatnika}
-	\item \textbf{Glavni sudionik:} Djelatnik
-	\item \textbf{Cilj:} Pregledati raspored bolesnika i sesija rehabilitacije.
-	\item \textbf{Sudionici:} Baza podataka
-	\item \textbf{Preduvjet:} Djelatnik je prijavljen u sustav.
-	\item \textbf{Opis osnovnog tijeka:}
-	\begin{packed_enum}
-		\item Djelatnik odabire opciju za pregled rasporeda.
-		\item Sustav prikazuje raspored bolesnika i sesija dodijeljenih djelatniku.
-	\end{packed_enum}
-\closeusecase
-
-\usecase{Obavijesti o promjenama termina}
-	\item \textbf{Glavni sudionik:} Djelatnik/Privilegirani djelatnik
-	\item \textbf{Cilj:} Obavijestiti bolesnike ili djelatnike o promjenama u rasporedu termina rehabilitacije.
-	\item \textbf{Sudionici:} Bolesnici, Djelatnici
-	\item \textbf{Preduvjet:} Promjena termina ili otkazivanje termina.
-	\item \textbf{Opis osnovnog tijeka:}
-	\begin{packed_enum}
-		\item Djelatnik bolesnike putem elektoničke pošte o svim promjenama u rasporedu termina.
-		\item Bolesnici primaju obavijest i mogu sami promjeniti termine.
-	\end{packed_enum}
-\closeusecase
-
-\usecase{Pregled rasporeda bolesnika i sesija}
-	\item \textbf{Glavni sudionik:} Privilegirani djelatnik
-	\item \textbf{Cilj:} Pregledati raspored bolesnika i sesija rehabilitacije.
-	\item \textbf{Sudionici:} Baza podataka
-	\item \textbf{Preduvjet:} Privilegirani djelatnik je prijavljen u sustav.
-	\item \textbf{Opis osnovnog tijeka:}
-	\begin{packed_enum}
-		\item Privilegirani djelatnik odabire opciju za pregled rasporeda.
-		\item Sustav prikazuje raspored svih bolesnika i sesija.
-		\item Privilegirani djelatnik može filtrirati raspored po različitim kriterijima.
-	\end{packed_enum}
-\closeusecase
-
-\usecase{Prihvaćanje ili odbijanje registracije bolesnika}
-	\item \textbf{Glavni sudionik:} Privilegirani djelatnik
+\usecase{Prihvaćanje registracije bolesnika}
+	\item \textbf{Glavni sudionik:} Administrator
 	\item \textbf{Cilj:} Provjeriti i obraditi nove zahtjeve za rehabilitaciju.
 	\item \textbf{Sudionici:} Baza podataka, Bolesnik
-	\item \textbf{Preduvjet:} Bolesnici su poslali zahtjeve za rehabilitaciju, privilegirani djelatnik je prijavljen u sustav.
+	\item \textbf{Preduvjet:} Bolesnici su poslali zahtjeve za rehabilitaciju, administrator je prijavljen u sustav.
 	\item \textbf{Opis osnovnog tijeka:}
 	\begin{packed_enum}
-		\item Privilegirani djelatnik provjerava nove zahtjeve.
-		\item Privilegirani djelatnik potvrđuje ili odbija termine.
-		\item Bolesnik prima elektoničku poštu s potvrdom ili promjenama u terminima.
-		\item Ako je potrebno, djelatnik može izravno kontaktirati bolesnika.
+		\item Administrator provjerava nove zahtjeve.
+		\item Administrator potvrđuje registraciju.
+		\item Bolesnik prima elektoničku poštu s potvrdom registracije.
 	\end{packed_enum}
+ \item \textbf{Opis mogućih odstupanja:}
+	U slučaju neispravne registracije u smislu duplikata OIB-a ili MBO-a frontend ne dopušta slanje registracije. 
+    Ukoliko nepravilnosti uoči administrator, Bolesnik prima elektroničku poštu na upisanu adresu u kojoj mu se govori da registracija nije uspjela. 
 \closeusecase
 
-\usecase{Pregled rasporeda svih djelatnika}
-	\item \textbf{Glavni sudionik:} Privilegirani djelatnik
-	\item \textbf{Cilj:} Pregledati raspored svih djelatnika u sustavu.
+
+\usecase{Pregled statistike o djelatnicima i resursima}
+	\item \textbf{Glavni sudionik:} Administrator 
+	\item \textbf{Cilj:} Praćenje dostupnosti osoblja, opreme i kapaciteta za rehabilitaciju.
 	\item \textbf{Sudionici:} Baza podataka
-	\item \textbf{Preduvjet:} Djelatnik je prijavljen u sustav.
+	\item \textbf{Preduvjet:} Administrator je prijavljen u sustav.
 	\item \textbf{Opis osnovnog tijeka:}
 	\begin{packed_enum}
-		\item Privilegirani djelatnik odabire opciju za pregled rasporeda svih djelatnika.
-		\item Sustav prikazuje raspored svih djelatnika.
-		\item Privilegirani djelatnik može pregledati informacije o pojedinom djelatniku.
-	\end{packed_enum}
-\closeusecase
-
-\usecase{Pregled podataka o bolesnicima}
-	\item \textbf{Glavni sudionik:} Privilegirani djelatnik
-	\item \textbf{Cilj:} Pregledati podatke o bolesnicima.
-	\item \textbf{Sudionici:} Baza podataka
-	\item \textbf{Preduvjet:} Privilegirani djelatnik je prijavljen u sustav.
-	\item \textbf{Opis osnovnog tijeka:}
-	\begin{packed_enum}
-		\item Privilegirani djelatnik odabire opciju za pregled podataka o bolesnicima.
-		\item Sustav prikazuje popis bolesnika i osnovne informacije o njima.
-		\item Privilegirani djelatnik može pregledati detaljnije podatke o svakom bolesniku.
-	\end{packed_enum}
-\closeusecase
-
-\usecase{Pregled specijalizacija djelatnika}
-	\item \textbf{Glavni sudionik:} Privilegirani djelatnik
-	\item \textbf{Cilj:} Pregledati specijalizacije djelatnika u sustavu.
-	\item \textbf{Sudionici:} Baza podataka
-	\item \textbf{Preduvjet:} Djelatnik je prijavljen u sustav.
-	\item \textbf{Opis osnovnog tijeka:}
-	\begin{packed_enum}
-		\item Privilegirani djelatnik odabire opciju za pregled specijalizacija.
-		\item Sustav prikazuje popis specijalizacija i povezane djelatnike.
-		\item Privilegirani djelatnik može pregledati detalje o svakoj specijalizaciji.
-	\end{packed_enum}
-\closeusecase
-
-\usecase{Praćenje opreme i kapaciteta}
-	\item \textbf{Glavni sudionik:} Privilegirani djelatnik
-	\item \textbf{Cilj:} Praćenje dostupnosti opreme i kapaciteta za rehabilitaciju.
-	\item \textbf{Sudionici:} Baza podataka, Sustav
-	\item \textbf{Preduvjet:} Privilegirani djelatnik je prijavljen u sustav.
-	\item \textbf{Opis osnovnog tijeka:}
-	\begin{packed_enum}
-		\item Privilegirani djelatnik pregledava dostupnu opremu i kapacitete prostorija za rehabilitaciju.
-		\item Sustav prikazuje trenutno dostupne resurse i obavještava djelatnika o njihovoj raspoloživosti.
+		\item Privilegirani djelatnik iz kontrolne ploče odabire Pregled statistike o djelatnicima i resursima
+		\item Sustav prikazuje zadani pogled (eng. view). 
 	\end{packed_enum}
 \closeusecase
 
@@ -326,7 +300,7 @@
 	\item \textbf{Preduvjet:} Administrator je prijavljen u sustav.
 	\item \textbf{Opis osnovnog tijeka:}
 	\begin{packed_enum}
-		\item Administrator odabire opciju za stvaranje novog djelatnika.
+		\item Administrator iz kontrolne ploče odabire opciju za stvaranje novog djelatnika.
 		\item Sustav prikazuje obrazac za unos osobnih podataka novog djelatnika.
 		\item Administrator unosi sve potrebne podatke o novom djelatniku.
 		\item Ako su svi podaci ispravni, sustav stvara novi korisnički račun za djelatnika.
@@ -335,68 +309,46 @@
 	Sustav reagira na neispravne podatke, već postojeće zaposlenike te obavještava administratora o neuspjelom upisu.
 \closeusecase
 
-\usecase{Dodavanje specijalizacija djelatnicima}
+
+\usecase{Promjena podataka o djelatnicima i bolesnicima}
 	\item \textbf{Glavni sudionik:} Administrator
-	\item \textbf{Cilj:} Dodati specijalizacije djelatnicima u sustavu.
+	\item \textbf{Cilj:} Izmijeniti informacije o djelatnicima i bolesnicima u bazi.
 	\item \textbf{Sudionici:} Baza podataka
 	\item \textbf{Preduvjet:} Administrator je prijavljen u sustav.
 	\item \textbf{Opis osnovnog tijeka:}
 	\begin{packed_enum}
-		\item Administrator odabire opciju za dodavanje specijalizacija.
-		\item Administrator odabire djelatnika i specijalizaciju koju dodaje.
+		\item Administrator iz kontrolne ploče odabire pregled svih djelatnika ili bolesnika.
+		\item Administrator odabire djelatnika/bolesnika i uređuje informacije o istom.
+        \item Prije potvrde o promjeni administrator ponovno unosi svoju šifru
 	\end{packed_enum}
 \closeusecase
 
-\usecase{Sigurnosna provjera pristupa podacima}
+\usecase{Deaktivacija korisničkog računa djelatnika/bolesnika}
 	\item \textbf{Glavni sudionik:} Administrator
-	\item \textbf{Cilj:} Osigurati siguran pristup podacima i kontrolirati ovlasti korisnika.
-	\item \textbf{Sudionici:} Baza podataka,Privilegirani djelatnici, Djelatnici, Bolesnici
+	\item \textbf{Cilj:} Deaktivirati korisnički račun djelatnika/bolesnika.
+	\item \textbf{Sudionici:} Baza podataka, Djelatnici/Bolesnici
 	\item \textbf{Preduvjet:} Administrator je prijavljen u sustav.
 	\item \textbf{Opis osnovnog tijeka:}
 	\begin{packed_enum}
-		\item Administrator pregledava i uređuje ovlasti korisnika sustava.
-		\item Sustav omogućava postavljanje različitih razina pristupa za različite korisničke uloge.
-		\item Administrator osigurava da samo ovlašteni korisnici mogu pristupiti osjetljivim podacima bolesnika.
+		\item Administrator iz kontrolne ploče odabire pregled svih djelatnika ili bolesnika.
+		\item Administrator odabire djelatnika/bolesnika čiji korisnički račun želi deaktivirati.
+        \item Prije potvrde o promjeni administrator ponovno unosi svoju šifru
 	\end{packed_enum}
 \closeusecase
 
-\usecase{Deaktivacija korisničkog računa djelatnika}
-	\item \textbf{Glavni sudionik:} Administrator
-	\item \textbf{Cilj:} Deaktivirati korisnički račun djelatnika.
-	\item \textbf{Sudionici:} Baza podataka, Djelatnici, Privilegirani djelatnici
-	\item \textbf{Preduvjet:} Administrator je prijavljen u sustav.
+\usecase{Deaktivacija vlastitog korisničkog računa}
+	\item \textbf{Glavni sudionik:} Bolesnik
+	\item \textbf{Cilj:} Dekativirati vlastiti korisnički račun.
+	\item \textbf{Sudionici:} Baza podataka
+	\item \textbf{Preduvjet:} Bolesnik je prijavljen u sustav.
 	\item \textbf{Opis osnovnog tijeka:}
 	\begin{packed_enum}
-		\item Administrator odabire opciju za pregled djelatnika.
-		\item Sustav prikazuje popis svih djelatnika.
-		\item Administrator odabire djelatnika čiji korisnički račun želi deaktivirati.
+		\item Bolesnik odabire opciju za deaktivaciju računa.
+		\item Sustav traži bolesnikovu lozinku za potvrdu zahtijeva.
+		\item Sustav je deaktivirao bolesnikov korisnički račun.
 	\end{packed_enum}
-\closeusecase
-
-\usecase{Deaktivacija korisničkog računa bolesnika}
-	\item \textbf{Glavni sudionik:} Administrator
-	\item \textbf{Cilj:} Deaktivirati korisnički račun bolesnika.
-	\item \textbf{Sudionici:} Baza podataka, Bolesnici
-	\item \textbf{Preduvjet:} Administrator je prijavljen u sustav.
-	\item \textbf{Opis osnovnog tijeka:}
-	\begin{packed_enum}
-		\item Administrator odabire opciju za pregled bolesnika.
-		\item Sustav prikazuje popis svih registriranih bolesnika.
-		\item Administrator odabire bolesnika čiji korisnički račun želi deaktivirati.
-	\end{packed_enum}
-\closeusecase
-
-\usecase{Pregled specijalizacija djelatnika}
-	\item \textbf{Glavni sudionik:} Administrator
-	\item \textbf{Cilj:} Pregledati specijalizacije svih djelatnika.
-	\item \textbf{Sudionici:} Baza podataka, Djelatnici, Privilegirani djelatnici
-	\item \textbf{Preduvjet:} Administrator je prijavljen u sustav.
-	\item \textbf{Opis osnovnog tijeka:}
-	\begin{packed_enum}
-		\item Administrator odabire opciju za pregled specijalizacija djelatnika.
-		\item Sustav prikazuje popis svih djelatnika i njihovih specijalizacija.
-		\item Administrator može uređivati ili brisati specijalizacije djelatnika.
-	\end{packed_enum}
+	\item \textbf{Opis mogućih odstupanja:}
+	Sustav reagira na neispravnu lozinku te obavještava bolesnika o neuspjelom pokušaju.
 \closeusecase
 
 
