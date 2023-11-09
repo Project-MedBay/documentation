@@ -28,7 +28,6 @@
 \begin{packed_enum}
 
 	\item Administrator
-	\item Privilegirani djelatnik
 	\item Djelatnik
 	\item Bolesnik
 
@@ -219,7 +218,7 @@
 	\item \textbf{Preduvjet:} Djelatnik je prijavljen u sustav.
 	\item \textbf{Opis osnovnog tijeka:}
 	\begin{packed_enum}
-		\item Djelatnik pretražuje ime bolesnika ili pregledava listu svih bolensika.
+		\item Djelatnik pretražuje ime bolesnika ili pregledava listu svih bolesnika.
 		\item Sustav prikazuje popis bolesnika i osnovne informacije o njima.
 		\item Djelatnik može pregledati detaljnije podatke o svakom bolesniku.
 	\end{packed_enum}
@@ -232,7 +231,7 @@
 	\item \textbf{Preduvjet:} Administrator je prijavljen u sustav.
 	\item \textbf{Opis osnovnog tijeka:}
 	\begin{packed_enum}
-		\item Privilegirani djelatnik odabire opciju za pregled rasporeda.
+		\item Djelatnik odabire opciju za pregled rasporeda.
 		\item Sustav prikazuje raspored svih bolesnika, djelatnika i sesija.
 		\item Administrator može filtrirati raspored po različitim kriterijima.
 	\end{packed_enum}
@@ -288,7 +287,7 @@
 	\item \textbf{Preduvjet:} Administrator je prijavljen u sustav.
 	\item \textbf{Opis osnovnog tijeka:}
 	\begin{packed_enum}
-		\item Privilegirani djelatnik iz kontrolne ploče odabire Pregled statistike o djelatnicima i resursima
+		\item Administrator iz kontrolne ploče odabire Pregled statistike o djelatnicima i resursima
 		\item Sustav prikazuje zadani pogled (eng. view). 
 	\end{packed_enum}
 \closeusecase
@@ -338,7 +337,7 @@
 
 \usecase{Deaktivacija vlastitog korisničkog računa}
 	\item \textbf{Glavni sudionik:} Bolesnik
-	\item \textbf{Cilj:} Dekativirati vlastiti korisnički račun.
+	\item \textbf{Cilj:} Deaktivirati vlastiti korisnički račun.
 	\item \textbf{Sudionici:} Baza podataka
 	\item \textbf{Preduvjet:} Bolesnik je prijavljen u sustav.
 	\item \textbf{Opis osnovnog tijeka:}
