@@ -114,20 +114,23 @@
 	\end{packed_enum}
 \closeusecase
 
+
 \usecase{Potvrda registracije bolesnika u sustav}
 	\item \textbf{Glavni sudionik:} Administrator
-	\item \textbf{Cilj:} Potvrditi registraciju bolesnika.
+	\item \textbf{Cilj:} Provjeriti i potvrditi registraciju bolesnika.
 	\item \textbf{Sudionici:} Baza podataka, Bolesnik
-	\item \textbf{Preduvjet:} Bolesnik je prethodno poslao zahtjev za registraciju.
+	\item \textbf{Preduvjet:} Bolesnik je prethodno poslao zahtjev za registraciju, administrator je prijavljen u sustav.
 	\item \textbf{Opis osnovnog tijeka:}
 	\begin{packed_enum}
 		\item Administrator provjerava ispravnost podataka.
 		\item Sustav pohranjuje podatke i stvara korisnički račun.
+  		\item Bolesnik prima elektoničku poštu s potvrdom registracije.
 	\end{packed_enum}
 	\item \textbf{Opis mogućih odstupanja:}
-	Sustav reagira na neispravne podatke, duplikate adresa elektoničke pošte/MBO-a i nepotpune
-	obrasce te obavještava bolesnika o potrebnim ispravkama. \\
+	U slučaju neispravne registracije u smislu duplikata OIB-a ili MBO-a frontend ne dopušta slanje registracije. 
+    	Ukoliko nepravilnosti uoči administrator, Bolesnik prima elektroničku poštu na upisanu adresu u kojoj mu se govori da registracija nije uspjela.
 \closeusecase
+
 
 \usecase{Prijava bolesnika/djelatnika/administratora u sustav}
 	\item \textbf{Glavni sudionik:} Bolesnik/Djelatnik/Administrator
@@ -163,6 +166,7 @@
 	Dok sve nužne informacije nisu upisane blokirano je slanje forme na provjeru kod administratora. 
 \closeusecase
 
+
 \usecase{Promjena zakazanog termina (bolesnik)}
 	\item \textbf{Glavni sudionik:} Bolesnik
 	\item \textbf{Cilj:} Promijeni zakazani termin za rehabilitaciju.
@@ -180,6 +184,7 @@
 	Ako promjena nije napravljena minimalno 48 sati prije termina, otkazivanja su onemogućena u sustavu i bolesnik se upućuje da u slučaju hitnoće kontaktira administratora direktno. 
 \closeusecase
 
+
 \usecase{Otkazivanje zakazanog termina (djelatnik)}
 	\item \textbf{Glavni sudionik:} Djelatnik
 	\item \textbf{Cilj:} Otkaži zakazani termin za rehabilitaciju.
@@ -195,6 +200,7 @@
 	Djelatnik ne može otkazivati termine koji nisu njegovi. 
 \closeusecase
 
+
 \usecase{Otkazivanje zakazanog termina (administrator)}
 	\item \textbf{Glavni sudionik:} Administrator
 	\item \textbf{Cilj:} Otkaži zakazani termin za rehabilitaciju.
@@ -207,6 +213,7 @@
         \item Izvršava se promjena u bazi te se obavještava djelatnika i bolesnika koji odabire novi termin 
 	\end{packed_enum}
 \closeusecase
+
 
 \usecase{Pregled kalendara vlastitih terapija}
 	\item \textbf{Glavni sudionik:} Bolesnik/Djelatnik
@@ -221,6 +228,7 @@
 	\end{packed_enum}
 \closeusecase
 
+
 \usecase{Pregled podataka o bolesnicima}
 	\item \textbf{Glavni sudionik:} Djelatnik
 	\item \textbf{Cilj:} Pregledati podatke o bolesnicima.
@@ -233,6 +241,7 @@
 		\item Djelatnik može pregledati detaljnije podatke o svakom bolesniku.
 	\end{packed_enum}
 \closeusecase
+
 
 \usecase{Pregled rasporeda svih bolesnika, djelatnika i sesija}
 	\item \textbf{Glavni sudionik:} Administrator
@@ -247,10 +256,11 @@
 	\end{packed_enum}
 \closeusecase
 
+
 \usecase{Bilježenje napretka bolesnika}
 	\item \textbf{Glavni sudionik:} Djelatnik
 	\item \textbf{Cilj:} Bilježiti i evidentirati napredak bolesnika tijekom procesa rehabilitacije.
-	\item \textbf{Sudionici:} Baza podataka, Bolesnik
+	\item \textbf{Sudionici:} Baza podataka
 	\item \textbf{Preduvjet:} Bolesnik je registriran, prijavljen i odradio sesiju rehabilitacije s određenim djelatikom.
 	\item \textbf{Opis osnovnog tijeka:}
 	\begin{packed_enum}
@@ -259,6 +269,7 @@
 		\item Djelatnik potvrđuje unos i sprema podatke.
 	\end{packed_enum}
 \closeusecase
+
 
 \usecase{Pregled podataka o terapijama}
 	\item \textbf{Glavni sudionik:} Bolesnik
@@ -273,23 +284,6 @@
 \closeusecase
 
 
-\usecase{Prihvaćanje registracije bolesnika}
-	\item \textbf{Glavni sudionik:} Administrator
-	\item \textbf{Cilj:} Provjeriti i obraditi nove zahtjeve za rehabilitaciju.
-	\item \textbf{Sudionici:} Baza podataka, Bolesnik
-	\item \textbf{Preduvjet:} Bolesnici su poslali zahtjeve za rehabilitaciju, administrator je prijavljen u sustav.
-	\item \textbf{Opis osnovnog tijeka:}
-	\begin{packed_enum}
-		\item Administrator provjerava nove zahtjeve.
-		\item Administrator potvrđuje registraciju.
-		\item Bolesnik prima elektoničku poštu s potvrdom registracije.
-	\end{packed_enum}
- \item \textbf{Opis mogućih odstupanja:}
-	U slučaju neispravne registracije u smislu duplikata OIB-a ili MBO-a frontend ne dopušta slanje registracije. 
-    Ukoliko nepravilnosti uoči administrator, Bolesnik prima elektroničku poštu na upisanu adresu u kojoj mu se govori da registracija nije uspjela. 
-\closeusecase
-
-
 \usecase{Pregled statistike o djelatnicima i resursima}
 	\item \textbf{Glavni sudionik:} Administrator 
 	\item \textbf{Cilj:} Praćenje dostupnosti osoblja, opreme i kapaciteta za rehabilitaciju.
@@ -301,6 +295,7 @@
 		\item Sustav prikazuje zadani pogled (eng. view). 
 	\end{packed_enum}
 \closeusecase
+
 
 \usecase{Dodavanje djelatnika u bazu}
 	\item \textbf{Glavni sudionik:} Administrator
@@ -332,6 +327,7 @@
 	\end{packed_enum}
 \closeusecase
 
+
 \usecase{Deaktivacija korisničkog računa djelatnika/bolesnika}
 	\item \textbf{Glavni sudionik:} Administrator
 	\item \textbf{Cilj:} Deaktivirati korisnički račun djelatnika/bolesnika.
@@ -344,6 +340,7 @@
         \item Prije potvrde o promjeni administrator ponovno unosi svoju šifru
 	\end{packed_enum}
 \closeusecase
+
 
 \usecase{Deaktivacija vlastitog korisničkog računa}
 	\item \textbf{Glavni sudionik:} Bolesnik
