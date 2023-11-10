@@ -103,14 +103,24 @@
 \textit{Funkcionalne zahtjeve razraditi u obliku obrazaca uporabe. Svaki obrazac je potrebno razraditi prema donjem predlošku. Ukoliko u nekom koraku može doći do odstupanja, potrebno je to odstupanje opisati i po mogućnosti ponuditi rješenje kojim bi se tijek obrasca vratio na osnovni tijek.}
 \vspace{2em} % Dodajte jedan prazan red
 
-\usecase{Inicijalna registracija bolesnika u suszav}
+\usecase{Zahtjev za registraciju bolesnika u sustav}
 	\item \textbf{Glavni sudionik:} Bolesnik
-	\item \textbf{Cilj:} Registrirati se u sustav kako bi pristupio procesu rehabilitacije.
-	\item \textbf{Sudionici:} Baza podataka, Administrator
+	\item \textbf{Cilj:} Poslati ispravan zahtjev za registraciju u sustav kako bi pristupio procesu rehabilitacije.
+	\item \textbf{Sudionici:} Baza podataka
 	\item \textbf{Preduvjet:} Bolesnik nema prethodno registriran korisnički račun
 	\item \textbf{Opis osnovnog tijeka:}
 	\begin{packed_enum}
 		\item Bolesnik unosi osobne podatke, adresu elektoničke pošte i lozinku.
+	\end{packed_enum}
+\closeusecase
+
+\usecase{Potvrda registracije bolesnika u sustav}
+	\item \textbf{Glavni sudionik:} Administrator
+	\item \textbf{Cilj:} Potvrditi registraciju bolesnika.
+	\item \textbf{Sudionici:} Baza podataka, Bolesnik
+	\item \textbf{Preduvjet:} Bolesnik je prethodno poslao zahtjev za registraciju.
+	\item \textbf{Opis osnovnog tijeka:}
+	\begin{packed_enum}
 		\item Administrator provjerava ispravnost podataka.
 		\item Sustav pohranjuje podatke i stvara korisnički račun.
 	\end{packed_enum}
@@ -199,7 +209,7 @@
 \closeusecase
 
 \usecase{Pregled kalendara vlastitih terapija}
-	\item \textbf{Glavni sudionik:} Bolesnik/Djleatnik
+	\item \textbf{Glavni sudionik:} Bolesnik/Djelatnik
 	\item \textbf{Cilj:} Pregledati kalendar s terminima terapije.
 	\item \textbf{Sudionici:} Baza podataka
 	\item \textbf{Preduvjet:} Bolesnik/Djelatnik je registriran i prijavljen u sustav.
@@ -343,7 +353,7 @@
 	\item \textbf{Opis osnovnog tijeka:}
 	\begin{packed_enum}
 		\item Bolesnik odabire opciju za deaktivaciju računa.
-		\item Sustav traži bolesnikovu lozinku za potvrdu zahtijeva.
+		\item Sustav traži bolesnikovu lozinku za potvrdu zahtjeva.
 		\item Sustav je deaktivirao bolesnikov korisnički račun.
 	\end{packed_enum}
 	\item \textbf{Opis mogućih odstupanja:}
