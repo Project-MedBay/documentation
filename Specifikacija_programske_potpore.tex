@@ -173,7 +173,7 @@
 		\item Bolesnik unosi informacije o svom oboljenju, potrebnom postupku liječenja i liječniku koji ga je uputio na rehabilitaciju.
         	\item S obzirom na unesenu vrstu rehabilitacije, sustav provjerava koji su sve termini slobodni (slobodan termin: slobodan resurs i slobodan specijalizirani djelatnik) 
 		\item Bolesnik odabire datum i vrijeme svojih termina na temelju dostupnih termina 
-        	\item Bolesnik čeka odobrenje administratora (UCXY) 
+        	\item Bolesnik čeka odobrenje administratora (UC18) 
         	\item Korisnik prima skočni prozor s obavijesti o administratorovoj odluci te sukladno istoj ili može ponoviti prijavu na rehabilitaciju ili je preusmjeren na kontrolnu ploču (dashboard) za novonastalu rehabilitaciju
 	\end{packed_enum}
 	\item \textbf{Opis mogućih odstupanja:}
@@ -355,6 +355,20 @@
 		\item Administrator odabire djelatnika/bolesnika i uređuje informacije o istom.
         	\item Prije potvrde o promjeni administrator ponovno unosi svoju šifru
 	\end{packed_enum}
+\closeusecase
+
+
+\usecase{Potvrda o ispravnoj prijavi na rehabilitaciju}
+	\item \textbf{Glavni sudionik:} Administrator
+ 	\item \textbf{Cilj:} Potvrditi bolesnikovu prijavu na određenu rehabilitaciju
+  	\item \textbf{Sudionici:} Baza podataka
+   	\item \textbf{Preduvjet:} Administrator je prijavljen u sustav i bolesnik je predao zahtjev za prijavu na rehabilitaciju
+    	\item \textbf{Opis osnovnog tijeka:}
+     	\begin{packed_enum}
+      		\item Administrator je obaviješten kako je dobio novi zahtjev za prijavu
+		\item Administrator analizira podatke o bolesniku i o prijavi te zajedno s informacijama iz baze podataka donosi odluku o ispravnosti zahtjeva
+  		\item S obzirom na rezultat svoje odluke, administrator ili omogućuje prijavu na rehabilitaciju ili dojavljuje bolesniku poruku o pogrešci
+    	\end{packed_enum}
 \closeusecase
 
 
