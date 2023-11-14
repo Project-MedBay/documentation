@@ -1,16 +1,35 @@
 \chapter{Arhitektura i dizajn sustava}
 		
 		\textbf{\textit{dio 1. revizije}}\\
-
-		\textit{ Potrebno je opisati stil arhitekture te identificirati: podsustave, preslikavanje na radnu platformu, spremišta podataka, mrežne protokole, globalni upravljački tok i sklopovsko-programske zahtjeve. Po točkama razraditi i popratiti odgovarajućim skicama:}
-	\begin{itemize}
-		\item 	\textit{izbor arhitekture temeljem principa oblikovanja pokazanih na predavanjima (objasniti zašto ste baš odabrali takvu arhitekturu)}
-		\item 	\textit{organizaciju sustava s najviše razine apstrakcije (npr. klijent-poslužitelj, baza podataka, datotečni sustav, grafičko sučelje)}
-		\item 	\textit{organizaciju aplikacije (npr. slojevi frontend i backend, MVC arhitektura) }		
-	\end{itemize}
-
 	
-		
+	Podsustavi:
+
+\begin{itemize}
+    \item Backend (Spring Boot):
+
+\begin{itemize}
+        \item Posjeduje više podsustava, uključujući servise i kontrolere za obradu poslovnih zahtjeva.
+        \item Spremište podataka temelji se na PostgreSQL bazi podataka, koja je relacijska baza podataka. Relacijske baze omogućuju jednostavan pristup i ažuriranje podataka pomoću tablica koje se sastoje od naziva i niza atributa. Ova struktura omogućuje lako preslikavanje podataka iz aplikacije u bazu i obrnuto.
+\end{itemize}
+
+    \item Frontend (Node.js i JavaScript):
+
+\begin{itemize}
+        \item Organiziran je u komponente i kontejnere kako bi se omogućilo strukturirano upravljanje korisničkim sučeljem.
+        \item Komunicira s backendom putem HTTP protokola, koristeći REST API za razmjenu podataka.
+\end{itemize}
+
+\end{itemize}
+
+
+\begin{itemize}
+    \item Baza podataka(PostgreSQL)
+\begin{itemize}
+    \item omogućuje pouzdanu  pohranu svih relevantnih podataka
+    \item  Ova baza podataka služi kao centralno spremište informacija i uključuje niz ključnih tablica i relacija.  
+    
+\end{itemize}
+ 
 
 		
 
@@ -19,35 +38,188 @@
 			
 			\textbf{\textit{dio 1. revizije}}\\
 			
-		\textit{Potrebno je opisati koju vrstu i implementaciju baze podataka ste odabrali, glavne komponente od kojih se sastoji i slično.}
+Koristili smo PostgreSQL relacijsku bazu podataka. PostgreSQL je snažan i visoko prilagodljiv sustav za upravljanje bazama podataka, što ga čini prikladnim izborom za učinkovito i sigurno upravljanje zdravstvenim podacima, osiguravajući da su informacije o pacijentima, terminima, zdravstvenom osoblju i opremi sigurno pohranjene i dostupne. 
+Svaka tablica ima primarni ključ koji jedinstveno identificira zapise unutar tablice. Baza podataka uspostavlja odnose između tablica koristeći strane ključeve. Ograničenja su postavljena kako bi se očuvao integritet podataka.  
 		
 			\subsection{Opis tablica}
 			
 
 				\textit{Svaku tablicu je potrebno opisati po zadanom predlošku. Lijevo se nalazi točno ime varijable u bazi podataka, u sredini se nalazi tip podataka, a desno se nalazi opis varijable. Svjetlozelenom bojom označite primarni ključ. Svjetlo plavom označite strani ključ}
 				
+\textbf{\_User } Ovaj entitet predstavlja korisnike sustava s različitim ulogama.  Sadrži atribute kao što su status korisnika (active), jedinstveni identifikator (id), e-mail adresa (email), ime (first\_name), prezime (last\_name), lozinka (password) i uloga korisnika (role). Provjerava se uloga korisnika kroz ograničenje \_user\_role\_check. Ovaj entitet omogućuje upravljanje korisnicima sustava i dodjeljivanje uloga kako bi se pristup određenim funkcionalnostima kontrolirao.  Primarni ključ (\_user\_pkey) je definiran na atributu id. 
+
+\begin{longtblr}[
+    label=none,
+    entry=none
+]{
+    width = \textwidth,
+    colspec={|X[6,l]|X[6, l]|X[20, l]|}, 
+    rowhead = 1,
+}
+\hline \SetCell[c=3]{c}{\textbf{ \_user}} \\ \hline[3pt]
+\SetCell{LightGreen}id & BIGINT & Jedinstveni identifikator korisnika \\ \hline
+active & BOOLEAN & Označava je li korisnik aktivan \\ \hline 
+email & VARCHAR & E-mail adresa korisnika \\ \hline 
+first\_name & VARCHAR & Ime korisnika \\ \hline 
+last\_name & VARCHAR & Prezime korisnika \\ \hline 
+password & VARCHAR & Lozinka korisnika \\ \hline 
+role & VARCHAR & Rola korisnika (mora biti jedna od predefiniranih uloga) \\ \hline 
+\end{longtblr}
+
 				
-				\begin{longtblr}[
-					label=none,
-					entry=none
-					]{
-						width = \textwidth,
-						colspec={|X[6,l]|X[6, l]|X[20, l]|}, 
-						rowhead = 1,
-					} %definicija širine tablice, širine stupaca, poravnanje i broja redaka naslova tablice
-					\hline \SetCell[c=3]{c}{\textbf{korisnik - ime tablice}}	 \\ \hline[3pt]
-					\SetCell{LightGreen}IDKorisnik & INT	&  	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod  	\\ \hline
-					korisnickoIme	& VARCHAR &   	\\ \hline 
-					email & VARCHAR &   \\ \hline 
-					ime & VARCHAR	&  		\\ \hline 
-					\SetCell{LightBlue} primjer	& VARCHAR &   	\\ \hline 
-				\end{longtblr}
+		
+\textbf{Imenik} Entitet koji služi za pohranu informacija o osobama. Sadrži atribute kao što su jedinstveni identifikator osobe (hlkid), ime (first\_name), prezime (last\_name), specijalizacija i informacija o aktivnosti osobe.  Primarni ključ (Imenik\_pkey) je definiran na atributu hlkid. 
+\begin{longtblr}[
+    label=none,
+    entry=none
+]{
+    width = \textwidth,
+    colspec={|X[6,l]|X[6, l]|X[20, l]|}, 
+    rowhead = 1,
+}
+\hline \SetCell[c=3]{c}{\textbf{imenik}} \\ \hline[3pt]
+\SetCell{LightGreen}hlkid & VARCHAR & Jedinstveni identifikator imenika \\ \hline
+first\_name & VARCHAR & Ime osobe \\ \hline 
+last\_name & VARCHAR & Prezime osobe  \\ \hline 
+specialization & VARCHAR & Stručnost osobe  \\ \hline 
+active & BOOLEAN & Označava je li osoba u imeniku aktivna \\ \hline 
+\end{longtblr}
+
+
+\textbf{Appointment} Čuva informacije o terminima unutar sustava. Sadrži atribute kao što su datum i vrijeme termina (date\_time), identifikator zaposlenika (employee\_id), jedinstveni identifikator termina (id), identifikator pacijenta (patient\_id), identifikator sesije (session\_id), identifikator terapije (therapy\_id) i status termina. Ovaj entitet je povezan s drugim entitetima(employee, patient , session, therapy) putem različitih Many-to-One veza prema atributima \verb|employee_id|, \verb|patient_id|, \verb|session_id|, i \verb|therapy_id|. 
+
+\begin{longtblr}[
+    label=none,
+    entry=none
+]{
+    width = \textwidth,
+    colspec={|X[6,l]|X[6, l]|X[20, l]|}, 
+    rowhead = 1,
+}
+\hline \SetCell[c=3]{c}{\textbf{appointment}} \\ \hline[3pt]
+\SetCell{LightGreen}id & BIGINT & Jedinstveni identifikator termina \\ \hline 
+date\_time & TIMESTAMP & Datum i vrijeme termina \\ \hline
+\SetCell{LightBlue}employee\_id & BIGINT & Identifikator zaposlenika koji obavlja termin \\ \hline 
+\SetCell{LightBlue}patient\_id & BIGINT & Identifikator pacijenta koji ima termin \\ \hline 
+\SetCell{LightBlue}session\_id & BIGINT & Identifikator sesije kojoj pripada termin \\ \hline 
+\SetCell{LightBlue}therapy\_id & BIGINT & Identifikator terapije koja se izvodi tijekom termina \\ \hline 
+status & VARCHAR & Status termina \\ \hline 
+\end{longtblr}
+
+\textbf{Employee} Ovaj entitet predstavlja tablicu koja sadrži informacije o zaposlenicima. Sadrži atribute kao što su specijalizacija (specialization) i identifikator (id).
+Ograničenje employee\_specialization\_check provjerava ispravnost specijalizacije. Primarni ključ (employee\_pkey) je definiran na atributu id. Povezan je One-to-Many vezom s entitetom session preko atributa employee\_id.
+\end{itemize}
+ 
+\begin{longtblr}[
+    label=none,
+    entry=none
+]{
+    width = \textwidth,
+    colspec={|X[6,l]|X[6, l]|X[20, l]|}, 
+    rowhead = 1,
+}
+\hline \SetCell[c=3]{c}{\textbf{employee}} \\ \hline[3pt]
+\SetCell{LightGreen}id & BIGINT & Jedinstveni identifikator zaposlenika \\ \hline 
+specialization & SMALLINT & Stručnost zaposlenika \\ \hline
+
+\end{longtblr}
+
+\textbf{Equipment} Ovaj entitet predstavlja tablicu equipment koja sadrži informacije o opremi.
+\begin{longtblr}[
+    label=none,
+    entry=none
+]{
+    width = \textwidth,
+    colspec={|X[6,l]|X[6, l]|X[20, l]|}, 
+    rowhead = 1,
+}
+\hline \SetCell[c=3]{c}{\textbf{equipment}} \\ \hline[3pt]
+\SetCell{LightGreen}id & BIGINT & Jedinstveni identifikator opreme \\ \hline 
+capacity & INTEGER & Kapacitet opreme \\ \hline
+description & VARCHAR & Opis opreme \\ \hline 
+name & VARCHAR & Naziv opreme \\ \hline 
+\end{longtblr}
+
+\textbf{Patient} Ovaj entitet predstavlja tablicu  koja sadrži informacije o pacijentima.  Sadrži atribute kao što su datum rođenja, identifikator (id), adresa, MBO (matični broj osiguranika) i broj telefona. Primarni ključ (patient\_pkey) je definiran na atributu id.
+ 
+\begin{longtblr}[
+    label=none,
+    entry=none
+]{
+    width = \textwidth,
+    colspec={|X[6,l]|X[6, l]|X[20, l]|}, 
+    rowhead = 1,
+}
+\hline \SetCell[c=3]{c}{\textbf{patient}} \\ \hline[3pt]
+\SetCell{LightGreen}id & BIGINT & Jedinstveni identifikator pacijenta \\ \hline 
+date \_of\_birth & DATE & Datum rođenja pacijenta \\ \hline
+address & VARCHAR & Adresa pacijenta \\ \hline 
+mbo & VARCHAR & Matični broj osiguranika pacijenta \\ \hline 
+phone\_number & VARCHAR & Broj telefona pacijenta \\ \hline 
+\end{longtblr}
+
+\textbf{Session} Ovaj entitet predstavlja tablicu koja sadrži informacije o sesijama.  Sadrži atribute kao što su datum i vrijeme, identifikator zaposlenika, identifikator sesije i povratna informacija (feedback). Primarni ključ (session\_pkey) je definiran na atributu id. Povezan je Many-to-One vezom s entitetom employee preko atributa employee\_id. 
+\begin{longtblr}[
+    label=none,
+    entry=none
+]{
+    width = \textwidth,
+    colspec={|X[6,l]|X[6, l]|X[20, l]|}, 
+    rowhead = 1,
+}
+\hline \SetCell[c=3]{c}{\textbf{session}} \\ \hline[3pt]
+\SetCell{LightGreen}id & BIGINT & Jedinstveni identifikator sesije \\ \hline
+date\_time & timestamp & Vrijeme sesije \\ \hline 
+\SetCell{LightBlue}employee\_id & BIGINT & Identifikator zaposlenika \\ \hline 
+feedback & character varying(255) & Povratna informacija o sesiji \\ \hline 
+\end{longtblr}
+
+
+\textbf{Therapy}  Ovaj entitet predstavlja tablicu koja sadrži informacije o terapijama.  Sadrži atribut identifikator (id) i atribut therapy\_type\_id. Primarni ključ (therapy\_pkey) je definiran na atributu id.  Također sadrži jedinstveno ograničenje therapy\_therapy\_type\_id\_key na atributu therapy\_type\_id. Povezan je One-to-One vezom s entitetom appointment preko atributa therapy\_id.
+\begin{longtblr}[
+    label=none,
+    entry=none
+]{
+    width = \textwidth,
+    colspec={|X[6,l]|X[6, l]|X[20, l]|}, 
+    rowhead = 1,
+}
+\hline \SetCell[c=3]{c}{\textbf{therapy}} \\ \hline[3pt]
+\SetCell{LightGreen}id & BIGINT & Jedinstveni identifikator terapije \\ \hline
+\SetCell{LightBlue}therapy\_type\_id & BIGINT & Identifikator vrste terapije \\ \hline 
+\end{longtblr}
+
+\textbf{Therapy\_type} Ovaj entitet predstavlja tablicu koja sadrži informacije o vrstama terapija. - Sadrži atribute kao što su identifikator (id), identifikator potrebne opreme (required\_equipment\_id) i opis.  Primarni ključ (therapy\_type\_pkey) je definiran na atributu id. - Povezan je Many-to-One vezom s entitetom therapy preko atributa required\_equipment\_id i s entitetom equipment preko atributa required\_equipment\_id. 
+\begin{longtblr}[
+    label=none,
+    entry=none
+]{
+    width = \textwidth,
+    colspec={|X[6,l]|X[6, l]|X[20, l]|}, 
+    rowhead = 1,
+}
+\hline \SetCell[c=3]{c}{\textbf{therapy\_type}} \\ \hline[3pt]
+\SetCell{LightGreen}id & BIGINT & Jedinstveni identifikator vrste terapije \\ \hline
+\SetCell{LightBlue}required\_equipment\_id & BIGINT & Identifikator potrebnog opreme \\ \hline 
+description & character varying(255) & Opis vrste terapije \\ \hline 
+\end{longtblr}
+
+
+
+
+
 				
 				
 			
 			\subsection{Dijagram baze podataka}
 				\textit{ U ovom potpoglavlju potrebno je umetnuti dijagram baze podataka. Primarni i strani ključevi moraju biti označeni, a tablice povezane. Bazu podataka je potrebno normalizirati. Podsjetite se kolegija "Baze podataka".}
-			
+			\begin{figure}
+			    \centering
+			    \includegraphics[width=1\linewidth]{slike/database_pr1.jpg}
+			    \caption{Dijagram baze podataka}
+			    
+			    \label{fig:enter-label}
+			\end{figure}
 			\eject
 			
 			
