@@ -178,6 +178,8 @@
 	\end{packed_enum}
 	\item \textbf{Opis mogućih odstupanja:}
 	Dok sve nužne informacije nisu upisane blokirano je slanje forme na provjeru kod administratora. 
+    Korisniku nije dopušteno odabrati sesije koje su vremenski udaljene manje od minimalne razlike između dvije sesije koja je definirana terapijom. 
+    Korisniku nije dopušteno slanje forme ukoliko je vremenska razlika između zadnje i prve sesije duža od maksimalnog trajanja terapije koje je definirano terapijom.
 \closeusecase
 
 
@@ -320,7 +322,7 @@
 	\item \textbf{Opis osnovnog tijeka:}
 	\begin{packed_enum}
 		\item Administrator iz kontrolne ploče odabire Pregled statistike o djelatnicima i resursima
-		\item Sustav prikazuje zadani pogled (eng. view). 
+		\item Sustav prikazuje zadani pogled (engl. \textit{view}). 
 	\end{packed_enum}
 \closeusecase
 
@@ -400,10 +402,90 @@
 
 \section{Ostali zahtjevi}
 
+
 \textbf{\textit{dio 1. revizije}}\\
 
-\textit{Nefunkcionalni zahtjevi i zahtjevi domene primjene dopunjuju funkcionalne zahtjeve. Oni opisuju \textbf{kako se sustav treba ponašati} i koja \textbf{ograničenja} treba poštivati (performanse, korisničko iskustvo, pouzdanost, standardi kvalitete, sigurnost...). Primjeri takvih zahtjeva u Vašem projektu mogu biti: podržani jezici korisničkog sučelja, vrijeme odziva, najveći mogući podržani broj korisnika, podržane web/mobilne platforme, razina zaštite (protokoli komunikacije, kriptiranje...)... Svaki takav zahtjev potrebno je navesti u jednoj ili dvije rečenice.}
-			 
-			 
-			 
+\textit{Nefunkcionalni zahtjevi i zahtjevi domene primjene ključni su za uspješno funkcioniranje našeg sustava. Oni definiraju kako se sustav treba ponašati, koje standarde kvalitete mora zadovoljiti, te koje sigurnosne i tehničke ograničenja treba poštivati.}
+
+\subsection*{Performanse i Pouzdanost}
+\begin{itemize}
+    \item Sustav treba podržavati simultani rad više korisnika bez gubitka performansi, osiguravajući pouzdano iskustvo u stvarnom vremenu.
+    \item Vrijeme odziva prilikom pristupa bazi podataka i drugim ključnim funkcijama sustava ne smije trajati duže od nekoliko sekundi, čime se osigurava brz i efikasan rad sustava.
+\end{itemize}
+
+\subsection*{Korisničko Iskustvo}
+\begin{itemize}
+    \item Korisničko sučelje treba biti intuitivno i jednostavno za korištenje, uz minimalnu potrebu za opsežnim instrukcijama ili obukom.
+    \item Sustav mora podržavati više jezika i odgovarajuće posebne znakove u različitim jezicima (starija populacija govori samo materinjim jezikom i sl.). Prva verzija aplikacije biti će na engleskom. 
+    \item Neispravno korištenje korisničkog sučelja ne smije narušiti funkcionalnost i rad sustava.
+\end{itemize}
+
+\subsection*{Sigurnost i Zaštita Podataka}
+\begin{itemize}
+    \item Sustav mora osigurati visoku razinu sigurnosti, koristeći enkripciju i druge sigurnosne protokole, posebice u komunikaciji s bazom podataka i tijekom prijenosa osjetljivih podataka.
+    \item Pristup sustavu mora biti omogućen kroz sigurne protokole kao što je HTTPS, čime se osigurava zaštita podataka i privatnosti korisnika.
+\end{itemize}
+
+\subsection*{Platforma i Tehnička Implementacija}
+\begin{itemize}
+    \item Sustav će biti implementiran kao web aplikacija, koristeći objektno-orijentirane jezike, što omogućuje fleksibilnost i lakše održavanje.
+    \item Aplikacija treba biti prilagodljiva i kompatibilna s različitim web i mobilnim platformama, osiguravajući široku dostupnost i pristupačnost.
+\end{itemize}
+
+\subsection*{Skalabilnost i Nadogradnje}
+\begin{itemize}
+    \item Sustav mora biti skalabilan kako bi podržao rast broja korisnika i povećanje opterećenja bez gubitka performansi.
+    \item Nadogradnje sustava trebaju biti implementirane na način da ne narušavaju postojeće funkcionalnosti i da se mogu efikasno integrirati u operativni sustav.
+\end{itemize}
+
+\subsection*{Standardi Kvalitete i Usklađenost}
+\begin{itemize}
+\item Sustav treba biti usklađen s nacionalnim i međunarodnim standardima kvalitete i sigurnosti, uključujući regulative vezane za zdravstvene informacijske sustave.
+\item Redovite provjere kvalitete i revizije trebaju osigurati da aplikacija kontinuirano zadovoljava sve postavljene standarde.
+\end{itemize}
+
+\subsection*{Dostupnost i Pouzdanost}
+\begin{itemize}
+\item Sustav treba osigurati visoku dostupnost i minimalno vrijeme prekida, posebno tijekom radnih sati zdravstvenih ustanova.
+\item Plan oporavka u slučaju kvara ili prekida treba biti jasno definiran i implementiran, osiguravajući brz povratak u normalan rad.
+\end{itemize}
+
+\subsection*{Pristupačnost i Inkluzivnost}
+\begin{itemize}
+\item Sustav treba biti dizajniran s obzirom na pristupačnost, omogućavajući laku upotrebu osobama s različitim stupnjevima sposobnosti, uključujući stariju populaciju i osobe s invaliditetom.
+\item Također, treba podržavati prilagodbe za korisnike s posebnim potrebama, poput prilagođenih fontova, kontrasta i pomoćnih tehnologija.
+\end{itemize}
+
+\subsection*{Interoperabilnost i Integracija}
+\begin{itemize}
+    \item Sustav treba biti interoperabilan s drugim zdravstvenim informacijskim sustavima, omogućujući razmjenu podataka i integraciju s postojećim IT infrastrukturama.
+    \item Integracija s vanjskim API-ima i servisima treba biti omogućena za proširivanje funkcionalnosti sustava, kao što su integracije s laboratorijskim sustavima, elektroničkim zdravstvenim kartonima i slično.
+\end{itemize}
+
+\subsection*{Održivost i Ekološka Osjećajnost}
+\begin{itemize}
+    \item Sustav treba biti razvijen s obzirom na ekološke aspekte, promovirajući smanjenje upotrebe papira i drugih materijala u zdravstvenim ustanovama.
+    \item Digitalizacija procesa treba doprinijeti održivijem načinu rada, smanjujući otpad i potrebu za fizičkim resursima.
+\end{itemize}
+
+\subsection*{Prilagodba Zakonodavnim Okvirima}
+\begin{itemize}
+    \item Sustav treba biti u skladu s lokalnim i međunarodnim zakonodavnim okvirima, uključujući propise o zaštiti osobnih podataka (npr. GDPR u EU).
+    \item Moraju se implementirati mehanizmi za usklađenost s pravnim zahtjevima u vezi sa zdravstvenim informacijama, kao što su prava na pristup, ispravak i brisanje osobnih podataka.
+\end{itemize}
+
+\subsection*{Praćenje i Izvještavanje}
+\begin{itemize}
+    \item Sustav treba omogućiti generiranje detaljnih izvještaja o korištenju resursa, učinkovitosti i performansama procesa rehabilitacije.
+    \item Treba biti omogućeno praćenje korištenja aplikacije, uključujući analitiku i povratne informacije od korisnika, za kontinuirano poboljšanje i prilagodbu sustava.
+\end{itemize}
+
+\subsection*{Prilagodljivost Budućim Tehnološkim Trendovima}
+\begin{itemize}
+    \item Sustav treba biti dizajniran s mogućnošću laganog ažuriranja i prilagodbe novim tehnološkim trendovima i inovacijama.
+    \item Treba postojati mogućnost integracije s budućim tehnologijama poput umjetne inteligencije, strojnog učenja i napredne analitike podataka.
+\end{itemize}
+
+
+\eject
 	
