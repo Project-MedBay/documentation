@@ -1,39 +1,57 @@
 \chapter{Arhitektura i dizajn sustava}
-		
-		\textbf{\textit{dio 1. revizije}}\\
-	
-	Podsustavi:
 
-\begin{itemize}
-    \item Backend (Spring Boot):
+\textbf{\textit{dio 1. revizije}}\\
 
+\section*{Uvod u Arhitekturu Sustava}
+Naš sustav je dizajniran da bude efikasan, skalabilan i pouzdan. U nastavku detaljno opisujemo arhitekturu našeg sustava.
+
+\subsection*{Izbor Arhitekture}
 \begin{itemize}
-        \item Posjeduje više podsustava, uključujući servise i kontrolere za obradu poslovnih zahtjeva.
-        \item Spremište podataka temelji se na PostgreSQL bazi podataka, koja je relacijska baza podataka. Relacijske baze omogućuju jednostavan pristup i ažuriranje podataka pomoću tablica koje se sastoje od naziva i niza atributa. Ova struktura omogućuje lako preslikavanje podataka iz aplikacije u bazu i obrnuto.
+    \item Naša odluka da koristimo trodjelnu arhitekturu temelji se na principima oblikovanja predstavljenim na predavanjima, gdje se ističe važnost modularnosti i odvajanja odgovornosti. Ovaj pristup omogućava bolje upravljanje kompleksnošću sustava i lakše održavanje.
 \end{itemize}
 
-    \item Frontend (Node.js i JavaScript):
-
+\subsection*{Organizacija Sustava}
 \begin{itemize}
-        \item Organiziran je u komponente i kontejnere kako bi se omogućilo strukturirano upravljanje korisničkim sučeljem.
-        \item Komunicira s backendom putem HTTP protokola, koristeći REST API za razmjenu podataka.
+    \item Sustav je organiziran na visokoj razini apstrakcije, koristeći klijent-poslužitelj model, što omogućuje razdvajanje korisničkog sučelja od poslovne logike.
 \end{itemize}
 
+\subsection*{Detalji Podsustava}
+\subsubsection*{Backend (Spring Boot)}
+\begin{itemize}
+    \item Backend služi kao osnova našeg sustava, sadrži više podsustava kao što su servisi i kontroleri koji obrađuju poslovne zahtjeve.
+    \item Komunikacija s bazom podataka vrši se kroz PostgreSQL, što omogućava efikasnu organizaciju i manipulaciju podacima.
 \end{itemize}
 
-
+\subsubsection*{Frontend (Node.js i JavaScript)}
 \begin{itemize}
-    \item Baza podataka(PostgreSQL)
-\begin{itemize}
-    \item omogućuje pouzdanu  pohranu svih relevantnih podataka
-    \item  Ova baza podataka služi kao centralno spremište informacija i uključuje niz ključnih tablica i relacija.  
-    
+    \item Frontend je organiziran u komponente i kontejnere, pružajući fleksibilno i intuitivno korisničko sučelje.
+    \item REST API se koristi za komunikaciju s backendom, što osigurava brzu i pouzdanu razmjenu podataka.
 \end{itemize}
- 
 
-		
+\subsubsection*{Baza podataka (PostgreSQL)}
+\begin{itemize}
+    \item Centralno spremište za sve relevantne podatke sustava, omogućuje pouzdanu pohranu i pristup podacima.
+    \item Struktura baze je dizajnirana da podržava složene upite i relacije između različitih podataka.
+\end{itemize}
 
-				
+\subsection*{Mrežni Protokoli i Komunikacija}
+\begin{itemize}
+    \item Komunikacija između klijenta i poslužitelja odvija se preko HTTP/HTTPS protokola, osiguravajući sigurnost i standardiziran protok informacija.
+\end{itemize}
+
+\subsection*{Globalni Upravljački Tok}
+\begin{itemize}
+    \item Globalni upravljački tok je definiran kroz MVC arhitekturu, gdje Model upravlja podacima, View prikazuje podatke, a Controller upravlja interakcijom korisnika s aplikacijom.
+\end{itemize}
+
+\subsection*{Sklopovsko-Programski Zahtjevi}
+\begin{itemize}
+    \item Sustav je prilagođen za rad na modernim računalnim platformama, uzimajući u obzir potrebe za visokom dostupnošću i performansama.
+\end{itemize}
+
+\subsection*{Skice Arhitekture}
+\textit{[Ovdje dodajte skice arhitekture koje ilustriraju organizaciju sustava, MVC arhitekturu, i podsustave.]}
+
 		\section{Baza podataka}
 			
 			\textbf{\textit{dio 1. revizije}}\\
@@ -213,7 +231,7 @@ description & character varying(255) & Opis vrste terapije \\ \hline
 			
 			\subsection{Dijagram baze podataka}
 				\textit{ U ovom potpoglavlju potrebno je umetnuti dijagram baze podataka. Primarni i strani ključevi moraju biti označeni, a tablice povezane. Bazu podataka je potrebno normalizirati. Podsjetite se kolegija "Baze podataka".}
-			\begin{figure}
+			\begin{figure}[h]
 			    \centering
 			    \includegraphics[width=1\linewidth]{slike/database_pr1.jpg}
 			    \caption{Dijagram baze podataka}
