@@ -34,8 +34,8 @@ Odvajanje korisničkog sučelja od poslovne logike donosi dodatne prednosti. Kor
 \subsubsection*{Backend (Spring Boot)}
 \item Backend predstavlja ključnu osnovu našeg sustava, pružajući infrastrukturu za obradu poslovnih zahtjeva. Organiziran je kao skup podsustava, uključujući servise i kontrolere, čija je svrha efikasno rukovanje različitim aspektima poslovnih funkcionalnosti.
 
- \item  \textbf{Servisi}: Funkcionalne jedinice sustava odgovorne za izvođenje specifičnih poslovnih operacija. Svaki servis fokusira se na određenu funkcionalnost, pridonoseći modularnosti i omogućavajući bolje upravljanje kompleksnošću sustava. Na primjer, možemo imati servis za korisničke operacije, proizvode ili neki drugi poslovni entitet.
- \item \textbf{Kontroleri}: Odgovorni za obradu i usmjeravanje HTTP zahtjeva koji dolaze od klijenata. Kontroleri predstavljaju sučelje između korisničkog sučelja (frontend) i poslovnih operacija koje izvode servisi. Ovo odvajanje odgovornosti omogućava bolju organizaciju koda i olakšava testiranje.
+\textbf{Servisi}: Funkcionalne jedinice sustava odgovorne za izvođenje specifičnih poslovnih operacija. Svaki servis fokusira se na određenu funkcionalnost, pridonoseći modularnosti i omogućavajući bolje upravljanje kompleksnošću sustava. Na primjer, možemo imati servis za korisničke operacije, proizvode ili neki drugi poslovni entitet.\newline
+\textbf{Kontroleri}: Odgovorni za obradu i usmjeravanje HTTP zahtjeva koji dolaze od klijenata. Kontroleri predstavljaju sučelje između korisničkog sučelja (frontend) i poslovnih operacija koje izvode servisi. Ovo odvajanje odgovornosti omogućava bolju organizaciju koda i olakšava testiranje.
 
 
 
@@ -56,7 +56,7 @@ Organizacija u komponente i kontejnere:
 \begin{itemize}
     \item Komponente su modularni dijelovi koji obavljaju specifične zadatke, kao što su prikazivanje određenih podataka ili omogućavanje korisničkih interakcija.
     \item Kontejneri služe kao viši slojevi koji upravljaju komponentama, pružajući organiziran pristup i poboljšavajući skalabilnost.
-    \item 
+
 \end{itemize}
 REST API za komunikaciju s backendom:
 
@@ -82,7 +82,7 @@ React kao glavni framework:
 \subsection*{Mrežni Protokoli i Komunikacija}
 \begin{itemize}
     \item Komunikacija između klijenta i poslužitelja odvija se preko HTTP protokola, osiguravajući sigurnost i standardiziran protok informacija
-    \item .  Kroz HTTP, klijent šalje zahtjeve poslužitelju, a poslužitelj šalje odgovore. 
+    \item Kroz HTTP, klijent šalje zahtjeve poslužitelju, a poslužitelj šalje odgovore. 
 \end{itemize}
 
 \subsection*{Globalni Upravljački Tok}
@@ -96,9 +96,16 @@ React kao glavni framework:
     \item \textbf{Model}: Model predstavlja središnju komponentu sustava koja upravlja podacima. Ovdje se nalaze podaci i poslovna logika aplikacije. Model je odvojen od korisničkog sučelja i interakcije te služi kao zasebna jedinica koja obrađuje podatke neovisno o korisničkom sučelju.
     \item \textbf{View}: View je odgovoran za prikazivanje podataka korisnicima. Ova komponenta generira korisničko sučelje na temelju podataka iz Modela. View je pasivan i ne obavlja izravne operacije na podacima, već ih prikazuje korisnicima na razumljiv način.
     \item \textbf{Controller}: Controller predstavlja upravljački sloj koji obrađuje korisničke zahtjeve i interakcije. Kada korisnik obavi neku akciju, Controller reagira, a zatim komunicira s Modelom i Viewom prema potrebi. Ova komponenta osigurava odvajanje korisničkih akcija od same logike sustava.
+
 \end{itemize}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\linewidth]{slike/mvc2.png}
+    \caption{MVC arhitektura}
+    \label{fig:enter-label}
+\end{figure}
  \textbf{
-Prednosti MVC Arhitekture:}
+\newline Prednosti MVC Arhitekture:}
 \begin{itemize}
     \item Odvajanje odgovornosti: MVC omogućava jasno odvajanje odgovornosti između različitih dijelova sustava. Model, View i Controller imaju specifične uloge, čime se olakšava razvoj, testiranje i održavanje koda.
     \item Lako proširivost i održavanje: Zbog modularnosti i odvajanja odgovornosti, dodavanje novih funkcionalnosti ili promjena postojećih dijelova sustava postaje jednostavno i manje riskantno.
@@ -114,31 +121,30 @@ Prednosti MVC Arhitekture:}
 \textbf{Prilagođenost modernim računalnim platformama:
 \item }Sustav je optimiziran za rad na suvremenim računalnim platformama, uključujući njihove specifičnosti i prednosti. Koristeći najnovije tehnologije i prakse, osiguravamo kompatibilnost s različitim operativnim sustavima i konfiguracijama računala.\newline
 
-\textbf{Visoka dostupnost:}
-\item Dostupnost sustava ključna je za neprekidno pružanje usluga korisnicima. Implementiramo strategije visoke dostupnosti kako bismo osigurali minimalne prekide u radu sustava. Ovo uključuje redundanciju ključnih komponenti i mehanizme automatskog oporavka od mogućih kvarova.\newline
+\textbf{Visoka dostupnost:\newline}
+Dostupnost sustava ključna je za neprekidno pružanje usluga korisnicima. Implementiramo strategije visoke dostupnosti kako bismo osigurali minimalne prekide u radu sustava. Ovo uključuje redundanciju ključnih komponenti i mehanizme automatskog oporavka od mogućih kvarova.\newline
 
-\item 
+
 \textbf{Optimizacija performansi:
 \item }Performanse su ključne za korisničko iskustvo i učinkovit rad sustava. Kroz optimizaciju koda, uporabu efikasnih algoritama i praćenje performansi u stvarnom vremenu, postižemo visoku razinu odziva i brze obrade podataka.\newline
 
 
-\textbf{Prilagodljivost za skaliranje:}
-\item Sustav je dizajniran kako bi se lako skalirao prema rastućim potrebama. Uz mogućnost horizontalnog i vertikalnog skaliranja, omogućujemo prilagodljivu infrastrukturu koja se može dinamički prilagoditi povećanju opterećenja.\newline
+\textbf{Prilagodljivost za skaliranje:\newline}
+Sustav je dizajniran kako bi se lako skalirao prema rastućim potrebama. Uz mogućnost horizontalnog i vertikalnog skaliranja, omogućujemo prilagodljivu infrastrukturu koja se može dinamički prilagoditi povećanju opterećenja.\newline
 
 \textbf{
-Sigurnosni aspekti:}
-\item Sklopovsko-programski zahtjevi također obuhvaćaju sigurnosne aspekte. Sustav implementira mjere zaštite podataka, enkripciju komunikacije i autentikaciju kako bi osigurao siguran rad i spriječio neovlašteni pristup.\newline
+Sigurnosni aspekti:}\newline
+Sklopovsko-programski zahtjevi također obuhvaćaju sigurnosne aspekte. Sustav implementira mjere zaštite podataka, enkripciju komunikacije i autentikaciju kako bi osigurao siguran rad i spriječio neovlašteni pristup.\newline
 
 
 \textbf{Kontinuirano ažuriranje i praćenje trendova:}
-\item S obzirom na brzu evoluciju tehnologije, sustav se kontinuirano prilagođava novim standardima i trendovima. Redovita ažuriranja omogućuju iskorištavanje najnovijih značajki, poboljšanje sigurnosti te održavanje konkurentske prednosti.\newline
+
+S obzirom na brzu evoluciju tehnologije, sustav se kontinuirano prilagođava novim standardima i trendovima. Redovita ažuriranja omogućuju iskorištavanje najnovijih značajki, poboljšanje sigurnosti te održavanje konkurentske prednosti.\newline
 
 Kroz integraciju navedenih sklopovsko-programskih zahtjeva, naš sustav ne samo da osigurava stabilnost i performanse, već je i spreman suočiti se s izazovima suvremenog informacijskog okruženja. Ovaj pristup jamči dugoročnu održivost, skalabilnost i optimalno iskorištavanje resursa računalnih platformi.
 
  
 
-\subsection*{Skice Arhitekture}
-\textit{[Ovdje dodajte skice arhitekture koje ilustriraju organizaciju sustava, MVC arhitekturu, i podsustave.]}
 
 		\section{Baza podataka}
 			
