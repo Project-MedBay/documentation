@@ -7,47 +7,135 @@ Naš sustav je dizajniran da bude efikasan, skalabilan i pouzdan. U nastavku det
 
 \subsection*{Izbor Arhitekture}
 \begin{itemize}
-    \item Naša odluka da koristimo trodjelnu arhitekturu temelji se na principima oblikovanja predstavljenim na predavanjima, gdje se ističe važnost modularnosti i odvajanja odgovornosti. Ovaj pristup omogućava bolje upravljanje kompleksnošću sustava i lakše održavanje.
-\end{itemize}
+    \item Naša odluka da koristimo trodjelnu arhitekturu temelji se na principima oblikovanja predstavljenim na predavanjima, gdje se ističe važnost modularnosti i odvajanja odgovornosti. Ovaj temeljni pristup oblikovanju sustava reflektira našu predanost stvaranju arhitekture koja je ne samo funkcionalna, već i prilagodljiva, jednostavna za održavanje te otporna na buduće izazove. 
+
+    \item Princip modularnosti naglašava važnost razdvajanja sustava na manje, samostalne dijelove, ili module. Ovakav pristup omogućava da svaki modul ima jasno definiranu funkcionalnost, što pojednostavljuje razvoj, testiranje i održavanje. Svaki modul može biti razvijen neovisno, što pridonosi većoj fleksibilnosti i olakšava integraciju novih značajki ili promjena u sustavu. 
+
+    \item Odvajanje odgovornosti, s druge strane, znači da svaki dio sustava ima precizno definiranu ulogu ili odgovornost. Na primjer, front-end se odvaja od backenda, čime se postiže jasna granica između korisničkog sučelja i poslovne logike. Ovo olakšava praćenje i održavanje svake komponente zasebno, smanjuje rizik od pogrešaka i omogućava paralelno razvijanje dijelova sustava. 
+
+\item Trodijelna arhitektura, koja obuhvaća backend, frontend i bazu podataka, idealno se uklapa u ove principe. Backend je odgovoran za poslovnu logiku, frontend za korisničko sučelje, dok je baza podataka centralno mjesto za pohranu podataka. Ovaj pristup omogućava svakom dijelu sustava da obavlja svoju specifičnu funkciju, čime se postiže bolja organizacija, održavanje i skalabilnost. 
 
 \subsection*{Organizacija Sustava}
-\begin{itemize}
-    \item Sustav je organiziran na visokoj razini apstrakcije, koristeći klijent-poslužitelj model, što omogućuje razdvajanje korisničkog sučelja od poslovne logike.
-\end{itemize}
+\item Naš sustav je pažljivo organiziran na visokoj razini apstrakcije, koristeći klijent-poslužitelj model, što predstavlja ključni element naše arhitekture. Ova organizacija ima za cilj efikasno upravljanje različitim dijelovima sustava, pružajući jasno odvojeni pristup korisničkom sučelju i poslovnoj logici. 
+
+\item \textbf{Klijent-poslužitelj} model je arhitektonski oblik koji omogućuje razdvajanje funkcionalnosti između dviju osnovnih komponenti: klijenta i poslužitelja. Klijent predstavlja korisničko sučelje, dok poslužitelj sadrži poslovnu logiku i podatke. Ovaj model omogućuje svakoj komponenti da obavlja svoje specifične zadatke, što rezultira modularnošću i skalabilnošću sustava. 
+
+\textbf{Prednosti klijent-poslužitelj modela:}
+
+\begin{enumerate}
+    \item Razdvajanje odgovornosti: Klijent i poslužitelj imaju jasno definirane uloge, čime se postiže precizno odvajanje korisničkog sučelja od poslovne logike. To olakšava održavanje, poboljšava sigurnost i doprinosi boljoj organizaciji koda.
+    \item Fleksibilnost i skalabilnost: Modularnost klijent-poslužitelj arhitekture omogućava prilagodbu svake komponente neovisno. Na primjer, možemo nadograditi ili zamijeniti korisničko sučelje bez narušavanja poslovne logike i obrnuto. Ovo čini sustav fleksibilnim i lako skalabilnim.
+    \item Efikasna komunikacija: Klijent i poslužitelj komuniciraju putem standardiziranih protokola, često kroz HTTP. Ova jasna komunikacija omogućava brzu i pouzdanu razmjenu podataka između dijelova sustava.
+\end{enumerate}
+ 
+Odvajanje korisničkog sučelja od poslovne logike donosi dodatne prednosti. Korisničko sučelje, koje može biti web aplikacija ili mobilna aplikacija, fokusira se na prezentaciju podataka i interakciju s korisnicima. S druge strane, poslovna logika centralizirana je na poslužitelju, gdje se vrše obrade podataka, donose poslovne odluke i upravlja cjelokupnim tokom aplikacije. 
 
 \subsection*{Detalji Podsustava}
 \subsubsection*{Backend (Spring Boot)}
+\item Backend predstavlja ključnu osnovu našeg sustava, pružajući infrastrukturu za obradu poslovnih zahtjeva. Organiziran je kao skup podsustava, uključujući servise i kontrolere, čija je svrha efikasno rukovanje različitim aspektima poslovnih funkcionalnosti.
+
+ \item  \textbf{Servisi}: Funkcionalne jedinice sustava odgovorne za izvođenje specifičnih poslovnih operacija. Svaki servis fokusira se na određenu funkcionalnost, pridonoseći modularnosti i omogućavajući bolje upravljanje kompleksnošću sustava. Na primjer, možemo imati servis za korisničke operacije, proizvode ili neki drugi poslovni entitet.
+ \item \textbf{Kontroleri}: Odgovorni za obradu i usmjeravanje HTTP zahtjeva koji dolaze od klijenata. Kontroleri predstavljaju sučelje između korisničkog sučelja (frontend) i poslovnih operacija koje izvode servisi. Ovo odvajanje odgovornosti omogućava bolju organizaciju koda i olakšava testiranje.
+
+
+
+\textbf{Komunikacija s bazom podataka (PostgreSQL):}
+\item Backend komunicira s bazom podataka putem PostgreSQL sustava, koji omogućava efikasnu organizaciju i manipulaciju podacima zbog svoje pouzdane i robusne arhitekture. Relacijski model podataka pruža strukturu temeljenu na tablicama, što olakšava povezivanje podataka između različitih dijelova sustava.
+    \item Ovaj pristup omogućava lako preslikavanje podataka iz aplikacije u bazu i obrnuto, pridonoseći dosljednosti podataka i olakšavajući njihovo upravljanje. Kroz PostgreSQL, ostvarujemo centralno spremište podataka koje je ključno za sve relevantne informacije u sustavu.
+\end{itemize}
+Backend, kao središnja komponenta sustava, osigurava da poslovna logika bude učinkovito izvršavana, a podaci pravilno organizirani i održavani. Ovaj dio arhitekture pridonosi integraciji svih poslovnih funkcionalnosti, čime se postiže koherentan i efikasan rad sustava.\newline
+
+ 
+ 
+
+\textbf{Frontend (Node.js, JavaScript, React)}
+Frontend, kao ključna korisnička strana našeg sustava, organiziran je prema modernim principima razvoja web aplikacija. Glavni tehnološki alati koje koristimo su Node.js, JavaScript i React, pružajući nam moćne alate za stvaranje fleksibilnog i intuitivnog korisničkog sučelja.
+
+Organizacija u komponente i kontejnere:
+
 \begin{itemize}
-    \item Backend služi kao osnova našeg sustava, sadrži više podsustava kao što su servisi i kontroleri koji obrađuju poslovne zahtjeve.
-    \item Komunikacija s bazom podataka vrši se kroz PostgreSQL, što omogućava efikasnu organizaciju i manipulaciju podacima.
+    \item Komponente su modularni dijelovi koji obavljaju specifične zadatke, kao što su prikazivanje određenih podataka ili omogućavanje korisničkih interakcija.
+    \item Kontejneri služe kao viši slojevi koji upravljaju komponentama, pružajući organiziran pristup i poboljšavajući skalabilnost.
+    \item 
+\end{itemize}
+REST API za komunikaciju s backendom:
+
+\begin{itemize}
+    \item Frontend komunicira s backendom putem REST API-ja (Representational State Transfer), standardnog protokola za komunikaciju između klijenta i poslužitelja koji omogućava brzu, standardiziranu i pouzdanu razmjenu podataka između frontend i backend dijelova sustava.
+\end{itemize}
+React kao glavni framework:
+
+\begin{itemize}
+    \item Koristimo React, popularni JavaScript framework za izgradnju korisničkih sučelja. React omogućava brzo renderiranje stranica, poboljšava učinkovitost i olakšava manipulaciju komponentama.
+    \item Kroz React, frontend postaje reaktivno sučelje koje brzo reagira na promjene stanja podataka, pružajući korisnicima ugodno iskustvo korištenja aplikacije.
 \end{itemize}
 
-\subsubsection*{Frontend (Node.js i JavaScript)}
-\begin{itemize}
-    \item Frontend je organiziran u komponente i kontejnere, pružajući fleksibilno i intuitivno korisničko sučelje.
-    \item REST API se koristi za komunikaciju s backendom, što osigurava brzu i pouzdanu razmjenu podataka.
-\end{itemize}
+ 
 
 \subsubsection*{Baza podataka (PostgreSQL)}
 \begin{itemize}
-    \item Centralno spremište za sve relevantne podatke sustava, omogućuje pouzdanu pohranu i pristup podacima.
+    \item Baza podataka predstavlja ključnu komponentu našeg sustava, pružajući centralno spremište za sve relevantne podatke. 
+    \item U našem slučaju, koristimo PostgreSQL, robustan i napredan relacijski sustav upravljanja bazama podataka, kako bismo osigurali pouzdanu pohranu i učinkovit pristup podacima. 
     \item Struktura baze je dizajnirana da podržava složene upite i relacije između različitih podataka.
 \end{itemize}
 
 \subsection*{Mrežni Protokoli i Komunikacija}
 \begin{itemize}
-    \item Komunikacija između klijenta i poslužitelja odvija se preko HTTP/HTTPS protokola, osiguravajući sigurnost i standardiziran protok informacija.
+    \item Komunikacija između klijenta i poslužitelja odvija se preko HTTP protokola, osiguravajući sigurnost i standardiziran protok informacija
+    \item .  Kroz HTTP, klijent šalje zahtjeve poslužitelju, a poslužitelj šalje odgovore. 
 \end{itemize}
 
 \subsection*{Globalni Upravljački Tok}
 \begin{itemize}
-    \item Globalni upravljački tok je definiran kroz MVC arhitekturu, gdje Model upravlja podacima, View prikazuje podatke, a Controller upravlja interakcijom korisnika s aplikacijom.
+    \item Globalni upravljački tok u našem sustavu određen je kroz primjenu MVC (Model-View-Controller) arhitekture, pružajući strukturu i organizaciju za učinkovitu interakciju između različitih dijelova aplikacije. 
 \end{itemize}
 
+\textbf{MVC Arhitektura:}
+
+\begin{itemize}
+    \item \textbf{Model}: Model predstavlja središnju komponentu sustava koja upravlja podacima. Ovdje se nalaze podaci i poslovna logika aplikacije. Model je odvojen od korisničkog sučelja i interakcije te služi kao zasebna jedinica koja obrađuje podatke neovisno o korisničkom sučelju.
+    \item \textbf{View}: View je odgovoran za prikazivanje podataka korisnicima. Ova komponenta generira korisničko sučelje na temelju podataka iz Modela. View je pasivan i ne obavlja izravne operacije na podacima, već ih prikazuje korisnicima na razumljiv način.
+    \item \textbf{Controller}: Controller predstavlja upravljački sloj koji obrađuje korisničke zahtjeve i interakcije. Kada korisnik obavi neku akciju, Controller reagira, a zatim komunicira s Modelom i Viewom prema potrebi. Ova komponenta osigurava odvajanje korisničkih akcija od same logike sustava.
+\end{itemize}
+ \textbf{
+Prednosti MVC Arhitekture:}
+\begin{itemize}
+    \item Odvajanje odgovornosti: MVC omogućava jasno odvajanje odgovornosti između različitih dijelova sustava. Model, View i Controller imaju specifične uloge, čime se olakšava razvoj, testiranje i održavanje koda.
+    \item Lako proširivost i održavanje: Zbog modularnosti i odvajanja odgovornosti, dodavanje novih funkcionalnosti ili promjena postojećih dijelova sustava postaje jednostavno i manje riskantno.
+    \item Jasna struktura: MVC pruža jasnu strukturu sustava, olakšavajući suradnju između različitih timova i programera. Ova organizacija doprinosi boljoj preglednosti i razumijevanju koda.
+\end{itemize}
+
+ 
 \subsection*{Sklopovsko-Programski Zahtjevi}
 \begin{itemize}
-    \item Sustav je prilagođen za rad na modernim računalnim platformama, uzimajući u obzir potrebe za visokom dostupnošću i performansama.
-\end{itemize}
+
+    \item Integracijom sklopovsko-programskih zahtjeva, sustav omogućuje stabilnost te se uspješno priprema za izazove suvremenog informacijskog okruženja. 
+
+\textbf{Prilagođenost modernim računalnim platformama:
+\item }Sustav je optimiziran za rad na suvremenim računalnim platformama, uključujući njihove specifičnosti i prednosti. Koristeći najnovije tehnologije i prakse, osiguravamo kompatibilnost s različitim operativnim sustavima i konfiguracijama računala.\newline
+
+\textbf{Visoka dostupnost:}
+\item Dostupnost sustava ključna je za neprekidno pružanje usluga korisnicima. Implementiramo strategije visoke dostupnosti kako bismo osigurali minimalne prekide u radu sustava. Ovo uključuje redundanciju ključnih komponenti i mehanizme automatskog oporavka od mogućih kvarova.\newline
+
+\item 
+\textbf{Optimizacija performansi:
+\item }Performanse su ključne za korisničko iskustvo i učinkovit rad sustava. Kroz optimizaciju koda, uporabu efikasnih algoritama i praćenje performansi u stvarnom vremenu, postižemo visoku razinu odziva i brze obrade podataka.\newline
+
+
+\textbf{Prilagodljivost za skaliranje:}
+\item Sustav je dizajniran kako bi se lako skalirao prema rastućim potrebama. Uz mogućnost horizontalnog i vertikalnog skaliranja, omogućujemo prilagodljivu infrastrukturu koja se može dinamički prilagoditi povećanju opterećenja.\newline
+
+\textbf{
+Sigurnosni aspekti:}
+\item Sklopovsko-programski zahtjevi također obuhvaćaju sigurnosne aspekte. Sustav implementira mjere zaštite podataka, enkripciju komunikacije i autentikaciju kako bi osigurao siguran rad i spriječio neovlašteni pristup.\newline
+
+
+\textbf{Kontinuirano ažuriranje i praćenje trendova:}
+\item S obzirom na brzu evoluciju tehnologije, sustav se kontinuirano prilagođava novim standardima i trendovima. Redovita ažuriranja omogućuju iskorištavanje najnovijih značajki, poboljšanje sigurnosti te održavanje konkurentske prednosti.\newline
+
+Kroz integraciju navedenih sklopovsko-programskih zahtjeva, naš sustav ne samo da osigurava stabilnost i performanse, već je i spreman suočiti se s izazovima suvremenog informacijskog okruženja. Ovaj pristup jamči dugoročnu održivost, skalabilnost i optimalno iskorištavanje resursa računalnih platformi.
+
+ 
 
 \subsection*{Skice Arhitekture}
 \textit{[Ovdje dodajte skice arhitekture koje ilustriraju organizaciju sustava, MVC arhitekturu, i podsustave.]}
@@ -56,8 +144,22 @@ Naš sustav je dizajniran da bude efikasan, skalabilan i pouzdan. U nastavku det
 			
 			\textbf{\textit{dio 1. revizije}}\\
 			
-Koristili smo PostgreSQL relacijsku bazu podataka. PostgreSQL je snažan i visoko prilagodljiv sustav za upravljanje bazama podataka, što ga čini prikladnim izborom za učinkovito i sigurno upravljanje zdravstvenim podacima, osiguravajući da su informacije o pacijentima, terminima, zdravstvenom osoblju i opremi sigurno pohranjene i dostupne. 
-Svaka tablica ima primarni ključ koji jedinstveno identificira zapise unutar tablice. Baza podataka uspostavlja odnose između tablica koristeći strane ključeve. Ograničenja su postavljena kako bi se očuvao integritet podataka.  
+Baza podataka predstavlja ključnu komponentu našeg sustava, pružajući centralno spremište za sve relevantne podatke. U našem slučaju, koristimo PostgreSQL, relacijski sustav upravljanja bazama podataka. PostgreSQL je snažan i visoko prilagodljiv sustav za upravljanje bazama podataka, što ga čini prikladnim izborom za učinkovito i sigurno upravljanje zdravstvenim podacima, osiguravajući da su informacije o pacijentima, terminima, zdravstvenom osoblju i opremi sigurno pohranjene i dostupne. 
+
+
+
+\textbf{Pouzdana pohrana i pristup podacima:}
+\item PostgreSQL pruža visoku razinu pouzdanosti i integriteta podataka. Njegova transakcijska podrška osigurava dosljednost podataka čak i u slučaju neplaniranih prekida rada sustava ili pogrešaka.
+Centralizirano pohranjivanje podataka omogućava nam učinkovito upravljanje svim informacijama relevantnim za rad sustava.
+
+\textbf{Struktura baze za složene upite i relacije:}
+\item Dizajn baze podataka ključan je za podršku složenim upitima i održavanje relacija između različitih podataka.
+\item PostgreSQL, kao relacijski sustav, koristi tablice kako bi organizirao podatke. Svaka tablica sastoji se od redova i stupaca, omogućujući jasno definiranje veza između entiteta.
+\item Veze između tablica omogućavaju složene upite koji spajaju informacije iz različitih dijelova sustava. 
+PostgreSQL također podržava napredne mogućnosti poput indeksiranja, pomažući ubrzati upite i optimizirati performanse baze podataka.
+\item  Struktura baze podataka je pažljivo oblikovana kako bi odražavala logičke relacije i potrebe sustava, čime se postiže efikasno upravljanje podacima.
+
+
 		
 			\subsection{Opis tablica}
 			
@@ -230,7 +332,7 @@ description & character varying(255) & Opis vrste terapije \\ \hline
 				
 			
 			\subsection{Dijagram baze podataka}
-				\textit{ U ovom potpoglavlju potrebno je umetnuti dijagram baze podataka. Primarni i strani ključevi moraju biti označeni, a tablice povezane. Bazu podataka je potrebno normalizirati. Podsjetite se kolegija "Baze podataka".}
+    Svaka tablica ima primarni ključ koji jedinstveno identificira zapise unutar tablice. Baza podataka uspostavlja odnose između tablica koristeći strane ključeve. Ograničenja su postavljena kako bi se očuvao integritet podataka.  
 			\begin{figure}[h]
 			    \centering
 			    \includegraphics[width=1\linewidth]{slike/database_pr1.jpg}
