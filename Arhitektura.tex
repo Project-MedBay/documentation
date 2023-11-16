@@ -250,7 +250,7 @@ specialization & SMALLINT & Stručnost zaposlenika \\ \hline
 
 \end{longtblr}
 
-\textbf{Equipment} Ovaj entitet predstavlja tablicu equipment koja sadrži informacije o opremi.
+\textbf{Equipment} Ovaj entitet predstavlja tablicu koja sadrži informacije o opremi. Svaka oprema ima svoj jedinstveni identifikator (id) za precizno praćenje. Attribut capacity označava kapacitet opreme, dok description pruža dodatne opise ili karakteristike. Naziv opreme (name) jedinstveno označava svaki komad, olakšavajući identifikaciju i korištenje unutar medicinskog okruženja. 
 \begin{longtblr}[
     label=none,
     entry=none
@@ -354,10 +354,61 @@ description & character varying(255) & Opis vrste terapije \\ \hline
 			\textit{Potrebno je priložiti dijagram razreda s pripadajućim opisom. Zbog preglednosti je moguće dijagram razlomiti na više njih, ali moraju biti grupirani prema sličnim razinama apstrakcije i srodnim funkcionalnostima.}\\
 			
 			\textbf{\textit{dio 1. revizije}}\\
-			
-			\textit{Prilikom prve predaje projekta, potrebno je priložiti potpuno razrađen dijagram razreda vezan uz \textbf{generičku funkcionalnost} sustava. Ostale funkcionalnosti trebaju biti idejno razrađene u dijagramu sa sljedećim komponentama: nazivi razreda, nazivi metoda i vrste pristupa metodama (npr. javni, zaštićeni), nazivi atributa razreda, veze i odnosi između razreda.}\\
-			
-			\textbf{\textit{dio 2. revizije}}\\			
+   
+			\textit{Prilikom prve predaje projekta, potrebno je priložiti potpuno razrađen dijagram razreda vezan uz \textbf{generičku funkcionalnost} sustava. Ostale funkcionalnosti trebaju biti idejno razrađene u dijagramu sa sljedećim komponentama: nazivi razreda, nazivi metoda i vrste pristupa metodama (npr. javni, zaštićeni), nazivi atributa razreda, veze i odnosi između razreda.}\newline
+   Backend arhitektura prikazana je u sljedećim dijagramima oznaćenim brojevima 4.3, 4.4.
+   Implementirane metode direktno komuniciraju s bazom podataka te vracaju tražene podatke  poput popisa dijelatnika, opreme, provjere je li dijelatnik i dalje aktivan.
+		   \begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{slike/razredi1.png}
+    \caption{Dijagram razreda}
+    \label{fig:enter-label}
+\end{figure}
+Razredi Employee i Patient  specifikacija su razreda User pa nasljeđuju njegove public atribute i metode.
+Razred Patient predstavlja model pacijenta u medicinskom sustavu. Ovaj razred proširuje osnovni razred \verb|User|, sadržavajući atribute kao što su adresa, datum rođenja, matični broj osiguranika (MBO), broj telefona te listu termina na koje je pacijent naručen.  \newline
+Razred User predstavlja osnovni model korisnika u sustavu. Ovaj razred obuhvaća osnovne informacije o korisniku, uključujući ime, prezime, email adresu, lozinku i status aktivnosti korisničkog računa. Dodatno, svaki korisnik ima dodijeljenu ulogu koja se koristi za upravljanje ovlastima unutar sustava. \newline
+
+Razred Employee predstavlja model zaposlenika u medicinskom sustavu. Ovaj razred proširuje osnovni razred User, dodajući specifične atribute i odnose relevantne za zaposlenike u sustavu. Sadrži privatni  atribut Specialization specialization koji predstavlja specijalizaciju zaposlenika, što može uključivati različite medicinske oblasti ili specifične zadatke unutar sustava. \newline
+Razred Specialization predstavlja enumeraciju koja sadrži različite vrste specijalizacija dijelatnika u medicinskom sustavu. 
+Razred Session predstavlja radnu sesiju unutar medicinskog sustava. Ovaj razred omogućuje praćenje sesija između zaposlenika i pacijenata. 
+Razred Equipment predstavlja opremu koja se koristi u medicinskom sustavu. Ovaj razred pruža informacije o različitim vrstama opreme, uključujući jedinstveni identifikator opreme, kapacitet, opis i naziv opreme. 
+Razred Therapy predstavlja terapiju unutar medicinskog sustava. 
+ Razred TherapyType predstavlja vrstu terapije u sustavu.
+
+   \begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{slike/razredi2.png}
+    \caption{Dijagram razreda, 2.dio}
+    \label{fig:enter-label}
+\end{figure}
+
+
+Svaki od ovih entiteta slijedi obrazac \verb|Controller -> Service -> Repository| za obavljanje operacija nad podacima.
+
+Na primjer, entitet Employee posjeduje EmployeeController, EmployeeService i EmployeeRepository. Ovi razredi zajednički omogućuju upravljanje informacijama o zaposlenicima, uključujući njihovu autentikaciju. Kroz ovaj ciklus, Controller komunicira s Servisom, a Servis dalje s Repozitorijem, osiguravajući konzistentan i siguran pristup podacima.
+
+Osim toga, entiteti poput Therapy, Appointment i Session imaju svoje setove Controllera, Servisa i Repozitorija koji omogućuju operacije vezane uz terapije, narudžbe pacijenata i sesije.
+
+Bitna karakteristika ovog organiziranog pristupa je da Controller vraća odgovarajući HTTP status i tražene informacije (klasa, string ili ništa) u obliku JSON-a. Ovaj proces olakšava komunikaciju između različitih dijelova sustava, pružajući jasnu i strukturiranu komunikaciju među različitim slojevima aplikacije.
+
+Kad Patient izvrši registraciju ili prijavu, procesi autentikacije i autorizacije upravljaju se putem SecurityControllera i SecurityServicea. Ovi kontroleri i servisi surađuju s SecurityConfig-om, implementiranim pomoću WebConfig, kako bi provjerili je li pacijent, administrator ili zdravstveni djelatnik autoriziran i autentificiran za svaku radnju koju žele izvršiti u sustavu.
+
+SecurityController omogućuje upravljanje zahtjevima vezanim uz sigurnost, poput registracije i prijave korisnika, dok SecurityService sadrži logiku autentikacije i autorizacije. Ove komponente zajednički rade kako bi osigurale siguran pristup podacima i funkcionalnostima sustava.
+
+Kroz SecurityConfig i WebConfig, postavke sigurnosti konfiguriraju se prema tipu korisnika. Ovaj postupak osigurava da pacijenti, administratori i zdravstveni djelatnici imaju odgovarajuće privilegije za izvršavanje željenih radnji, uzimajući u obzir autentikaciju i autorizaciju.
+
+Ova struktura omogućuje efikasno i sigurno upravljanje pristupom resursima u sustavu, osiguravajući da svaki korisnik ima odgovarajuće ovlasti za obavljanje svojih funkcija u skladu s postavljenim sigurnosnim pravilima.
+
+ 
+
+ 
+
+ 
+
+  
+
+   
+   \textbf{\textit{dio 2. revizije}}\\			
 			
 			\textit{Prilikom druge predaje projekta dijagram razreda i opisi moraju odgovarati stvarnom stanju implementacije}
 			
