@@ -1,3 +1,89 @@
+%definira klasu dokumenta 
+\documentclass[12pt]{report} 
+
+%prostor izmedu naredbi \documentclass i \begin{document} se zove uvod. U njemu se nalaze naredbe koje se odnose na cijeli dokument
+
+%osnovni LaTex ne može riješiti sve probleme, pa se koriste različiti paketi koji olakšavaju izradu željenog dokumenta
+\usepackage[croatian]{babel} 
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{txfonts}
+\usepackage{mathdots}
+\usepackage{titlesec}
+\usepackage{array}
+\usepackage{lastpage}
+\usepackage{etoolbox}
+\usepackage{tabularray}
+\usepackage{color, colortbl}
+\usepackage{adjustbox}
+\usepackage{geometry}
+\usepackage[classicReIm]{kpfonts}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{placeins}
+
+\usepackage{float}
+\usepackage{setspace}
+\restylefloat{table}
+
+
+\patchcmd{\chapter}{\thispagestyle{plain}}{\thispagestyle{fancy}}{}{} %redefiniranje stila stranice u paketu fancyhdr
+
+%oblik naslova poglavlja
+\titleformat{\chapter}{\normalfont\huge\bfseries}{\thechapter.}{20pt}{\Huge}
+\titlespacing{\chapter}{0pt}{0pt}{40pt}
+
+
+\linespread{1.3} %razmak između redaka
+
+\geometry{a4paper, left=1in, top=1in,}  %oblik stranice
+
+\hypersetup{ colorlinks, citecolor=black, filecolor=black, linkcolor=black,	urlcolor=black }   %izgled poveznice
+
+
+%prored smanjen između redaka u nabrajanjima i popisima
+\newenvironment{packed_enum}{
+	\begin{enumerate}
+		\setlength{\itemsep}{0pt}
+		\setlength{\parskip}{0pt}
+		\setlength{\parsep}{0pt}
+	}{\end{enumerate}}
+
+\newenvironment{packed_item}{
+	\begin{itemize}
+		\setlength{\itemsep}{0pt}
+		\setlength{\parskip}{0pt}
+		\setlength{\parsep}{0pt}
+	}{\end{itemize}}
+
+
+
+
+%boja za privatni i udaljeni kljuc u tablicama
+\definecolor{LightBlue}{rgb}{0.9,0.9,1}
+\definecolor{LightGreen}{rgb}{0.9,1,0.9}
+
+%Promjena teksta za dugačke tablice
+\DefTblrTemplate{contfoot-text}{normal}{Nastavljeno na idućoj stranici}
+\SetTblrTemplate{contfoot-text}{normal}
+\DefTblrTemplate{conthead-text}{normal}{(Nastavljeno)}
+\SetTblrTemplate{conthead-text}{normal}
+\DefTblrTemplate{middlehead,lasthead}{normal}{Nastavljeno od prethodne stranice}
+\SetTblrTemplate{middlehead,lasthead}{normal}
+
+%podesavanje zaglavlja i podnožja
+
+\pagestyle{fancy}
+\lhead{Programsko inženjerstvo}
+\rhead{Medicinska rehabilitacija}
+\lfoot{MedBay}
+\cfoot{stranica \thepage/\pageref{LastPage}}
+\rfoot{\today}
+\renewcommand{\headrulewidth}{0.2pt}
+\renewcommand{\footrulewidth}{0.2pt}
+
+
+\begin{document} 
 \chapter{Specifikacija programske potpore}
 
 \section{Funkcionalni zahtjevi}
@@ -443,8 +529,14 @@
     \caption{Sekvencijski dijagram za UC6}
     \label{fig:my_image}
 \end{figure}
-
 \begin{figure}[p]
+    \centering
+    \includegraphics[width=\textwidth]{./slike/Sekvencijski - UC13.jpg} 
+    \caption{Sekvencijski dijagram za UC13}
+    \label{fig:my_image}
+\end{figure}
+\eject
+\begin{figure}[h]
     \centering
     \includegraphics[width=\textwidth]{./slike/Sekvencijski - UC16.jpg} 
     \caption{Sekvencijski dijagram za UC16}
@@ -459,80 +551,80 @@
 
 \textit{Nefunkcionalni zahtjevi i zahtjevi domene primjene ključni su za uspješno funkcioniranje našeg sustava. Oni definiraju kako se sustav treba ponašati, koje standarde kvalitete mora zadovoljiti, te koje sigurnosne i tehničke ograničenja treba poštivati.}
 
-\subsection*{Performanse i Pouzdanost}
+\subsection*{Performanse i pouzdanost}
 \begin{itemize}
     \item Sustav treba podržavati simultani rad više korisnika bez gubitka performansi, osiguravajući pouzdano iskustvo u stvarnom vremenu.
-    \item Vrijeme odziva prilikom pristupa bazi podataka i drugim ključnim funkcijama sustava ne smije trajati duže od nekoliko sekundi, čime se osigurava brz i efikasan rad sustava.
+    \item Vrijeme odziva prilikom pristupa bazi podataka i drugim ključnim funkcijama sustava ne smije trajati duže od nekoliko sekundi. Time se osigurava brz i efikasan rad sustava.
 \end{itemize}
 
-\subsection*{Korisničko Iskustvo}
+\subsection*{Korisničko iskustvo}
 \begin{itemize}
     \item Korisničko sučelje treba biti intuitivno i jednostavno za korištenje, uz minimalnu potrebu za opsežnim instrukcijama ili obukom.
-    \item Sustav mora podržavati više jezika i odgovarajuće posebne znakove u različitim jezicima (starija populacija govori samo materinjim jezikom i sl.). Prva verzija aplikacije biti će na engleskom. 
+    \item Sustav mora podržavati više jezika i odgovarajuće posebne znakove u različitim jezicima (starija populacija govori samo materinjim jezikom i sl.). Prva verzija aplikacije bit će na engleskom. 
     \item Neispravno korištenje korisničkog sučelja ne smije narušiti funkcionalnost i rad sustava.
 \end{itemize}
 
-\subsection*{Sigurnost i Zaštita Podataka}
+\subsection*{Sigurnost i zaštita podataka}
 \begin{itemize}
     \item Sustav mora osigurati visoku razinu sigurnosti, koristeći enkripciju i druge sigurnosne protokole, posebice u komunikaciji s bazom podataka i tijekom prijenosa osjetljivih podataka.
-    \item Pristup sustavu mora biti omogućen kroz sigurne protokole kao što je HTTPS, čime se osigurava zaštita podataka i privatnosti korisnika.
+    \item Pristup sustavu mora biti omogućen kroz sigurne protokole kao što je HTTPS čime se osigurava zaštita podataka i privatnosti korisnika.
 \end{itemize}
 
-\subsection*{Platforma i Tehnička Implementacija}
+\subsection*{Platforma i tehnička implementacija}
 \begin{itemize}
     \item Sustav će biti implementiran kao web aplikacija, koristeći objektno-orijentirane jezike, što omogućuje fleksibilnost i lakše održavanje.
     \item Aplikacija treba biti prilagodljiva i kompatibilna s različitim web i mobilnim platformama, osiguravajući široku dostupnost i pristupačnost.
 \end{itemize}
 
-\subsection*{Skalabilnost i Nadogradnje}
+\subsection*{Skalabilnost i nadogradnje}
 \begin{itemize}
     \item Sustav mora biti skalabilan kako bi podržao rast broja korisnika i povećanje opterećenja bez gubitka performansi.
     \item Nadogradnje sustava trebaju biti implementirane na način da ne narušavaju postojeće funkcionalnosti i da se mogu efikasno integrirati u operativni sustav.
 \end{itemize}
 
-\subsection*{Standardi Kvalitete i Usklađenost}
+\subsection*{Standardi Kvalitete i usklađenost}
 \begin{itemize}
 \item Sustav treba biti usklađen s nacionalnim i međunarodnim standardima kvalitete i sigurnosti, uključujući regulative vezane za zdravstvene informacijske sustave.
 \item Redovite provjere kvalitete i revizije trebaju osigurati da aplikacija kontinuirano zadovoljava sve postavljene standarde.
 \end{itemize}
 
-\subsection*{Dostupnost i Pouzdanost}
+\subsection*{Dostupnost i pouzdanost}
 \begin{itemize}
 \item Sustav treba osigurati visoku dostupnost i minimalno vrijeme prekida, posebno tijekom radnih sati zdravstvenih ustanova.
 \item Plan oporavka u slučaju kvara ili prekida treba biti jasno definiran i implementiran, osiguravajući brz povratak u normalan rad.
 \end{itemize}
 
-\subsection*{Pristupačnost i Inkluzivnost}
+\subsection*{Pristupačnost i inkluzivnost}
 \begin{itemize}
 \item Sustav treba biti dizajniran s obzirom na pristupačnost, omogućavajući laku upotrebu osobama s različitim stupnjevima sposobnosti, uključujući stariju populaciju i osobe s invaliditetom.
-\item Također, treba podržavati prilagodbe za korisnike s posebnim potrebama, poput prilagođenih fontova, kontrasta i pomoćnih tehnologija.
+\item Također, treba podržavati prilagodbe za korisnike s posebnim potrebama poput prilagođenih fontova, kontrasta i pomoćnih tehnologija.
 \end{itemize}
 
-\subsection*{Interoperabilnost i Integracija}
+\subsection*{Interoperabilnost i integracija}
 \begin{itemize}
     \item Sustav treba biti interoperabilan s drugim zdravstvenim informacijskim sustavima, omogućujući razmjenu podataka i integraciju s postojećim IT infrastrukturama.
-    \item Integracija s vanjskim API-ima i servisima treba biti omogućena za proširivanje funkcionalnosti sustava, kao što su integracije s laboratorijskim sustavima, elektroničkim zdravstvenim kartonima i slično.
+    \item Integracija s vanjskim API-ima i servisima treba biti omogućena za proširivanje funkcionalnosti sustava kao što su integracije s laboratorijskim sustavima, elektroničkim zdravstvenim kartonima i slično.
 \end{itemize}
 
-\subsection*{Održivost i Ekološka Osjećajnost}
+\subsection*{Održivost i ekološka osjećajnost}
 \begin{itemize}
     \item Sustav treba biti razvijen s obzirom na ekološke aspekte, promovirajući smanjenje upotrebe papira i drugih materijala u zdravstvenim ustanovama.
     \item Digitalizacija procesa treba doprinijeti održivijem načinu rada, smanjujući otpad i potrebu za fizičkim resursima.
 \end{itemize}
 
-\subsection*{Prilagodba Zakonodavnim Okvirima}
+\subsection*{Prilagodba zakonodavnim okvirima}
 \begin{itemize}
     \item Sustav treba biti u skladu s lokalnim i međunarodnim zakonodavnim okvirima, uključujući propise o zaštiti osobnih podataka (npr. GDPR u EU).
-    \item Moraju se implementirati mehanizmi za usklađenost s pravnim zahtjevima u vezi sa zdravstvenim informacijama, kao što su prava na pristup, ispravak i brisanje osobnih podataka.
+    \item Moraju se implementirati mehanizmi za usklađenost s pravnim zahtjevima u vezi sa zdravstvenim informacijama kao što su prava na pristup, ispravak i brisanje osobnih podataka.
 \end{itemize}
 
-\subsection*{Praćenje i Izvještavanje}
+\subsection*{Praćenje i izvještavanje}
 \begin{itemize}
     \item Sustav treba omogućiti generiranje detaljnih izvještaja o korištenju resursa, učinkovitosti i performansama procesa rehabilitacije.
-    \item Treba biti omogućeno praćenje korištenja aplikacije, uključujući analitiku i povratne informacije od korisnika, za kontinuirano poboljšanje i prilagodbu sustava.
+    \item Treba biti omogućeno praćenje korištenja aplikacije, uključujući analitiku i povratne informacije od korisnika za kontinuirano poboljšanje i prilagodbu sustava.
 \end{itemize}
 
-\subsection*{Prilagodljivost Budućim Tehnološkim Trendovima}
+\subsection*{Prilagodljivost budućim tehnološkim trendovima}
 \begin{itemize}
     \item Sustav treba biti dizajniran s mogućnošću laganog ažuriranja i prilagodbe novim tehnološkim trendovima i inovacijama.
     \item Treba postojati mogućnost integracije s budućim tehnologijama poput umjetne inteligencije, strojnog učenja i napredne analitike podataka.
@@ -540,3 +632,5 @@
 
 
 \eject
+\end{document}
+
