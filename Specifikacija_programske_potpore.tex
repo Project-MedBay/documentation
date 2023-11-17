@@ -84,6 +84,92 @@
 
 
 \begin{document} 
+%definira klasu dokumenta 
+\documentclass[12pt]{report} 
+
+%prostor izmedu naredbi \documentclass i \begin{document} se zove uvod. U njemu se nalaze naredbe koje se odnose na cijeli dokument
+
+%osnovni LaTex ne može riješiti sve probleme, pa se koriste različiti paketi koji olakšavaju izradu željenog dokumenta
+\usepackage[croatian]{babel} 
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{txfonts}
+\usepackage{mathdots}
+\usepackage{titlesec}
+\usepackage{array}
+\usepackage{lastpage}
+\usepackage{etoolbox}
+\usepackage{tabularray}
+\usepackage{color, colortbl}
+\usepackage{adjustbox}
+\usepackage{geometry}
+\usepackage[classicReIm]{kpfonts}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{placeins}
+
+\usepackage{float}
+\usepackage{setspace}
+\restylefloat{table}
+
+
+\patchcmd{\chapter}{\thispagestyle{plain}}{\thispagestyle{fancy}}{}{} %redefiniranje stila stranice u paketu fancyhdr
+
+%oblik naslova poglavlja
+\titleformat{\chapter}{\normalfont\huge\bfseries}{\thechapter.}{20pt}{\Huge}
+\titlespacing{\chapter}{0pt}{0pt}{40pt}
+
+
+\linespread{1.3} %razmak između redaka
+
+\geometry{a4paper, left=1in, top=1in,}  %oblik stranice
+
+\hypersetup{ colorlinks, citecolor=black, filecolor=black, linkcolor=black,	urlcolor=black }   %izgled poveznice
+
+
+%prored smanjen između redaka u nabrajanjima i popisima
+\newenvironment{packed_enum}{
+	\begin{enumerate}
+		\setlength{\itemsep}{0pt}
+		\setlength{\parskip}{0pt}
+		\setlength{\parsep}{0pt}
+	}{\end{enumerate}}
+
+\newenvironment{packed_item}{
+	\begin{itemize}
+		\setlength{\itemsep}{0pt}
+		\setlength{\parskip}{0pt}
+		\setlength{\parsep}{0pt}
+	}{\end{itemize}}
+
+
+
+
+%boja za privatni i udaljeni kljuc u tablicama
+\definecolor{LightBlue}{rgb}{0.9,0.9,1}
+\definecolor{LightGreen}{rgb}{0.9,1,0.9}
+
+%Promjena teksta za dugačke tablice
+\DefTblrTemplate{contfoot-text}{normal}{Nastavljeno na idućoj stranici}
+\SetTblrTemplate{contfoot-text}{normal}
+\DefTblrTemplate{conthead-text}{normal}{(Nastavljeno)}
+\SetTblrTemplate{conthead-text}{normal}
+\DefTblrTemplate{middlehead,lasthead}{normal}{Nastavljeno od prethodne stranice}
+\SetTblrTemplate{middlehead,lasthead}{normal}
+
+%podesavanje zaglavlja i podnožja
+
+\pagestyle{fancy}
+\lhead{Programsko inženjerstvo}
+\rhead{Medicinska rehabilitacija}
+\lfoot{MedBay}
+\cfoot{stranica \thepage/\pageref{LastPage}}
+\rfoot{\today}
+\renewcommand{\headrulewidth}{0.2pt}
+\renewcommand{\footrulewidth}{0.2pt}
+
+
+\begin{document} 
 \chapter{Specifikacija programske potpore}
 
 \section{Funkcionalni zahtjevi}
@@ -488,23 +574,26 @@
 \closeusecase
 
 
+\vspace{2cm}
+
 \subsubsection{Dijagrami obrazaca uporabe}
 
-\textit{Prikazati odnos aktora i obrazaca uporabe odgovarajućim UML dijagramom. Nije nužno nacrtati sve na jednom dijagramu. Modelirati po razinama apstrakcije i skupovima srodnih funkcionalnosti.}
+
 \begin{figure}[h]
     \centering
     \includegraphics[width=\textwidth]{./slike/UC Dijagram - Bolesnik} 
     \caption{Dijagram obrasca uporabe, funkcionalnost bolesnika}
     \label{fig:my_image}
 \end{figure}
-\begin{figure}[p]
+
+\begin{figure}[bp]
     \centering
     \includegraphics[width=\textwidth]{./slike/UC Dijagram - Djelatnik} 
     \caption{Dijagram obrasca uporabe, funkcionalnost djelatnika}
     \label{fig:my_image}
 \end{figure}
 
-\begin{figure}[p]
+\begin{figure}[bp]
     \centering
     \includegraphics[width=\textwidth]{./slike/UC Dijagram - Administrator} 
     \caption{Dijagram obrasca uporabe, funkcionalnost administratora}
@@ -516,27 +605,53 @@
 
 \textbf{\textit{dio 1. revizije}}\\
 
-\textit{Nacrtati sekvencijske dijagrame koji modeliraju najvažnije dijelove sustava (max. 4 dijagrama). Ukoliko postoji nedoumica oko odabira, razjasniti s asistentom. Uz svaki dijagram napisati detaljni opis dijagrama.}
-\begin{figure}[h]
+
+
+\textbf{Obrazac uporabe UC5 – Prijava bolesnika na rehabilitaciju}
+
+Za prijavu na rehabilitaciju, bolesnik pritišće na gumb s kojim dobiva od web aplikacije prikaz za prijavu te zatim unosi sve podatke o rehabilitaciji na koju se želi prijaviti. Te informacije se šalju bazi kako bi se provjerile te se, ako nije došlo do pogreške, vraćaju svi slobodni termini koje onda web aplikacija koristi za kreaciju kalendara slobodnih termina i to prikazuje bolesniku. Zatim, bolesnik mora odabrati onoliko termina koliko je naveo u prijavi te odabire svoje termine sve dok ne odabere toliko točnih termina. Svaki termin je određen svojim datumom i vremenom, jednom kada bolesnik odabere jedan termin, u bazi se provjerava slijedi li taj termin sva pravila (postoji minimalan razmak među terminima koji se mora poštovati) te ako odabrani termin nije valjan, sustav bolesniku vraća odgovarajuću poruku, a taj se termin ne uzima u obzir. Ako je termin valjan, bolesnik može prijeći na izabiranje sljedećeg termina. Na kraju, kada je bolesnik odabrao točan broj valjanih termina, svi termini se šalju i zapisuju u bazu, a bolesniku se ispisuje poruka kako mora pričekati potvrdu administratora sustava.
+
+\begin{figure}[h!]
     \centering
     \includegraphics[width=\textwidth]{./slike/Sekvencijski - UC5.jpg} 
     \caption{Sekvencijski dijagram za UC5}
     \label{fig:my_image}
 \end{figure}
-\begin{figure}[p]
+\eject
+
+
+\textbf{Obrazac uporabe UC6 – Promjena zakazanog termina}
+
+Bolesnik pritiskom na odgovarajući gumb dobiva prikaz svojeg raspored koji aplikacija dohvaća iz baze te na tom rasporedu odabire termin koji mu je dodijeljen, a koji bi želio promijeniti. Pojavljuju se dodatne informacije o odabranom terminu i također gumb za mijenjanje termina, pritiskom na taj gumb, web aplikacija dohvaća sve moguće termine zamjene za tog bolesnika i za tu rehabilitaciju i prikazuje ih bolesniku. Od ponuđenih termina, bolesnik odabire jedan te web aplikacija obavlja zamjenu u bazi podataka. Ako je zamjena prošla bez pogrešaka, promjena se odmah evidentira na kontrolnoj ploči dok u suprotnom bolesniku dolazi poruka o pogrešci.
+
+
+
+\begin{figure}[h!]
     \centering
     \includegraphics[width=\textwidth]{./slike/Sekvencijski - UC6.jpg} 
     \caption{Sekvencijski dijagram za UC6}
     \label{fig:my_image}
 \end{figure}
-\begin{figure}[p]
+\eject
+
+\textbf{Obrazac uporabe UC13 – Bilježenje napretka bolesnika}
+
+Djelatnik odabire bolesnika kojem želi zabilježiti napredak, a sustav vraća iz baze dohvaćene podatke o tom bolesniku. Djelatnik zatim piše svoj zapis o napretku, a kada završi, sustav od njega traži potvrdu. Jednom kada djelatnik potvrdi svoj zapis, web aplikacija ga šalje bazi podataka gdje se i upisuje.
+genijalan i prekoristan sekvencijski dijagram.
+
+\begin{figure}[h!]
     \centering
     \includegraphics[width=\textwidth]{./slike/Sekvencijski - UC13.jpg} 
     \caption{Sekvencijski dijagram za UC13}
     \label{fig:my_image}
 \end{figure}
 \eject
-\begin{figure}[h]
+
+\textbf{Obrazac uporabe UC16 - Dodavanje djelatnika u bazu}
+
+Administrator odabire prikaz za stvaranje novog djelatnika, a web aplikacija mu ga vraća. Administrator zatim unosi sve podatke novog djelatnika kojeg želi dodati u sustav te se ti podatci s web aplikacije šalju bazi podataka. Baza podataka tada, ako nije došlo do pogreške, dodaje novog djelatnika u sustav, ako je do pogreške slučajno došlo, administrator se odgovarajućom porukom obavještava o njoj.
+
+\begin{figure}[h!]
     \centering
     \includegraphics[width=\textwidth]{./slike/Sekvencijski - UC16.jpg} 
     \caption{Sekvencijski dijagram za UC16}
@@ -632,5 +747,7 @@
 
 
 \eject
+\end{document}
+
 \end{document}
 
