@@ -7,11 +7,11 @@ Naš sustav je dizajniran da bude efikasan, skalabilan i pouzdan. U nastavku det
 
 \subsection*{Izbor Arhitekture}
 \begin{itemize}
-    \item Naša odluka da koristimo trodjelnu arhitekturu temelji se na principima oblikovanja predstavljenim na predavanjima, gdje se ističe važnost modularnosti i odvajanja odgovornosti. Ovaj temeljni pristup oblikovanju sustava reflektira našu predanost stvaranju arhitekture koja je ne samo funkcionalna, već i prilagodljiva, jednostavna za održavanje te otporna na buduće izazove. 
+    \item Naša odluka da koristimo trodijelnu arhitekturu temelji se na principima oblikovanja predstavljenim na predavanjima, gdje se ističe važnost modularnosti i odvajanja odgovornosti. Ovaj temeljni pristup oblikovanju sustava reflektira našu predanost stvaranju arhitekture koja je ne samo funkcionalna, već i prilagodljiva, jednostavna za održavanje te otporna na buduće izazove. 
 
     \item Princip modularnosti naglašava važnost razdvajanja sustava na manje, samostalne dijelove, ili module. Ovakav pristup omogućava da svaki modul ima jasno definiranu funkcionalnost, što pojednostavljuje razvoj, testiranje i održavanje. Svaki modul može biti razvijen neovisno, što pridonosi većoj fleksibilnosti i olakšava integraciju novih značajki ili promjena u sustavu. 
 
-    \item Odvajanje odgovornosti, s druge strane, znači da svaki dio sustava ima precizno definiranu ulogu ili odgovornost. Na primjer, front-end se odvaja od backenda, čime se postiže jasna granica između korisničkog sučelja i poslovne logike. Ovo olakšava praćenje i održavanje svake komponente zasebno, smanjuje rizik od pogrešaka i omogućava paralelno razvijanje dijelova sustava. 
+    \item Odvajanje odgovornosti, s druge strane, znači da svaki dio sustava ima precizno definiranu ulogu ili odgovornost. Na primjer, frontend se odvaja od backenda, čime se postiže jasna granica između korisničkog sučelja i poslovne logike. Ovo olakšava praćenje i održavanje svake komponente zasebno, smanjuje rizik od pogrešaka i omogućava paralelno razvijanje dijelova sustava. 
 
 \item Trodijelna arhitektura, koja obuhvaća backend, frontend i bazu podataka, idealno se uklapa u ove principe. Backend je odgovoran za poslovnu logiku, frontend za korisničko sučelje, dok je baza podataka centralno mjesto za pohranu podataka. Ovaj pristup omogućava svakom dijelu sustava da obavlja svoju specifičnu funkciju, čime se postiže bolja organizacija, održavanje i skalabilnost. 
 
@@ -81,7 +81,7 @@ React kao glavni framework:
 
 \subsection*{Mrežni Protokoli i Komunikacija}
 \begin{itemize}
-    \item Komunikacija između klijenta i poslužitelja odvija se preko HTTP protokola, osiguravajući sigurnost i standardiziran protok informacija
+    \item Komunikacija između klijenta i poslužitelja odvija se preko HTTP protokola, osiguravajući sigurnost i standardiziran protok informacija.
     \item Kroz HTTP, klijent šalje zahtjeve poslužitelju, a poslužitelj šalje odgovore. 
 \end{itemize}
 
@@ -115,25 +115,24 @@ React kao glavni framework:
  
 \subsection*{Sklopovsko-Programski Zahtjevi}
 \begin{itemize}
-
     \item Integracijom sklopovsko-programskih zahtjeva, sustav omogućuje stabilnost te se uspješno priprema za izazove suvremenog informacijskog okruženja. 
+\end{itemize}
 
-\textbf{Prilagođenost modernim računalnim platformama:
-\item }Sustav je optimiziran za rad na suvremenim računalnim platformama, uključujući njihove specifičnosti i prednosti. Koristeći najnovije tehnologije i prakse, osiguravamo kompatibilnost s različitim operativnim sustavima i konfiguracijama računala.\newline
+\textbf{Prilagođenost modernim računalnim platformama:}
+Sustav je optimiziran za rad na suvremenim računalnim platformama, uključujući njihove specifičnosti i prednosti. Koristeći najnovije tehnologije i prakse, osiguravamo kompatibilnost s različitim operativnim sustavima i konfiguracijama računala.\newline
 
-\textbf{Visoka dostupnost:\newline}
+\textbf{Visoka dostupnost:}
 Dostupnost sustava ključna je za neprekidno pružanje usluga korisnicima. Implementiramo strategije visoke dostupnosti kako bismo osigurali minimalne prekide u radu sustava. Ovo uključuje redundanciju ključnih komponenti i mehanizme automatskog oporavka od mogućih kvarova.\newline
 
 
-\textbf{Optimizacija performansi:
-\item }Performanse su ključne za korisničko iskustvo i učinkovit rad sustava. Kroz optimizaciju koda, uporabu efikasnih algoritama i praćenje performansi u stvarnom vremenu, postižemo visoku razinu odziva i brze obrade podataka.\newline
+\textbf{Optimizacija performansi:}
+Performanse su ključne za korisničko iskustvo i učinkovit rad sustava. Kroz optimizaciju koda, uporabu efikasnih algoritama i praćenje performansi u stvarnom vremenu, postižemo visoku razinu odziva i brze obrade podataka.\newline
 
 
-\textbf{Prilagodljivost za skaliranje:\newline}
+\textbf{Prilagodljivost za skaliranje:}
 Sustav je dizajniran kako bi se lako skalirao prema rastućim potrebama. Uz mogućnost horizontalnog i vertikalnog skaliranja, omogućujemo prilagodljivu infrastrukturu koja se može dinamički prilagoditi povećanju opterećenja.\newline
 
-\textbf{
-Sigurnosni aspekti:}\newline
+\textbf{Sigurnosni aspekti:}
 Sklopovsko-programski zahtjevi također obuhvaćaju sigurnosne aspekte. Sustav implementira mjere zaštite podataka, enkripciju komunikacije i autentikaciju kako bi osigurao siguran rad i spriječio neovlašteni pristup.\newline
 
 
@@ -146,7 +145,7 @@ Kroz integraciju navedenih sklopovsko-programskih zahtjeva, naš sustav ne samo 
  
 
 
-		\section{Baza podataka}
+        \section{Baza podataka}
 			
 			\textbf{\textit{dio 1. revizije}}\\
 			
@@ -155,16 +154,18 @@ Baza podataka predstavlja ključnu komponentu našeg sustava, pružajući centra
 
 
 \textbf{Pouzdana pohrana i pristup podacima:}
-\item PostgreSQL pruža visoku razinu pouzdanosti i integriteta podataka. Njegova transakcijska podrška osigurava dosljednost podataka čak i u slučaju neplaniranih prekida rada sustava ili pogrešaka.
+
+PostgreSQL pruža visoku razinu pouzdanosti i integriteta podataka. Njegova transakcijska podrška osigurava dosljednost podataka čak i u slučaju neplaniranih prekida rada sustava ili pogrešaka.
 Centralizirano pohranjivanje podataka omogućava nam učinkovito upravljanje svim informacijama relevantnim za rad sustava.
 
 \textbf{Struktura baze za složene upite i relacije:}
+\begin{itemize}
 \item Dizajn baze podataka ključan je za podršku složenim upitima i održavanje relacija između različitih podataka.
 \item PostgreSQL, kao relacijski sustav, koristi tablice kako bi organizirao podatke. Svaka tablica sastoji se od redova i stupaca, omogućujući jasno definiranje veza između entiteta.
 \item Veze između tablica omogućavaju složene upite koji spajaju informacije iz različitih dijelova sustava. 
 PostgreSQL također podržava napredne mogućnosti poput indeksiranja, pomažući ubrzati upite i optimizirati performanse baze podataka.
 \item  Struktura baze podataka je pažljivo oblikovana kako bi odražavala logičke relacije i potrebe sustava, čime se postiže efikasno upravljanje podacima.
-
+\end{itemize}
 
 		
 			\subsection{Opis tablica}
@@ -194,7 +195,7 @@ role & VARCHAR & Rola korisnika (mora biti jedna od predefiniranih uloga) \\ \hl
 
 				
 		
-\textbf{Imenik} Entitet koji služi za pohranu informacija o osobama. Sadrži atribute kao što su jedinstveni identifikator osobe (hlkid), ime (first\_name), prezime (last\_name), specijalizacija i informacija o aktivnosti osobe.  Primarni ključ (Imenik\_pkey) je definiran na atributu hlkid. 
+\textbf{Imenik} Entitet koji služi za pohranu informacija o liječnicima. Sadrži atribute kao što su jedinstveni identifikator liječnika (hlkid), ime (first\_name), prezime (last\_name), specijalizacija (specialization) i informacija o aktivnosti liječnika (active).  Primarni ključ (Imenik\_pkey) je definiran na atributu hlkid. 
 \begin{longtblr}[
     label=none,
     entry=none
@@ -204,15 +205,15 @@ role & VARCHAR & Rola korisnika (mora biti jedna od predefiniranih uloga) \\ \hl
     rowhead = 1,
 }
 \hline \SetCell[c=3]{c}{\textbf{imenik}} \\ \hline[3pt]
-\SetCell{LightGreen}hlkid & VARCHAR & Jedinstveni identifikator imenika \\ \hline
-first\_name & VARCHAR & Ime osobe \\ \hline 
-last\_name & VARCHAR & Prezime osobe  \\ \hline 
-specialization & VARCHAR & Stručnost osobe  \\ \hline 
-active & BOOLEAN & Označava je li osoba u imeniku aktivna \\ \hline 
+\SetCell{LightGreen}hlkid & VARCHAR & Jedinstveni identifikator liječnika \\ \hline
+first\_name & VARCHAR & Ime liječnika \\ \hline 
+last\_name & VARCHAR & Prezime liječnika  \\ \hline 
+specialization & VARCHAR & Specijalizacija liječnika  \\ \hline 
+active & BOOLEAN & Označava je li liječnik u imeniku aktivna \\ \hline 
 \end{longtblr}
 
 
-\textbf{Appointment} Čuva informacije o terminima unutar sustava. Sadrži atribute kao što su datum i vrijeme termina (date\_time), identifikator zaposlenika (employee\_id), jedinstveni identifikator termina (id), identifikator pacijenta (patient\_id), identifikator sesije (session\_id), identifikator terapije (therapy\_id) i status termina. Ovaj entitet je povezan s drugim entitetima(employee, patient , session, therapy) putem različitih Many-to-One veza prema atributima \verb|employee_id|, \verb|patient_id|, \verb|session_id|, i \verb|therapy_id|. 
+\textbf{Appointment} Čuva informacije o terminima unutar sustava. Sadrži atribute kao što su datum i vrijeme termina (date\_time), identifikator zaposlenika (employee\_id), jedinstveni identifikator termina (id), identifikator pacijenta (patient\_id), identifikator sesije (session\_id), identifikator terapije (therapy\_id) i status termina (status). Ovaj entitet je povezan s drugim entitetima(employee, patient, session, therapy) putem različitih Many-to-One veza prema atributima \verb|employee_id|, \verb|patient_id|, \verb|session_id|, i \verb|therapy_id|. 
 
 \begin{longtblr}[
     label=none,
@@ -234,7 +235,7 @@ status & VARCHAR & Status termina \\ \hline
 
 \textbf{Employee} Ovaj entitet predstavlja tablicu koja sadrži informacije o zaposlenicima. Sadrži atribute kao što su specijalizacija (specialization) i identifikator (id).
 Ograničenje employee\_specialization\_check provjerava ispravnost specijalizacije. Primarni ključ (employee\_pkey) je definiran na atributu id. Povezan je One-to-Many vezom s entitetom session preko atributa employee\_id.
-\end{itemize}
+
  
 \begin{longtblr}[
     label=none,
@@ -273,7 +274,7 @@ name & VARCHAR & Naziv opreme \\ \hline
     entry=none
 ]{
     width = \textwidth,
-    colspec={|X[6,l]|X[6, l]|X[20, l]|}, 
+    colspec={|X[7,l]|X[6, l]|X[19, l]|}, 
     rowhead = 1,
 }
 \hline \SetCell[c=3]{c}{\textbf{patient}} \\ \hline[3pt]
@@ -307,7 +308,7 @@ feedback & character varying(255) & Povratna informacija o sesiji \\ \hline
     entry=none
 ]{
     width = \textwidth,
-    colspec={|X[6,l]|X[6, l]|X[20, l]|}, 
+    colspec={|X[7,l]|X[6, l]|X[19, l]|}, 
     rowhead = 1,
 }
 \hline \SetCell[c=3]{c}{\textbf{therapy}} \\ \hline[3pt]
@@ -315,13 +316,13 @@ feedback & character varying(255) & Povratna informacija o sesiji \\ \hline
 \SetCell{LightBlue}therapy\_type\_id & BIGINT & Identifikator vrste terapije \\ \hline 
 \end{longtblr}
 
-\textbf{Therapy\_type} Ovaj entitet predstavlja tablicu koja sadrži informacije o vrstama terapija. - Sadrži atribute kao što su identifikator (id), identifikator potrebne opreme (required\_equipment\_id) i opis.  Primarni ključ (therapy\_type\_pkey) je definiran na atributu id. - Povezan je Many-to-One vezom s entitetom therapy preko atributa required\_equipment\_id i s entitetom equipment preko atributa required\_equipment\_id. 
+\textbf{Therapy\_type} Ovaj entitet predstavlja tablicu koja sadrži informacije o vrstama terapija. Sadrži atribute kao što su identifikator (id), identifikator potrebne opreme (required\_equipment\_id) i opis. Primarni ključ (therapy\_type\_pkey) je definiran na atributu id. Povezan je Many-to-One vezom s entitetom therapy preko atributa required\_equipment\_id i s entitetom equipment preko atributa required\_equipment\_id. 
 \begin{longtblr}[
     label=none,
     entry=none
 ]{
     width = \textwidth,
-    colspec={|X[6,l]|X[6, l]|X[20, l]|}, 
+    colspec={|X[10,l]|X[6, l]|X[17, l]|}, 
     rowhead = 1,
 }
 \hline \SetCell[c=3]{c}{\textbf{therapy\_type}} \\ \hline[3pt]
@@ -329,17 +330,12 @@ feedback & character varying(255) & Povratna informacija o sesiji \\ \hline
 \SetCell{LightBlue}required\_equipment\_id & BIGINT & Identifikator potrebnog opreme \\ \hline 
 description & character varying(255) & Opis vrste terapije \\ \hline 
 \end{longtblr}
-
-
-
-
-
-				
 				
 			
 			\subsection{Dijagram baze podataka}
-    Svaka tablica ima primarni ključ koji jedinstveno identificira zapise unutar tablice. Baza podataka uspostavlja odnose između tablica koristeći strane ključeve. Ograničenja su postavljena kako bi se očuvao integritet podataka.  
-			\begin{figure}[h]
+        Svaka tablica ima primarni ključ koji jedinstveno identificira zapise unutar tablice. Baza podataka uspostavlja odnose između tablica koristeći strane ključeve. Ograničenja su postavljena kako bi se očuvao integritet podataka.  
+			
+    \begin{figure}[h]
 			    \centering
 			    \includegraphics[width=1\linewidth]{slike/database_pr1.jpg}
 			    \caption{Dijagram baze podataka}
@@ -351,31 +347,31 @@ description & character varying(255) & Opis vrste terapije \\ \hline
 			
 		\section{Dijagram razreda}
 		
-			\textit{Potrebno je priložiti dijagram razreda s pripadajućim opisom. Zbog preglednosti je moguće dijagram razlomiti na više njih, ali moraju biti grupirani prema sličnim razinama apstrakcije i srodnim funkcionalnostima.}\\
-			
-			\textbf{\textit{dio 1. revizije}}\\
-   
-			\textit{Prilikom prve predaje projekta, potrebno je priložiti potpuno razrađen dijagram razreda vezan uz \textbf{generičku funkcionalnost} sustava. Ostale funkcionalnosti trebaju biti idejno razrađene u dijagramu sa sljedećim komponentama: nazivi razreda, nazivi metoda i vrste pristupa metodama (npr. javni, zaštićeni), nazivi atributa razreda, veze i odnosi između razreda.}\newline
-   Backend arhitektura prikazana je u sljedećim dijagramima oznaćenim brojevima 4.3, 4.4.
-   Implementirane metode direktno komuniciraju s bazom podataka te vracaju tražene podatke  poput popisa dijelatnika, opreme, provjere je li dijelatnik i dalje aktivan.
+			\textit{Potrebno je priložiti dijagram razreda s pripadajućim opisom. Zbog preglednosti je moguće dijagram razlomiti na više njih, ali moraju biti grupirani prema sličnim razinama apstrakcije i srodnim funkcionalnostima.}
+            
+            \textbf{\textit{dio 1. revizije}}
+            
+            \textit{Prilikom prve predaje projekta, potrebno je priložiti potpuno razrađen dijagram razreda vezan uz \textbf{generičku funkcionalnost} sustava. Ostale funkcionalnosti trebaju biti idejno razrađene u dijagramu sa sljedećim komponentama: nazivi razreda, nazivi metoda i vrste pristupa metodama (npr. javni, zaštićeni), nazivi atributa razreda, veze i odnosi između razreda.}\newline
+
+    Backend arhitektura prikazana je u sljedećim dijagramima označenim brojevima 4.3, 4.4.
+    Implementirane metode direktno komuniciraju s bazom podataka te vraćaju tražene podatke  poput popisa dijelatnika, opreme, provjere je li dijelatnik i dalje aktivan.
 		   \begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\linewidth]{slike/razredi1.png}
+    \includegraphics[width=0.46\linewidth]{slike/razredi1.png}
     \caption{Dijagram razreda}
     \label{fig:enter-label}
 \end{figure}
 Razredi Employee i Patient  specifikacija su razreda User pa nasljeđuju njegove public atribute i metode.
-Razred Patient predstavlja model pacijenta u medicinskom sustavu. Ovaj razred proširuje osnovni razred \verb|User|, sadržavajući atribute kao što su adresa, datum rođenja, matični broj osiguranika (MBO), broj telefona te listu termina na koje je pacijent naručen.  \newline
-Razred User predstavlja osnovni model korisnika u sustavu. Ovaj razred obuhvaća osnovne informacije o korisniku, uključujući ime, prezime, email adresu, lozinku i status aktivnosti korisničkog računa. Dodatno, svaki korisnik ima dodijeljenu ulogu koja se koristi za upravljanje ovlastima unutar sustava. \newline
+Razred Patient predstavlja model pacijenta u medicinskom sustavu. Ovaj razred proširuje osnovni razred \verb|User|, sadržavajući atribute kao što su adresa, datum rođenja, matični broj osiguranika (MBO), broj telefona te listu termina na koje je pacijent naručen.
+Razred User predstavlja osnovni model korisnika u sustavu. Ovaj razred obuhvaća osnovne informacije o korisniku, uključujući ime, prezime, email adresu, lozinku i status aktivnosti korisničkog računa. Dodatno, svaki korisnik ima dodijeljenu ulogu koja se koristi za upravljanje ovlastima unutar sustava.
+Razred Employee predstavlja model zaposlenika u medicinskom sustavu. Ovaj razred proširuje osnovni razred User, dodajući specifične atribute i odnose relevantne za zaposlenike u sustavu. Sadrži privatni atribut Specialization specialization koji predstavlja specijalizaciju zaposlenika, što može uključivati različite medicinske oblasti ili specifične zadatke unutar sustava.
 
-Razred Employee predstavlja model zaposlenika u medicinskom sustavu. Ovaj razred proširuje osnovni razred User, dodajući specifične atribute i odnose relevantne za zaposlenike u sustavu. Sadrži privatni  atribut Specialization specialization koji predstavlja specijalizaciju zaposlenika, što može uključivati različite medicinske oblasti ili specifične zadatke unutar sustava. \newline
 Razred Specialization predstavlja enumeraciju koja sadrži različite vrste specijalizacija dijelatnika u medicinskom sustavu. 
 Razred Session predstavlja radnu sesiju unutar medicinskog sustava. Ovaj razred omogućuje praćenje sesija između zaposlenika i pacijenata. 
 Razred Equipment predstavlja opremu koja se koristi u medicinskom sustavu. Ovaj razred pruža informacije o različitim vrstama opreme, uključujući jedinstveni identifikator opreme, kapacitet, opis i naziv opreme. 
 Razred Therapy predstavlja terapiju unutar medicinskog sustava. 
- Razred TherapyType predstavlja vrstu terapije u sustavu.
-
-   \begin{figure}[H]
+Razred TherapyType predstavlja vrstu terapije u sustavu. \\
+\begin{figure}[H]
     \centering
     \includegraphics[width=1\linewidth]{slike/razredi2.png}
     \caption{Dijagram razreda, 2.dio}
@@ -383,7 +379,7 @@ Razred Therapy predstavlja terapiju unutar medicinskog sustava.
 \end{figure}
 
 
-Svaki od ovih entiteta slijedi obrazac \verb|Controller -> Service -> Repository| za obavljanje operacija nad podacima.
+Svaki od ovih entiteta slijedi obrazac  \verb|Controller -> Service -> Repository| za obavljanje operacija nad podacima.
 
 Na primjer, entitet Employee posjeduje EmployeeController, EmployeeService i EmployeeRepository. Ovi razredi zajednički omogućuju upravljanje informacijama o zaposlenicima, uključujući njihovu autentikaciju. Kroz ovaj ciklus, Controller komunicira s Servisom, a Servis dalje s Repozitorijem, osiguravajući konzistentan i siguran pristup podacima.
 
@@ -397,7 +393,7 @@ SecurityController omogućuje upravljanje zahtjevima vezanim uz sigurnost, poput
 
 Kroz SecurityConfig i WebConfig, postavke sigurnosti konfiguriraju se prema tipu korisnika. Ovaj postupak osigurava da pacijenti, administratori i zdravstveni djelatnici imaju odgovarajuće privilegije za izvršavanje željenih radnji, uzimajući u obzir autentikaciju i autorizaciju.
 
-Ova struktura omogućuje efikasno i sigurno upravljanje pristupom resursima u sustavu, osiguravajući da svaki korisnik ima odgovarajuće ovlasti za obavljanje svojih funkcija u skladu s postavljenim sigurnosnim pravilima.
+Ova struktura omogućuje efikasno i sigurno upravljanje pristupom resursima u sustavu, osiguravajući da svaki korisnik ima odgovarajuće ovlasti za obavljanje svojih funkcija u skladu s postavljenim sigurnosnim pravilima.\\
 
  
 
