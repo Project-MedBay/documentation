@@ -1,89 +1,4 @@
-%definira klasu dokumenta 
-\documentclass[12pt]{report} 
 
-%prostor izmedu naredbi \documentclass i \begin{document} se zove uvod. U njemu se nalaze naredbe koje se odnose na cijeli dokument
-
-%osnovni LaTex ne može riješiti sve probleme, pa se koriste različiti paketi koji olakšavaju izradu željenog dokumenta
-\usepackage[croatian]{babel} 
-\usepackage{amssymb}
-\usepackage{amsmath}
-\usepackage{txfonts}
-\usepackage{mathdots}
-\usepackage{titlesec}
-\usepackage{array}
-\usepackage{lastpage}
-\usepackage{etoolbox}
-\usepackage{tabularray}
-\usepackage{color, colortbl}
-\usepackage{adjustbox}
-\usepackage{geometry}
-\usepackage[classicReIm]{kpfonts}
-\usepackage{hyperref}
-\usepackage{fancyhdr}
-\usepackage{placeins}
-
-\usepackage{float}
-\usepackage{setspace}
-\restylefloat{table}
-
-
-\patchcmd{\chapter}{\thispagestyle{plain}}{\thispagestyle{fancy}}{}{} %redefiniranje stila stranice u paketu fancyhdr
-
-%oblik naslova poglavlja
-\titleformat{\chapter}{\normalfont\huge\bfseries}{\thechapter.}{20pt}{\Huge}
-\titlespacing{\chapter}{0pt}{0pt}{40pt}
-
-
-\linespread{1.3} %razmak između redaka
-
-\geometry{a4paper, left=1in, top=1in,}  %oblik stranice
-
-\hypersetup{ colorlinks, citecolor=black, filecolor=black, linkcolor=black,	urlcolor=black }   %izgled poveznice
-
-
-%prored smanjen između redaka u nabrajanjima i popisima
-\newenvironment{packed_enum}{
-	\begin{enumerate}
-		\setlength{\itemsep}{0pt}
-		\setlength{\parskip}{0pt}
-		\setlength{\parsep}{0pt}
-	}{\end{enumerate}}
-
-\newenvironment{packed_item}{
-	\begin{itemize}
-		\setlength{\itemsep}{0pt}
-		\setlength{\parskip}{0pt}
-		\setlength{\parsep}{0pt}
-	}{\end{itemize}}
-
-
-
-
-%boja za privatni i udaljeni kljuc u tablicama
-\definecolor{LightBlue}{rgb}{0.9,0.9,1}
-\definecolor{LightGreen}{rgb}{0.9,1,0.9}
-
-%Promjena teksta za dugačke tablice
-\DefTblrTemplate{contfoot-text}{normal}{Nastavljeno na idućoj stranici}
-\SetTblrTemplate{contfoot-text}{normal}
-\DefTblrTemplate{conthead-text}{normal}{(Nastavljeno)}
-\SetTblrTemplate{conthead-text}{normal}
-\DefTblrTemplate{middlehead,lasthead}{normal}{Nastavljeno od prethodne stranice}
-\SetTblrTemplate{middlehead,lasthead}{normal}
-
-%podesavanje zaglavlja i podnožja
-
-\pagestyle{fancy}
-\lhead{Programsko inženjerstvo}
-\rhead{Medicinska rehabilitacija}
-\lfoot{MedBay}
-\cfoot{stranica \thepage/\pageref{LastPage}}
-\rfoot{\today}
-\renewcommand{\headrulewidth}{0.2pt}
-\renewcommand{\footrulewidth}{0.2pt}
-
-
-\begin{document} 
 \chapter{Dnevnik promjena dokumentacije}
 		
 		\textbf{\textit{Kontinuirano osvježavanje}}\\
@@ -123,5 +38,4 @@
 	
 		\textit{Moraju postojati glavne revizije dokumenata 1.0 i 2.0 na kraju prvog i drugog ciklusa. Između tih revizija mogu postojati manje revizije već prema tome kako se dokument bude nadopunjavao. Očekuje se da nakon svake značajnije promjene (dodatka, izmjene, uklanjanja dijelova teksta i popratnih grafičkih sadržaja) dokumenta se to zabilježi kao revizija. Npr., revizije unutar prvog ciklusa će imati oznake 0.1, 0.2, …, 0.9, 0.10, 0.11.. sve do konačne revizije prvog ciklusa 1.0. U drugom ciklusu se nastavlja s revizijama 1.1, 1.2, itd.}
 
-\end{document}
 
