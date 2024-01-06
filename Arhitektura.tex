@@ -411,8 +411,21 @@ Ova struktura omogućuje efikasno i sigurno upravljanje pristupom resursima u su
 			\textbf{\textit{dio 2. revizije}}\\
 			
 			\textit{Potrebno je priložiti dijagram stanja i opisati ga. Dovoljan je jedan dijagram stanja koji prikazuje \textbf{značajan dio funkcionalnosti} sustava. Na primjer, stanja korisničkog sučelja i tijek korištenja neke ključne funkcionalnosti jesu značajan dio sustava, a registracija i prijava nisu. }
+
+   Dijagram stanja za registriranog i prijavljenog korisnika(pacijenta) prikazan je na Slici 4.4. Početno stanje označava da je korisnik već uspješno prijavljen u sustav te se preusmjerava na dashboard s rasporedom terapija. Ovdje korisnik može vidjeti trenutnu terapiju koja mu je dodijeljena.
+
+Klikom na "View More" pored terapije, korisniku se pružaju dodatne informacije o terapiji, uključujući informacije o doktoru, vremenu, bilješkama te prikaz tlocrta zgrade s točnim mjestom prostorije gdje se održava terapija.
+
+U gornjem desnom kutu nalaze se gumbići za pristup korisničkom profilu pacijenta, kreiranje nove terapije ili odjavu. Klikom na korisnički profil, korisnik može pregledati osobne podatke i bilješke liječnika o terapijama. Također, korisnik ima mogućnost ažuriranja svojih osobnih podataka, uključujući promjenu broja mobitela ili postavljanje nove profilne slike. Odabirom opcije "New Therapy", korisnik može unijeti kod ili odabrati dio tijela sa skice za koji želi terapiju. Nakon toga, prikazuje se kalendar s dostupnim terminima za odabranu terapiju, gdje korisnik bira jedan ili više termina. Slanjem zahtjeva s MBO-om, šifrom terapije i odabranim datumom, korisnik podnosi zahtjev za novom terapijom.
+
+Korisnik također ima opciju odjave, što vodi u završno stanje. U svakom trenutku korisnik može i deaktivirati račun.
 			
-			
+			\begin{figure}[H]
+			    \centering
+			    \includegraphics[width=1\linewidth]{slike/dijagramStanjaPacijent.png}
+			    \caption{Dijagram stanja - pacijent}
+			    \label{fig:enter-label}
+			\end{figure}
 			\eject 
 		
 		\section{Dijagram aktivnosti}
