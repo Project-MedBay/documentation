@@ -444,7 +444,15 @@ Korisnik također ima opciju odjave, što vodi u završno stanje. U svakom trenu
 			\eject
 
 		\section{Dijagram komponenti}
-		
+			
 			\textbf{\textit{dio 2. revizije}}\\
-		
-			 \textit{Potrebno je priložiti dijagram komponenti s pripadajućim opisom. Dijagram komponenti treba prikazivati strukturu cijele aplikacije.}
+			
+
+            Dijagram komponenti prikazuje od kojih komponenti je sustav sastavljen, kako te komponente međusobno surađuju i ovise jedna o drugoj. Iz sustava se informacije dobivaju na dva načina: upitima \textit{frontendu} i \textit{backendu}. \textit{Frontend} dio (HTML, CSS, JS) dohvaća se preko datoteke App.jsx koja vodi brigu o tome što će se prikazati. App.jsx ovisan je o bibliotekama Reacta. \textit{Frontend} u sebi sadrži segmente koji mogu poslati podatke \textit{backendu} na obradu. Tu \textit{backend} prima zahtjeve s određenim podatcima, analizira ih kroz \textit{Controllere}, Servise i Repozitorije (zadnji komunicira s PostgreSQL bazom podataka). Na taj način korisnik dobiva sučelja i informacije koje se njega tiču.
+            
+            \begin{figure}[H]
+             \centering
+             \includegraphics[width=1\linewidth]{dijagramKomponenti.png}
+             \caption{Dijagram komponenti}
+             \end{figure}
+			\eject 
