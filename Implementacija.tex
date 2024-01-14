@@ -74,9 +74,14 @@ Naša interakcija s \href{https://openai.com/gpt}{ChatGPT}-om bila je višestruk
 			
 			\textbf{\textit{dio 2. revizije}}
 			
-			 \textit{Potrebno je umetnuti \textbf{specifikacijski} dijagram razmještaja i opisati ga. Moguće je umjesto specifikacijskog dijagrama razmještaja umetnuti dijagram razmještaja instanci, pod uvjetom da taj dijagram bolje opisuje neki važniji dio sustava.}
-			
-			\eject 
+			Dijagram razmještaja opisuje topologiju sustava, fizičku arhitekturu i razmještaj programskih sustava te kako te cjeline komuniciraju. Na dijagramu imamo dva glavna čvora. Prvo imamo uređaj korisnika (PC, mobitel) preko čijeg web preglednika korisnik putem HTTPS-a dohvaća informacije iz drugog čvora, mjesta gdje je pohranjen kod aplikacije, baza podataka i gdje je upogonjena aplikacija. Riječ je o \textit{Herokuu}, platformi za pogonjenje aplikaciji na oblaku. Unutar \textit{Herokua} nalazimo web aplikaciju gdje se nalazi naš \textit{React frontend} i \textit{Spring backend}, a naša aplikacija koristi i uslugu baze podataka koju nudi \textit{Heroku}, \textit{Heroku PostgreSQL}. Tamo se nalaze podatci aplikacije koje dohvaća \textit{backend} dio aplikacije.
+
+            \begin{figure}[H]
+             \centering
+             \includegraphics[width=1\linewidth]{slike/Dijagram razmještaja.png}
+             \caption{Dijagram razmještaja}
+             \end{figure}
+			\eject
 		
 		\section{Upute za puštanje u pogon}
 		
