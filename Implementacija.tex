@@ -78,19 +78,88 @@ Naša interakcija s \href{https://openai.com/gpt}{ChatGPT}-om bila je višestruk
 
             \begin{figure}[H]
              \centering
-             \includegraphics[width=1\linewidth]{slike/Dijagram razmještaja.png}
+             \includegraphics[width=1\linewidth]{slike/Dijagram razmjeτtaja.png}
              \caption{Dijagram razmještaja}
              \end{figure}
 			\eject
 		
 		\section{Upute za puštanje u pogon}
 		
-			\textbf{\textit{dio 2. revizije}}\\
 		
-			 \textit{U ovom poglavlju potrebno je dati upute za puštanje u pogon (engl. deployment) ostvarene aplikacije. Na primjer, za web aplikacije, opisati postupak kojim se od izvornog kôda dolazi do potpuno postavljene baze podataka i poslužitelja koji odgovara na upite korisnika. Za mobilnu aplikaciju, postupak kojim se aplikacija izgradi, te postavi na neku od trgovina. Za stolnu (engl. desktop) aplikaciju, postupak kojim se aplikacija instalira na računalo. Ukoliko mobilne i stolne aplikacije komuniciraju s poslužiteljem i/ili bazom podataka, opisati i postupak njihovog postavljanja. Pri izradi uputa preporučuje se \textbf{naglasiti korake instalacije uporabom natuknica} te koristiti što je više moguće \textbf{slike ekrana} (engl. screenshots) kako bi upute bile jasne i jednostavne za slijediti.}
-			
-			
-			 \textit{Dovršenu aplikaciju potrebno je pokrenuti na javno dostupnom poslužitelju. Studentima se preporuča korištenje neke od sljedećih besplatnih usluga: \href{https://aws.amazon.com/}{Amazon AWS}, \href{https://azure.microsoft.com/en-us/}{Microsoft Azure} ili \href{https://www.heroku.com/}{Heroku}. Mobilne aplikacije trebaju biti objavljene na F-Droid, Google Play ili Amazon App trgovini.}
-			
-			
-			\eject 
+U postavljanju i puštanju u pogon naše aplikacije ključnu ulogu igra Heroku CLI (Command Line Interface), moćan naredbeni alat koji pojednostavljuje interakciju s Heroku platformom izravno iz terminala. Instalirali smo Heroku CLI na lokalnom računalu kako bismo iskoristili njegove funkcionalnosti za upravljanje aplikacijama na Heroku platformi.
+
+Naša integrirana strategija razvoja i puštanja u pogon koristi niz ključnih značajki Heroku platforme:
+
+1. Automatsko puštanje u pogon s GitHub-a:
+   - GitHub repozitorij povezan je s Heroku, omogućujući jednostavano automatsko puštanje u pogon naše aplikacije.
+   - Svaka promjena na glavnoj grani GitHuba automatski pokreće puštanje u pogon na Heroku platformi.
+
+2. Konfiguracijske Datoteke na Heroku:
+   - Heroku nam omogućava preciznu konfiguraciju putem posebnih datoteka koje definiraju okruženje za našu aplikaciju.
+   - Detaljno smo definirali parametre poput verzija jezika (Java, Python) i aktivnih profila za Spring.
+
+3. Korištenje Financijske Potpore od Heroku:
+
+   - Naša organizacija prima financijsku potporu od Heroku platforme, pružajući nam sredstva za korištenje resursa.
+
+
+4. Baza Podataka na Heroku:
+   - Integrirali smo Heroku Postgres "add-on" za potrebe baze podataka.
+   - Heroku Postgres pruža siguran pristup bazama podataka putem pridruženih akreditiva.
+   \begin{figure}[H]
+       \centering
+       \includegraphics[width=1\linewidth]{slike/credentials.png}
+       \caption{Akreditivi za našu aplikaciju}
+       \label{fig:enter-label}
+   \end{figure}
+
+5. Dinamičko Okruženje s  dinamičkim kontejnerima:
+   - Korištenjem dinamičkih kontejnera na Heroku stvaramo virtualno okruženje koje omogućuje izvršavanje i hostanje naše aplikacije.
+   - Ime domene "medbay.life" registrirano je putem "Namecheap"-a, dok smo HTTPS certifikat dobili kroz Cloudflare za sigurnu komunikaciju.
+
+6. Praćenje i evidentiranje:
+   - Heroku pruža napredne alate za praćenje performansi, uključujući detaljne evidencije za svaki zahtjev poslan aplikaciji.
+   - Metrike i analize omogućuju nam praćenje ponašanja aplikacije u stvarnom vremenu.
+   \begin{figure}[H]
+       \centering
+       \includegraphics[width=1\linewidth]{slike/appLogs.png}
+       \caption{Aplikacijsko evidentiranje}
+       \label{fig:enter-label}
+   \end{figure}
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{slike/metrics.png}
+    \caption{Metrika aplikacija}
+    \label{fig:enter-label}
+\end{figure}
+7. Paketi za izgradnju:
+   - Integrirali smo različite Pakete za izgradnju prilagođene jezicima koje koristimo (npr., Python, Java).
+   - Automatski konfiguriraju okolinu i podržavaju različite jezične specifikacije.
+
+Ovaj sveobuhvatan pristup omogućava nam efikasan ciklus razvoja i puštanja u pogon aplikacije. Kombinacijom GitHuba, Heroku platforme, i alata poput Heroku CLI-a, postižemo stabilan i automatski proces implementacije koji podržava dinamično okruženje naše aplikacije.
+
+
+\textbf{Općenito o načinu korištenja Heroku CLI (Command Line Interface):}
+
+1. Instalacija Heroku CLI:
+   Heroku CLI smo instalirali na lokalnom računalu, omogućujući nam jednostavan pristup naredbama i funkcionalnostima koje pruža. Za instalaciju, slijedili smo upute dostupne na [službenoj Heroku stranici za instalaciju CLI-a](https://devcenter.heroku.com/articles/heroku-cli).
+
+2. Povezivanje s Heroku Računom:
+    Pomoću Heroku CLI-a uspostavili smo vezu s našim Heroku računom, omogućavajući autentikaciju i autorizaciju za izvršavanje različitih operacija. Ova faza je ključna za pristup resursima i upravljanje aplikacijom.
+
+3. Korištenje CLI-a za puštanje u pogon aplikacije:
+    Heroku CLI smo aktivno koristili za inicijalizaciju puštanje u pogon naših aplikacija. Naredbe poput `git push heroku main` omogućuju nam jednostavano i automatsko puštanje u pogon na Heroku platformu.
+
+4. Upotreba CLI-a za Konfiguraciju Aplikacije:
+    Heroku CLI pruža alate za konfiguraciju različitih aspekata aplikacije. Kroz naredbe poput `heroku config:set` postavljali smo i mijenjali okružne varijable te druge konfiguracijske postavke prema potrebama naše aplikacije.
+
+5. Praćenje evidencija i Performansi:
+    Za praćenje evidencija i performansi aplikacije koristili smo Heroku CLI. Naredbe poput `heroku logs` omogućuju nam pregled događaja u stvarnom vremenu, pružajući važne informacije o ponašanju aplikacije.
+
+6. Dodatne Naredbe za Upravljanje Resursima:
+    Heroku CLI pruža širok spektar dodatnih naredbi za upravljanje resursima. Skaliranje aplikacije, upravljanje "add-on"-ima i druge operacije mogu se jednostavno izvršiti putem ovog sučelja.
+
+Heroku CLI je postao ključan alat u našem procesu razvoja i deploya. Omogućuje nam jednostavnu interakciju s Heroku platformom direktno iz terminala, čime poboljšavamo produktivnost i imamo veću kontrolu nad našim aplikacijama. 
+
