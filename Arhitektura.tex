@@ -348,18 +348,13 @@ description & character varying(255) & Opis vrste terapije \\ \hline
 		\section{Dijagram razreda}
 		
 		
-            
-            \textbf{\textit{dio 1. revizije}}
+
             
       
 
     Dijagram razreda  prikazan je  na slici 4.3.  Implementirane metode direktno komuniciraju s bazom podataka te vraćaju tražene podatke  poput popisa dijelatnika, opreme, provjere je li dijelatnik i dalje aktivan.
-		   \begin{figure}[H]
-    \centering
-    \includegraphics[width=0.46\linewidth]{slike/dijagramRazreda.png}
-    \caption{Dijagram razreda}
-    \label{fig:enter-label}
-\end{figure}
+	
+
 Razredi Employee i Patient  generalizacija su razreda User pa nasljeđuju njegove public atribute i metode.
 Razred User predstavlja osnovni model korisnika u sustavu. Ovaj razred obuhvaća osnovne informacije o korisniku, uključujući ime, prezime, korisničko ime profila, email adresu, lozinku i status aktivnosti korisničkog računa. Dodatno, svaki korisnik ima dodijeljenu ulogu koja se koristi za upravljanje ovlastima unutar sustava, a ta uloga je opisana pomoću enumeracije putem razreda  Role.
 Razred Employee predstavlja model zaposlenika u medicinskom sustavu. Proširuje osnovni razred User, dodajući specifične atribute i odnose relevantne za zaposlenike u sustavu.  Razred Patient predstavlja model pacijenta u medicinskom sustavu. 
@@ -369,6 +364,13 @@ Razred Session predstavlja radnu sesiju unutar medicinskog sustava. Ovaj razred 
 Razred Equipment predstavlja opremu koja se koristi u medicinskom sustavu. Ovaj razred pruža informacije o različitim vrstama opreme, uključujući jedinstveni identifikator opreme, kapacitet, opis i naziv opreme. 
 Razred Therapy predstavlja terapiju unutar medicinskog sustava. 
 Razred TherapyType predstavlja vrstu terapije u sustavu. \\
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{slike/dijagramRazredaFinal.png}
+    \caption{Dijagram razreda}
+    \label{fig:enter-label}
+\end{figure}
 
 
 
@@ -396,10 +398,7 @@ Ova struktura omogućuje efikasno i sigurno upravljanje pristupom resursima u su
 
   
 
-   
-   \textbf{\textit{dio 2. revizije}}\\			
-			
-			\textit{Prilikom druge predaje projekta dijagram razreda i opisi moraju odgovarati stvarnom stanju implementacije}
+ 
 			
 			
 			
@@ -407,22 +406,21 @@ Ova struktura omogućuje efikasno i sigurno upravljanje pristupom resursima u su
 		
 		\section{Dijagram stanja}
 			
-			
-			\textbf{\textit{dio 2. revizije}}\\
-			
-			\textit{Potrebno je priložiti dijagram stanja i opisati ga. Dovoljan je jedan dijagram stanja koji prikazuje \textbf{značajan dio funkcionalnosti} sustava. Na primjer, stanja korisničkog sučelja i tijek korištenja neke ključne funkcionalnosti jesu značajan dio sustava, a registracija i prijava nisu. }
 
    Dijagram stanja za registriranog i prijavljenog korisnika(pacijenta) prikazan je na Slici 4.4. Početno stanje označava da je korisnik već uspješno prijavljen u sustav te se preusmjerava na dashboard s rasporedom terapija. Ovdje korisnik može vidjeti trenutnu terapiju koja mu je dodijeljena.
 
-Klikom na "View More" pored terapije, korisniku se pružaju dodatne informacije o terapiji, uključujući informacije o doktoru, vremenu, bilješkama te prikaz tlocrta zgrade s točnim mjestom prostorije gdje se održava terapija.
 
 U gornjem desnom kutu nalaze se gumbići za pristup korisničkom profilu pacijenta, kreiranje nove terapije ili odjavu. Klikom na korisnički profil, korisnik može pregledati osobne podatke i bilješke liječnika o terapijama. Također, korisnik ima mogućnost ažuriranja svojih osobnih podataka, uključujući promjenu broja mobitela ili postavljanje nove profilne slike. Odabirom opcije "New Therapy", korisnik može unijeti kod ili odabrati dio tijela sa skice za koji želi terapiju. Nakon toga, prikazuje se kalendar s dostupnim terminima za odabranu terapiju, gdje korisnik bira jedan ili više termina. Slanjem zahtjeva s MBO-om, šifrom terapije i odabranim datumom, korisnik podnosi zahtjev za novom terapijom.
+
+U gornjem desnom kutu smješteni su gumbi koji omogućavaju prijelaz u tamni način rada te promjenu jezika između engleskog i hrvatskog, čime se postiže dvojezičnost u našoj aplikaciji.
+
+Na dnu stranice smješten je virtualni asistent. MedBot je zadužen za pružanje općih informacija o terapijama, dok BayBot odgovara na pitanja korisnika vezana uz korištenje aplikacije.
 
 Korisnik također ima opciju odjave, što vodi u završno stanje. U svakom trenutku korisnik može i deaktivirati račun.
 			
 			\begin{figure}[H]
 			    \centering
-			    \includegraphics[width=1\linewidth]{slike/dijagramStanjaPacijent.png}
+			    \includegraphics[width=1\linewidth]{slike/dijStanjaFinal.png}
 			    \caption{Dijagram stanja - pacijent}
 			    \label{fig:enter-label}
 			\end{figure}
