@@ -17,7 +17,7 @@ Dokumentacija projekta oblikovana je pomoću \href{https://www.overleaf.com/lear
 
 U procesu zajedničkog rada, pisanja koda i praćenja promjena koristili smo \href{https://git-scm.com/}{Git}. Omogućavao je stvaranje, pregledavanje i spajanje promjena koda, čime se postizavao učinkovit timski rad. Sve ove tehnologije integrirane su u našem projektu kako bismo osigurali da interakcija između bolesnika, djelatnika zdravstvene ustanove i administratora bude glatka, učinkovita i prilagođena specifičnim ulogama i funkcionalnim zahtjevima svakog dionika.
 
-Python je bio ključan u razvoju našeg AI chat bota, iskoristili smo njegove sposobnosti u strojnom učenju i obradi prirodnog jezika za stvaranje interaktivnog i inteligentnog sučelja za korisnike. Python smo još koristili u kombinaciji sa Selenium WebDriverom za automatizaciju testiranja korisničkog sučelja, omogućavajući simulaciju stvarnih interakcija korisnika i osiguravajući pouzdanost naše web aplikacije.
+\href{https://www.python.org/}{Python} je bio ključan u razvoju našeg AI chat bota, iskoristili smo njegove sposobnosti u strojnom učenju i obradi prirodnog jezika za stvaranje interaktivnog i inteligentnog sučelja za korisnike. \href{https://www.python.org/}{Python} smo još koristili u kombinaciji sa \href{https://www.selenium.dev/documentation/webdriver/}{Selenium WebDriverom} za automatizaciju testiranja korisničkog sučelja, omogućavajući simulaciju stvarnih interakcija korisnika i osiguravajući pouzdanost naše web aplikacije.
 
 \textbf{KORIŠTENI ALATI
 }
@@ -37,7 +37,25 @@ Za potrebe pisanja, testiranja i ispravljanja koda koristili smo \href{https://w
 Naša interakcija s \href{https://openai.com/gpt}{ChatGPT}om bila je višestruko korisna, pružajući podršku u različitim aspektima, uključujući punjenje baze podataka te pružanje informacija i savjeta za vrijeme razvoja projekta. 
 
 
- 		Napomena: Prilikom klika u tekstu na nazive korištenih alata i tehnologija otvara se internet poveznica na kojoj se može saznati više informacija o njima. Unatoč tome ovdje su navedene internet poveznice na kojima je moguće saznati više:  https://www.spring.io/projects/spring-boot, https://www.oracle.com/java,  https://www.developer.mozilla.org/en-US/docs/Web/JavaScript, https://www.reactjs.org, https://www.postgresql.org, https://www.developer.mozilla.org/en-US/docs/Web/HTML, https://www.developer.mozilla.org/en-US/docs/Web/CSS, https://www.overleaf.com/learn/latex,  https://www.markdownguide.org, https://git-scm.com, https://www.heroku.com, https://www.visualstudio.com, https://www.jetbrains.com/idea, https://github.com, https://discord.com, https://www.notion.so, https://www.overleaf.com, https://www.visual-paradigm.com, https://www.figma.com, https://www.adobe.com/products/premiere.html, https://www.adobe.com/products/audition.html, https://openai.com/gpt
+ 		Napomena: Prilikom klika u tekstu na nazive korištenih alata i tehnologija otvara se internet poveznica na kojoj se može saznati više informacija o njima. 
+		Unatoč tome ovdje su navedene internet poveznice na kojima je moguće saznati više:  
+		https://www.spring.io/projects/spring-boot, \newline https://www.oracle.com/java,  
+		https://www.developer.mozilla.org/en-US/docs/Web/JavaScript, 
+		https://www.reactjs.org, https://www.postgresql.org, 
+		\newline https://www.developer.mozilla.org/en-US/docs/Web/HTML,
+		\newline https://www.developer.mozilla.org/en-US/docs/Web/CSS, 
+		\newline https://www.overleaf.com/learn/latex,  
+		\newline https://www.markdownguide.org, https://git-scm.com, 
+		https://www.heroku.com, https://www.visualstudio.com, 
+		\newline https://www.jetbrains.com/idea, https://github.com, 
+		\newline https://discord.com, https://www.notion.so, 
+		https://www.overleaf.com, 
+		\newline https://www.visual-paradigm.com, https://www.figma.com, 
+		\newline https://www.adobe.com/products/premiere.html, 
+		\newline https://www.adobe.com/products/audition.html, 
+		\newline https://openai.com/gpt, https://www.python.org/,
+		\newline https://www.selenium.dev/documentation/webdriver/
+
 			\eject 
 		
 	
@@ -188,7 +206,7 @@ void deleteTherapy_WhenTherapyDoesNotExist_ReturnsNotFound() {
 			
 			\subsection{Ispitivanje sustava}
 			Svi testovi osim registracije i zaboravljene lozinke izvršeni su uz pomoć Selenium WebDrivera . Ispitivanje se radilo po obrascima uporabe kako bi
-se provjerile funkcionalnosti sustava. Prikazivanje ispitivanja UC1, UC3, UC4, UC5, UC6, UC i UC13 (uključujući UC7).
+se provjerile funkcionalnosti sustava. Prikazivanje ispitivanja UC1, UC3, UC4, UC5, UC6 i UC13 (uključujući UC7).
 			\newline
 			\textbf{Ispitni sučaj 1: Registracija} 
 			\begin{enumerate}
@@ -281,9 +299,7 @@ se provjerile funkcionalnosti sustava. Prikazivanje ispitivanja UC1, UC3, UC4, U
 		
 		
 		\section{Dijagram razmještaja}
-			
-			\textbf{\textit{dio 2. revizije}}
-			
+						
 			Dijagram razmještaja opisuje topologiju sustava, fizičku arhitekturu i razmještaj programskih sustava te kako te cjeline komuniciraju. Na dijagramu imamo dva glavna čvora. Prvo imamo uređaj korisnika (PC, mobitel) preko čijeg web preglednika korisnik putem HTTPS-a dohvaća informacije iz drugog čvora, mjesta gdje je pohranjen kod aplikacije, baza podataka i gdje je upogonjena aplikacija. Riječ je o Herokuu, platformi za pogonjenje aplikacija na oblaku. Heroku funkcionira pomoću \textit{dynoa}, fleksibilnih i izoliranih kontejnera koji sadrže Linux. Naša web aplikacija koristi tri \textit{dynoa}. Na prvome se nalazi frontend dio aplikacije koji je napisan u okviru React. Druga komponenta je kontejner na kojemu se sadrži \textit{backend} dio aplikacije. Tu je najbitnija Spring aplikacija koja reagira na zahtjeve \textit{frontenda} i komunicira s bazom podataka, a prisutan je i kratki kod koji omogućuje rad AI bota na našoj aplikaciji. Tu se još nalazi i zadnji \textit{dyno}, Herokuova PostgreSQL usluga gdje se nalazi baza podataka koju aplikacija koristi. Kontejneri za \textit{frontend} i \textit{backend} komuniciraju HTTPS protokolom, a \textit{backend} i baza podataka s protokolima koje osmišlja i definira sam Heroku.
 
             \begin{figure}[H]
@@ -301,21 +317,20 @@ U postavljanju i puštanju u pogon naše aplikacije ključnu ulogu igra Heroku C
 Naša integrirana strategija razvoja i puštanja u pogon koristi niz ključnih značajki Heroku platforme:
 
 1. Automatsko puštanje u pogon s GitHub-a:
-   - GitHub repozitorij povezan je s Heroku, omogućujući jednostavano automatsko puštanje u pogon naše aplikacije.
-   - Svaka promjena na glavnoj grani GitHuba automatski pokreće puštanje u pogon na Heroku platformi.
+\newline- GitHub repozitorij povezan je s Heroku, omogućujući jednostavano automatsko puštanje u pogon naše aplikacije.
+\newline- Svaka promjena na glavnoj grani GitHuba automatski pokreće puštanje u pogon na Heroku platformi.
 
 2. Konfiguracijske Datoteke na Heroku:
-   - Heroku nam omogućava preciznu konfiguraciju putem posebnih datoteka koje definiraju okruženje za našu aplikaciju.
-   - Detaljno smo definirali parametre poput verzija jezika (Java, Python) i aktivnih profila za Spring.
+\newline- Heroku nam omogućava preciznu konfiguraciju putem posebnih datoteka koje definiraju okruženje za našu aplikaciju.
+\newline- Detaljno smo definirali parametre poput verzija jezika (Java, Python) i aktivnih profila za Spring.
 
 3. Korištenje Financijske Potpore od Heroku:
-
-   - Naša organizacija prima financijsku potporu od Heroku platforme, pružajući nam sredstva za korištenje resursa.
+\newline- Naša organizacija prima financijsku potporu od Heroku platforme, pružajući nam sredstva za korištenje resursa.
 
 
 4. Baza Podataka na Heroku:
-   - Integrirali smo Heroku Postgres "add-on" za potrebe baze podataka.
-   - Heroku Postgres pruža siguran pristup bazama podataka putem pridruženih akreditiva.
+\newline- Integrirali smo Heroku Postgres "add-on" za potrebe baze podataka.
+\newline- Heroku Postgres pruža siguran pristup bazama podataka putem pridruženih akreditiva.
    \begin{figure}[H]
        \centering
        \includegraphics[width=1\linewidth]{slike/credentials.png}
@@ -324,12 +339,12 @@ Naša integrirana strategija razvoja i puštanja u pogon koristi niz ključnih z
    \end{figure}
 
 5. Dinamičko Okruženje s  dinamičkim kontejnerima:
-   - Korištenjem dinamičkih kontejnera na Heroku stvaramo virtualno okruženje koje omogućuje izvršavanje i hostanje naše aplikacije.
-   - Ime domene "medbay.life" registrirano je putem "Namecheap"-a, dok smo HTTPS certifikat dobili kroz Cloudflare za sigurnu komunikaciju.
+\newline- Korištenjem dinamičkih kontejnera na Heroku stvaramo virtualno okruženje koje omogućuje izvršavanje i hostanje naše aplikacije.
+\newline- Ime domene "medbay.life" registrirano je putem "Namecheap"-a, dok smo HTTPS certifikat dobili kroz Cloudflare za sigurnu komunikaciju.
 
 6. Praćenje i evidentiranje:
-   - Heroku pruža napredne alate za praćenje performansi, uključujući detaljne evidencije za svaki zahtjev poslan aplikaciji.
-   - Metrike i analize omogućuju nam praćenje ponašanja aplikacije u stvarnom vremenu.
+\newline- Heroku pruža napredne alate za praćenje performansi, uključujući detaljne evidencije za svaki zahtjev poslan aplikaciji.
+\newline- Metrike i analize omogućuju nam praćenje ponašanja aplikacije u stvarnom vremenu.
    \begin{figure}[H]
        \centering
        \includegraphics[width=1\linewidth]{slike/appLogs.png}
@@ -345,8 +360,8 @@ Naša integrirana strategija razvoja i puštanja u pogon koristi niz ključnih z
     \label{fig:enter-label}
 \end{figure}
 7. Paketi za izgradnju:
-   - Integrirali smo različite Pakete za izgradnju prilagođene jezicima koje koristimo (npr., Python, Java).
-   - Automatski konfiguriraju okolinu i podržavaju različite jezične specifikacije.
+\newline- Integrirali smo različite Pakete za izgradnju prilagođene jezicima koje koristimo (npr., Python, Java).
+\newline- Automatski konfiguriraju okolinu i podržavaju različite jezične specifikacije.
 
 Ovaj sveobuhvatan pristup omogućava nam efikasan ciklus razvoja i puštanja u pogon aplikacije. Kombinacijom GitHuba, Heroku platforme, i alata poput Heroku CLI-a, postižemo stabilan i automatski proces implementacije koji podržava dinamično okruženje naše aplikacije.
 

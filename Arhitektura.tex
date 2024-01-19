@@ -1,6 +1,5 @@
 \chapter{Arhitektura i dizajn sustava}
 
-\textbf{\textit{dio 1. revizije}}\\
 
 \section*{Uvod u Arhitekturu Sustava}
 Naš sustav je dizajniran da bude efikasan, skalabilan i pouzdan. U nastavku detaljno opisujemo arhitekturu našeg sustava.
@@ -147,7 +146,6 @@ Kroz integraciju navedenih sklopovsko-programskih zahtjeva, naš sustav ne samo 
 
         \section{Baza podataka}
 			
-			\textbf{\textit{dio 1. revizije}}\\
 			
 Baza podataka predstavlja ključnu komponentu našeg sustava, pružajući centralno spremište za sve relevantne podatke. U našem slučaju, koristimo PostgreSQL, relacijski sustav upravljanja bazama podataka. PostgreSQL je snažan i visoko prilagodljiv sustav za upravljanje bazama podataka, što ga čini prikladnim izborom za učinkovito i sigurno upravljanje zdravstvenim podacima, osiguravajući da su informacije o pacijentima, terminima, zdravstvenom osoblju i opremi sigurno pohranjene i dostupne. 
 
@@ -171,7 +169,6 @@ PostgreSQL također podržava napredne mogućnosti poput indeksiranja, pomažuć
 			\subsection{Opis tablica}
 			
 
-				\textit{Svaku tablicu je potrebno opisati po zadanom predlošku. Lijevo se nalazi točno ime varijable u bazi podataka, u sredini se nalazi tip podataka, a desno se nalazi opis varijable. Svjetlozelenom bojom označite primarni ključ. Svjetlo plavom označite strani ključ}
 				
 \textbf{\_User } Ovaj entitet predstavlja korisnike sustava s različitim ulogama.  Sadrži atribute kao što su status korisnika (active), jedinstveni identifikator (id), e-mail adresa (email), ime (first\_name), prezime (last\_name), lozinka (password) i uloga korisnika (role). Provjerava se uloga korisnika kroz ograničenje \_user\_role\_check. Ovaj entitet omogućuje upravljanje korisnicima sustava i dodjeljivanje uloga kako bi se pristup određenim funkcionalnostima kontrolirao.  Primarni ključ (\_user\_pkey) je definiran na atributu id. 
 
@@ -442,9 +439,7 @@ Korisnik također ima opciju odjave, što vodi u završno stanje. U svakom trenu
 			\eject
 
 		\section{Dijagram komponenti}
-			
-			\textbf{\textit{dio 2. revizije}}\\
-			
+						
 
             Dijagram komponenti prikazuje od kojih komponenti je sustav sastavljen, kako te komponente međusobno surađuju i ovise jedna o drugoj. Iz sustava se informacije dobivaju na dva načina: upitima \textit{frontendu} i \textit{backendu}. \textit{Frontend} dio (HTML, CSS, JS) dohvaća se preko datoteke App.jsx koja vodi brigu o tome što će se prikazati. App.jsx ovisan je o bibliotekama Reacta. \textit{Frontend} u sebi sadrži segmente koji mogu poslati podatke \textit{backendu} na obradu. Tu \textit{backend} prima zahtjeve s određenim podatcima, analizira ih kroz \textit{Controllere}, Servise i Repozitorije (zadnji komunicira s PostgreSQL bazom podataka). Na taj način korisnik dobiva sučelja i informacije koje se njega tiču.
             
