@@ -11,13 +11,13 @@ Prilikom izrade web aplikacija za upravljanje rehabilitacijom koristili smo se r
 
 Za dinamičke i interaktivne elemente na korisničkom sučelju, koristili smo \href{https://www.developer.mozilla.org/en-US/docs/Web/JavaScript}{JavaScript}, dok je \href{https://www.reactjs.org}{React}, popularni \href{https://www.developer.mozilla.org/en-US/docs/Web/JavaScript}{JavaScript} framework, omogućio izgradnju efikasnog korisničkog sučelja. \href{https://www.reactjs.org}{React}, koristeći koncept komponenti, pojednostavljuje organizaciju i održavanje koda, pridonoseći poboljšanju korisničkog iskustva i olakšavajući upravljanje stanjem naše aplikacije 
 
-Podaci o pacijentima, terapijama i terminima pohranjeni su u \href{https://www.postgresql.org}{PostgreSQL} bazi podataka koja pruža pouzdanu podršku. . \href{https://www.postgresql.org}{PostgreSQL}, kao snažan objektno-relacijski sustav upravljanja bazama podataka, omogućava nam efikasno upravljanje informacijama uz podršku za kompleksne upite i transakcije. Osim toga, \href{https://www.developer.mozilla.org/en-US/docs/Web/HTML}{HTML} i \href{https://www.developer.mozilla.org/en-US/docs/Web/CSS}{CSS} koriste se za strukturiranje sadržaja web stranice i stilizaciju, stvarajući tako funkcionalno i atraktivno korisničko sučelje.
+Podaci o pacijentima, terapijama i terminima pohranjeni su u \href{https://www.postgresql.org}{PostgreSQL} bazi podataka koja pruža pouzdanu podršku. \href{https://www.postgresql.org}{PostgreSQL}, kao snažan objektno-relacijski sustav upravljanja bazama podataka, omogućava nam efikasno upravljanje informacijama uz podršku za kompleksne upite i transakcije. Osim toga, \href{https://www.developer.mozilla.org/en-US/docs/Web/HTML}{HTML} i \href{https://www.developer.mozilla.org/en-US/docs/Web/CSS}{CSS} koriste se za strukturiranje sadržaja web stranice i stilizaciju, stvarajući tako funkcionalno i atraktivno korisničko sučelje.
 
 Dokumentacija projekta oblikovana je pomoću \href{https://www.overleaf.com/learn/latex/Learn_LaTeX_in_30_minutes}{LaTeX} sustava za pripremu dokumenata, pružajući precizno formatiranje i organizaciju. Za organizaciju sastanaka i suradnju koristili smo \href{https://www.markdownguide.org}{Markdown} format, pružajući jednostavan i čitljiv način za pisanje i dijeljenje informacija.
 
 U procesu zajedničkog rada, pisanja koda i praćenja promjena koristili smo \href{https://git-scm.com/}{Git}. Omogućavao je stvaranje, pregledavanje i spajanje promjena koda, čime se postizavao učinkovit timski rad. Sve ove tehnologije integrirane su u našem projektu kako bismo osigurali da interakcija između bolesnika, djelatnika zdravstvene ustanove i administratora bude glatka, učinkovita i prilagođena specifičnim ulogama i funkcionalnim zahtjevima svakog dionika.
 
-
+Python je bio ključan u razvoju našeg AI chat bota, iskorištavajući njegove sposobnosti u strojnom učenju i obradi prirodnog jezika za stvaranje interaktivnog i inteligentnog sučelja za korisnike. Python smo još koristili u kombinaciji sa Selenium WebDriverom za automatizaciju testiranja korisničkog sučelja, omogućavajući simulaciju stvarnih interakcija korisnika i osiguravajući pouzdanost naše web aplikacije.
 
 \textbf{KORIŠTENI ALATI
 }
@@ -41,28 +41,241 @@ Naša interakcija s \href{https://openai.com/gpt}{ChatGPT}-om bila je višestruk
 			\eject 
 		
 	
-		\section{Ispitivanje programskog rješenja}
+			\section{Ispitivanje programskog rješenja}
 			
-			\textbf{\textit{dio 2. revizije}}\\
+			Ispitivanje komponenti provedeno je na razredima  \href{https://github.com/Project-MedBay/backend/blob/main/src/test/java/com/medbay/TherapyTypeServiceTest.java}{TherapyTypeService} 
+			i \href{https://github.com/Project-MedBay/backend/blob/main/src/test/java/com/medbay/TherapyServiceTest.java}{TherapyService} u okruženju \texttt{com.medbay}. Slijede rezultati pojedinih ispitnih slučajeva:
+			\newline \textbf{Rezultati ispitivanja komponenti za \href{https://github.com/Project-MedBay/backend/blob/main/src/test/java/com/medbay/TherapyTypeServiceTest.java}{TherapyTypeService}}
+
+			\begin{enumerate}
+				\item \textbf{Test: getTherapyType\_ReturnsListOfTherapyTypes}
+				\begin{itemize}
+					\item \textit{Opis:} Provjera vraćanja liste tipova terapija.
+					\item \textit{Rezultat:} Test uspješan. Vraćena lista tipova terapija.
+				\end{itemize}
+\begin{lstlisting}[language=Java]
+@Test
+void getTherapyType_ReturnsListOfTherapyTypes() {
+	List<TherapyType> expectedTherapyTypes = Arrays.asList(buildTherapyType("1"), buildTherapyType("2"));
+	when(therapyTypeRepository.findAll()).thenReturn(expectedTherapyTypes);
+	ResponseEntity<List<TherapyType>> response = therapyTypeService.getTherapyType();
+	assertEquals(HttpStatus.OK, response.getStatusCode());
+	assertEquals(expectedTherapyTypes, response.getBody());
+	}
+\end{lstlisting}
+
+				\item \textbf{Test: getTherapyType\_WhenNoTherapyTypes\_ReturnsEmptyList}
+				\begin{itemize}
+					\item \textit{Opis:} Provjera vraćanja prazne liste kada nema tipova terapija.
+					\item \textit{Rezultat:} Test uspješan. Vraćena prazna lista.
+				\end{itemize}
+\begin{lstlisting}[language=Java]
+@Test
+void getTherapyType_WhenNoTherapyTypes_ReturnsEmptyList() {
+	when(therapyTypeRepository.findAll()).thenReturn(Collections.emptyList());
+	ResponseEntity<List<TherapyType>> response = therapyTypeService.getTherapyType();
+	assertEquals(HttpStatus.OK, response.getStatusCode());
+	assertTrue(Objects.requireNonNull(response.getBody()).isEmpty());
+		}
+\end{lstlisting}
+
+				\item \textbf{Test: getTherapyType\_WhenRepositoryThrowsException\_ReturnsErrorResponse}
+				\begin{itemize}
+					\item \textit{Opis:} Provjera odziva na iznimku iz repozitorija.
+					\item \textit{Rezultat:} Test uspješan. Izazvana iznimka.
+				\end{itemize}
+
+\begin{lstlisting}[language=Java]
+@Test
+void getTherapyType_WhenRepositoryThrowsException_ReturnsErrorResponse() {
+	when(therapyTypeRepository.findAll()).thenThrow(new RuntimeException("Database error"));
+	assertThrows(RuntimeException.class, () -> therapyTypeService.getTherapyType());
+}
+\end{lstlisting}
+			\end{enumerate}
 			
-			 \textit{U ovom poglavlju je potrebno opisati provedbu ispitivanja implementiranih funkcionalnosti na razini komponenti i na razini cijelog sustava s prikazom odabranih ispitnih slučajeva. Studenti trebaju ispitati temeljnu funkcionalnost i rubne uvjete.}
-	
-			
-			\subsection{Ispitivanje komponenti}
-			\textit{Potrebno je provesti ispitivanje jedinica (engl. unit testing) nad razredima koji implementiraju temeljne funkcionalnosti. Razraditi \textbf{minimalno 6 ispitnih slučajeva} u kojima će se ispitati redovni slučajevi, rubni uvjeti te izazivanje pogreške (engl. exception throwing). Poželjno je stvoriti i ispitni slučaj koji koristi funkcionalnosti koje nisu implementirane. Potrebno je priložiti izvorni kôd svih ispitnih slučajeva te prikaz rezultata izvođenja ispita u razvojnom okruženju (prolaz/pad ispita). }
-			
+			Svi ispitni slučajevi su prošli uspješno, što ukazuje na pouzdanost i stabilnost implementiranih funkcionalnosti u razredu \texttt{TherapyTypeService}. 
+			\begin{figure}[h]
+				\centering
+				\includegraphics[width=1\linewidth]{slike/therapyTypeServiceTest.png}
+				\caption{Rezultati testova za TherapyTypeService}
+				\label{fig:enter-label}
+			\end{figure}
+
+			\newblock \textbf{Rezultati ispitivanja komponenti za \href{https://github.com/Project-MedBay/backend/blob/main/src/test/java/com/medbay/TherapyServiceTest.java}{TherapyService}}
+
+			\begin{enumerate}
+				\item \textbf{Test: getTherapies\_ReturnsListOfTherapies}
+				\begin{itemize}
+					\item \textit{Opis:} Provjera vraćanja liste terapija.
+					\item \textit{Rezultat:} Test uspješan. Vraćena lista terapija.
+				\end{itemize}
+\begin{lstlisting}[language=Java]
+@Test
+void getTherapies_ReturnsListOfTherapies() {
+	List<Therapy> expectedTherapies = Arrays.asList(buildTherapy("1"), buildTherapy("2"));
+	when(therapyRepository.findAll()).thenReturn(expectedTherapies);
+	ResponseEntity<List<Therapy>> response = therapyService.getTherapies();
+	assertEquals(HttpStatus.OK, response.getStatusCode());
+	assertEquals(expectedTherapies, response.getBody());
+}
+\end{lstlisting}
+					
+				\item \textbf{Test: getTherapies\_WhenNoTherapies\_ReturnsEmptyList}
+				\begin{itemize}
+					\item \textit{Opis:} Provjera vraćanja prazne liste kada nema terapija.
+					\item \textit{Rezultat:} Test uspješan. Vraćena prazna lista.
+				\end{itemize}
+
+\begin{lstlisting}[language=Java]
+@Test
+void getTherapies_WhenNoTherapies_ReturnsEmptyList() {
+	when(therapyRepository.findAll()).thenReturn(Collections.emptyList());
+	ResponseEntity<List<Therapy>> response = therapyService.getTherapies();
+	assertEquals(HttpStatus.OK, response.StatusCode());
+	assertTrue(Objects.requireNonNull(response.getBody()).isEmpty());
+}
+\end{lstlisting}
+					
+				\item \textbf{Test: deleteTherapy\_WhenTherapyExists\_DeletesTherapy}
+				\begin{itemize}
+					\item \textit{Opis:} Provjera brisanja postojeće terapije.
+					\item \textit{Rezultat:} Test uspješan. Terapija izbrisana.
+				\end{itemize}
+
+\begin{lstlisting}[language=Java]
+@Test
+void deleteTherapy_WhenTherapyExists_DeletesTherapy() {
+	Long therapyId = 1L;
+	when(therapyRepository.existsById(therapyId)).thenReturn(true);
+	ResponseEntity<Void> response = therapyService.deleteTherapy(therapyId);
+	assertEquals(HttpStatus.OK, response.getStatusCode());
+	verify(therapyRepository).deleteById(therapyId);
+}
+\end{lstlisting}
+					
+				\item \textbf{Test: deleteTherapy\_WhenTherapyDoesNotExist\_ReturnsNotFound}
+				\begin{itemize}
+					\item \textit{Opis:} Provjera odziva kada terapija ne postoji.
+					\item \textit{Rezultat:} Test uspješan. Vraćen status "Nije pronađeno".
+				\end{itemize}
+
+\begin{lstlisting}[language=Java]
+@Test
+void deleteTherapy_WhenTherapyDoesNotExist_ReturnsNotFound() {
+	Long therapyId = 1L;
+	when(therapyRepository.existsById(therapyId)).thenReturn(false);
+	ResponseEntity<Void> response = therapyService.deleteTherapy(therapyId);
+	assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+	verify(therapyRepository, never()).deleteById(therapyId);
+}
+\end{lstlisting}
+					
+			\end{enumerate}
+			\begin{figure}[!h]
+				\centering
+				\includegraphics[width=1\linewidth]{slike/therapyServiceTest.png}
+				\caption{Rezultati testova za TherapyService}
+				\label{fig:enter-label}
+			\end{figure}
+
+
+			Svi testovi su uspješno prošli, što ukazuje na pouzdanost i ispravnost implementacije u razredu \texttt{TherapyService}. \newline
+
+			Napomena: Prilikom klika na naziv razreda korištenih za testiranje otvara se internet poveznica na kojoj se može vidjeti izvorni kod testova.
+
 			
 			
 			\subsection{Ispitivanje sustava}
-			
-			 \textit{Potrebno je provesti i opisati ispitivanje sustava koristeći radni okvir Selenium\footnote{\url{https://www.seleniumhq.org/}}. Razraditi \textbf{minimalno 4 ispitna slučaja} u kojima će se ispitati redovni slučajevi, rubni uvjeti te poziv funkcionalnosti koja nije implementirana/izaziva pogrešku kako bi se vidjelo na koji način sustav reagira kada nešto nije u potpunosti ostvareno. Ispitni slučaj se treba sastojati od ulaza (npr. korisničko ime i lozinka), očekivanog izlaza ili rezultata, koraka ispitivanja i dobivenog izlaza ili rezultata.\\ }
-			 
-			 \textit{Izradu ispitnih slučajeva pomoću radnog okvira Selenium moguće je provesti pomoću jednog od sljedeća dva alata:}
-			 \begin{itemize}
-			 	\item \textit{dodatak za preglednik \textbf{Selenium IDE} - snimanje korisnikovih akcija radi automatskog ponavljanja ispita	}
-			 	\item \textit{\textbf{Selenium WebDriver} - podrška za pisanje ispita u jezicima Java, C\#, PHP koristeći posebno programsko sučelje.}
-			 \end{itemize}
-		 	\textit{Detalji o korištenju alata Selenium bit će prikazani na posebnom predavanju tijekom semestra.}
+			Svi testovi osim registracije i zaboravljene lozinke izvršeni su uz pomoć Selenium WebDrivera . Ispitivanje se radilo po obrascima uporabe kako bi
+se provjerile funkcionalnosti sustava. Prikazivanje ispitivanja UC1, UC3, UC4, UC5, UC6, UC i UC13 (uključujući UC7).
+			\newline
+			\textbf{Ispitni sučaj 1: Registracija} 
+			\begin{enumerate}
+				\item Otvaranje stranice za registraciju.
+				\item Unos obveznih podataka: ime, prezime, email, datum rođenja, adresa, broj telefona, MBO, lozinka.
+				\item Riješavanje Google reCAPTCHA.
+				\item Klik na gumb za registraciju.
+			\end{enumerate}
+			\textbf{Očekivani izlaz:}
+			\begin{enumerate}
+				\item Prikaz poruke o uspjehu slanja zahtjeva za registraciju.
+			\end{enumerate}
+			\textbf{Rezultat:} Očekivani rezultat je zadovoljen. \color{green} Aplikacija je prošla test. \color{black} \newline
+			\textbf{Ispitni sučaj 2: Prijava na stranicu} 
+			\textbf{Ulaz:}
+			\begin{enumerate}
+				\item Otvaranje početne stranice.
+				\item Unos e-maila i lozinka.
+				\item Klik na gumb za prijavu.
+			\end{enumerate}
+			\textbf{Očekivani izlaz:}
+			\begin{enumerate}
+				\item Uspješna prijava i preusmjeravanje na početnu stranicu za pacijente.
+			\end{enumerate}
+			\textbf{Rezultat:} Očekivani rezultat je zadovoljen. \color{green} Aplikacija je prošla test. \color{black} \newline
+			\textbf{Ispitni slučaj 3: Promjena termina terapije}
+			\begin{enumerate}
+				\item Klik na prvi termin terapije.
+				\item Klik na opciju "Odgodi termin".
+				\item Promjena datuma termina iza posljednjeg termina terapije.
+				\item Potvrda odabira i klik na gumb za potvrdu odgode.
+				\item Klik na poslijednji termin terapije.
+				\item Klik na opciju "Odgodi termin".
+				\item Promjena datuma termina na orginalni datum.
+				\item Potvrda odabira i klik na gumb za potvrdu odgode.
+			\end{enumerate}
+			\textbf{Očekivani izlaz:}
+			\begin{enumerate}
+				\item[1.a] Uspješna promjena datuma termina.
+				\item[1.b] Informacije o terminu promijenjene i odgovaraju novom datumu.
+				\item[2.a] Uspješna promjena datuma termina.
+				\item[2.b] Informacije o terminu promijenjene i odgovaraju novom datumu.
+			\end{enumerate}
+			\textbf{Rezultat:} Očekivani rezultat [2.b] nije zadovoljen jer se redni broj termina prikazuje kao posljednji umjesto kao prvi, iako je u kalendaru na točnoj poziciji. Ostala očekivanja su zadovoljena. \color{red} Aplikacija nije prošla test. \color{black} \newline
+			\textbf{Ispitni slučaj 4: Stvaranje novog zahtjeva za terapiju}
+			\begin{enumerate}
+				\item Klik na opciju "Nova terapija".
+				\item Odabir vrste terapije i unos potrebnih datuma.
+				\item Unos verifikacijski podataka terapije sa uputnice.
+				\item Potvrda odabira i klik na gumb za završetak.
+				\item Prikaz poruke o uspješnom zahtjevu za novu terapiju.
+			\end{enumerate}
+			\textbf{Očekivani izlaz:}
+			\begin{enumerate}
+				\item Uspješno stvaranje terapije i prikaz potvrde. 
+				\item Dodavanje termina u raspored korisnika.
+			\end{enumerate}
+			\textbf{Rezultat:} Sva očekivanja su zadovoljena. \color{green} Aplikacija je prošla test. \color{black} \newline
+			\textbf{Ispitni slučaj 5: Zaboravljena lozinka}
+			\begin{enumerate}
+				\item Otvaranje početne stranice.
+				\item Klik na "Zaboravljena lozinka".
+				\item Upis e-mail adrese za oporavak lozinke.
+				\item Klik na poveznicu koja je došla e-mailom.
+				\item Upis i potvrda nove lozinke.
+				\item Klik na gumb "Reset password".
+				\item Spremanje promjena.
+			\end{enumerate}
+			\textbf{Očekivani izlaz:}
+			\begin{enumerate}
+				\item Sustav šalje elektronsku poštu s obrascem za promjenu lozinke.
+				\item Nakon ispunjavanja obrasca uspješno promijenjena lozinka.
+			\end{enumerate}
+			\textbf{Rezultat:} Sva očekivanja su zadovoljena. \color{green} Aplikacija je prošla test. \color{black} \newline
+			\textbf{Ispitni slučaj 6: Promjena bilješke o terminu pacijenta}
+			\begin{enumerate}
+				\item Odabir termina kojem želimo promijeniti bilješku o terminu.
+				\item Klik na "Uredi".
+				\item Promjena bilješke o terminu.
+				\item Spremanje promjena.
+			\end{enumerate}
+			\textbf{Očekivani izlaz:}
+			\begin{enumerate}
+				\item Ažuriranje bilješke o terminu.
+			\end{enumerate}
+			\textbf{Rezultat:} Očekivani rezultat je ostvaren. \color{green} Aplikacija je prošla test. \color{black} \newline
+
 			
 			\eject 
 		
